@@ -1,0 +1,236 @@
+# GCAT/BCAT Geometric Invariants for Public Metadata Admissibility
+# Every piece of public metadata must pass these invariants or be marked DENY
+# Governance cost is negligible. Bad exposure is not.
+
+version: "0.2.0"
+last_updated: "2026-04-28"
+
+invariants:
+  # CRITICAL: Medical and health information
+  - id: INV-001
+    name: no_medical_exposure
+    description: Medical conditions, diagnoses, symptoms, or health references are inadmissible in public metadata
+    severity: CRITICAL
+    action: DENY
+    patterns:
+      - keyword: "seizure"
+      - keyword: "epilepsy"
+      - keyword: "medical"
+      - keyword: "diagnosis"
+      - keyword: "condition"
+      - keyword: "disability"
+      - keyword: "health"
+      - keyword: "hospital"
+      - keyword: "doctor"
+      - keyword: "physician"
+      - keyword: "treatment"
+      - keyword: "medication"
+      - keyword: "prescription"
+      - keyword: "therapy"
+      - keyword: "surgery"
+      - keyword: "chronic"
+      - keyword: "acute"
+      - keyword: "symptom"
+      - keyword: "episode"
+      - keyword: "attack"  # As in "seizure attack"
+      - keyword: "fit"     # As in "seizure fit"
+      - keyword: "uncontrolled"
+      - keyword: "managed"
+      - keyword: "stable"
+    context_boost:
+      - "since 2000"
+      - "since [0-9]{4}"  # Year pattern with health context
+      - "not worked"
+      - "unable to"
+      - "cannot drive"
+      - "restricted"
+    remediation: immediate_removal
+
+  # CRITICAL: Family identity and relationships
+  - id: INV-002
+    name: no_family_identity
+    description: Family member names, relationships, or family-specific narratives are inadmissible
+    severity: CRITICAL
+    action: DENY
+    patterns:
+      - keyword: "wife"
+      - keyword: "husband"
+      - keyword: "spouse"
+      - keyword: "married"
+      - keyword: "children"
+      - keyword: "kids"
+      - keyword: "son"
+      - keyword: "daughter"
+      - keyword: "family"
+      - keyword: "parent"
+      - keyword: "mother"
+      - keyword: "father"
+      - keyword: "sibling"
+      - keyword: "brother"
+      - keyword: "sister"
+      - keyword: "home"
+      - keyword: "household"
+    context_boost:
+      - "my wife"
+      - "my husband"
+      - "my children"
+      - "my family"
+      - "we have"
+      - "our home"
+    remediation: immediate_removal
+
+  # HIGH: Precise location data
+  - id: INV-003
+    name: no_location_precision
+    description: City-level or finer location data is inadmissible. State-level or country-level may be admissible with review
+    severity: HIGH
+    action: DENY
+    patterns:
+      - regex: "\\b[A-Z][a-z]+,\\s*(TX|Texas|FL|Florida|CA|California|NY|New York|WA|Washington)\\b"
+      - regex: "\\b(Dallas|Austin|Houston|San Antonio|Fort Worth|El Paso|Arlington|Corpus Christi|Plano|Laredo|Lubbock|Garland|Irving|Amarillo|Grand Prairie|Brownsville|McKinney|Frisco|Pasadena|Killeen|Mesquite|McAllen|Waco|Denton|Carrollton|Midland|Abilene|Beaumont|Round Rock|Odessa|Richardson|Wichita Falls|Lewisville|Tyler|College Station|San Angelo|Pearland|Allen|League City|Longview|Sugar Land|Edinburg|Mission|Bryan|Baytown|Pharr|Temple|Missouri City|Flower Mound|Harlingen|North Richland Hills|Victoria|Conroe|New Braunfels|Mansfield|Cedar Park|Rowlett|Port Arthur|Georgetown|San Marcos|Pflugerville|Euless|DeSoto|Grapevine|Galveston|Bedford|Cedar Hill|Texas City|Wylie|Haltom City|Keller|Coppell|Rockwall|Huntsville|Duncanville|Sherman|The Colony|Burleson|Lancaster|Friendswood|Hurst|Texarkana|Kyle|Channelview|Little Elm|Southlake|Sherman|Leander|Jollyville|Del Rio|Lufkin|Rosenberg|La Porte|Copperas Cove|Weslaco|Farmers Branch|San Juan|Timberwood Park|Schertz|Prosper|Dickinson|Alvin|Nederland|Sequin|Blanchard|Canyon Lake|Blanchard|Harker Heights|Roma|Gainesville|White Settlement|Terrell|Raymondville|Brenham|Forney|Stephenville|Lamesa|Sweetwater|Hondo|Uvalde|Rockdale|Giddings|Jacksboro|Center|Childress|Haskell|Clarendon|Cooper|Quanah|Shamrock|Morton|Floydada|Lockney|Olton|Plains|Sudan|Amherst|Earth|Springlake|Bovina|Farwell|Hart|Nazareth|Dimmitt|Friona|Bula|Littlefield|Lamb|Levelland|Sundown|Brownfield|Tahoka|Post|Gail|Dickens|Spur|Jayton|Rotan|Roby|Haskell|Stamford|Anson|Hawley|Albany|Breckenridge|Eastland|Ranger|Gorman|De Leon|Dublin|Stephenville|Hamilton|Hico|Meridian|Morgan|Valley Mills|West|McGregor|Crawford|Bruceville-Eddy|Lorena|Hewitt|Woodway|Robinson|Beverly Hills|Bellmead|Lacy-Lakeview|Waco|Gholson|Riesel|Mart|Groesbeck|Buffalo|Franklin|Calvert|Hearne|Franklin|Cameron|Rockdale|Thorndale|Taylor|Coupland|Weir|Granger|Jarrell|Serenada|Georgetown|Florence|Liberty Hill|Leander|Cedar Park|Lago Vista|The Hills|Briarcliff|Jonestown|Point Venture|Lakeway|Bee Cave|West Lake Hills|Rollingwood|Sunset Valley|Austin|Manor|Pflugerville|Round Rock|Hutto|Elgin|Bastrop|Smithville|La Grange|Fayetteville|Schulenburg|Weimar|Flatonia|Shiner|Yoakum|Cuero|Gonzales|Waelder|Luling|Lockhart|Kyle|Buda|San Marcos|Martindale|Fentress|Maxwell|Reedville|Uhland|Niederwald|Creedmoor|Mustang Ridge|Sunset Valley|Austin|Del Valle|Garfield|Hornsby Bend|Webberville|Elgin|McDade|Paige|Bastrop|Smithville|Red Rock|Rosanky|Dale|Lockhart|Niederwald|Uhland|Kyle|Buda|San Leanna|Manchaca|Sunset Valley|Austin|Rollingwood|West Lake Hills|Lost Creek|Bee Cave|Lakeway|The Hills|Briarcliff|Point Venture|Jonestown|Lago Vista|Volente|Cedar Park|Leander|Liberty Hill|Bertram|Marble Falls|Granite Shoals|Cottonwood Shores|Highland Haven|Burnet|Bertram|Liberty Hill|Leander|Cedar Park|Round Rock|Georgetown|Jarrell|Granger|Taylor|Thrall|Coupland|Hutto|Round Rock|Pflugerville|Manor|Elgin|Webberville|Garfield|Hornsby Bend|Del Valle|Austin|Sunset Valley|Manchaca|San Leanna|Buda|Kyle|Uhland|Niederwald|Creedmoor|Mustang Ridge|Lockhart|Dale|Rosanky|Red Rock|Smithville|Bastrop|Paige|McDade|Elgin|Manor|Pflugerville|Round Rock|Hutto|Taylor|Thrall|Coupland|Granger|Jarrell|Georgetown|Serenada|Florence|Liberty Hill|Leander|Cedar Park|Lago Vista|Jonestown|Point Venture|Lakeway|Bee Cave|West Lake Hills|Rollingwood|Austin|Sunset Valley|Lost Creek|Shady Hollow|Barton Creek|Oak Hill|Austin|Jollyville|Anderson Mill|Wells Branch|Windemere|Hudson Bend|Steiner Ranch|River Place|Four Points|Canyon Creek|Balcones|Great Hills|Arboretum|Northwest Hills|Allandale|Brentwood|Crestview|Hyde Park|Rosedale|Clarksville|Downtown|East Austin|Montopolis|Riverside|South Austin|Circle C|Slaughter|MoPac|Far West|West Campus|Hyde Park|North Loop|East Austin|Montopolis|Riverside|Cherrywood|Mueller|Windsor Park|Brentwood|Crestview|Allandale|North Shoal Creek|Wooten|Georgian Acres|North Lamar|Highland|St. Johns|Pecan Springs|Windsor Hills|Delwood|East Cesar Chavez|Govalle|East Austin|Montopolis|Riverside|Pleasant Valley|Burleson|Hornsby Bend|Garfield|Manor|Elgin|Webberville|Del Valle|Austin|Sunset Valley|Manchaca|Buda|Kyle|San Marcos|Martindale|Fentress|Maxwell|Reedville|Uhland|Niederwald|Lockhart|Dale|Rosanky|Bastrop|Smithville|Paige|McDade|Elgin|Manor|Pflugerville|Round Rock|Hutto|Taylor|Thrall|Coupland|Granger|Jarrell|Georgetown|Leander|Cedar Park|Lago Vista|Jonestown|Point Venture|Lakeway|Bee Cave|West Lake Hills|Rollingwood|Austin|Lost Creek|Shady Hollow|Barton Creek|Oak Hill|Jollyville|Anderson Mill|Wells Branch|Windemere|Steiner Ranch|River Place|Four Points|Canyon Creek|Balcones|Great Hills|Arboretum|Northwest Hills|Allandale|Brentwood|Crestview|Hyde Park|Rosedale|Clarksville|Downtown|East Austin|Montopolis|Riverside|South Austin|Circle C|Slaughter|MoPac|Far West|West Campus|North Loop|Cherrywood|Mueller|Windsor Park|St. Johns|Pecan Springs|Delwood|Govalle|East Cesar Chavez|Pleasant Valley|Burleson|Hornsby Bend|Garfield|Del Valle|Austin|Buda|Kyle|San Marcos|Martindale|Lockhart|Bastrop|Smithville|Elgin|Manor|Pflugerville|Round Rock|Georgetown|Cedar Park|Leander|Lago Vista|Lakeway|Bee Cave|West Lake Hills|Rollingwood|Sunset Valley|Lost Creek|Shady Hollow|Barton Creek|Oak Hill|Jollyville|Anderson Mill|Wells Branch|Steiner Ranch|River Place|Four Points|Canyon Creek|Balcones|Great Hills|Arboretum|Northwest Hills|Allandale|Brentwood|Crestview|Hyde Park|Rosedale|Clarksville|Downtown|East Austin|Montopolis|Riverside|South Austin|Circle C|Slaughter|MoPac|Far West|West Campus|North Loop|Cherrywood|Mueller|Windsor Park|St. Johns|Pecan Springs|Delwood|Govalle|East Cesar Chavez|Pleasant Valley|Austin|Buda|Kyle|San Marcos|Lockhart|Bastrop|Elgin|Manor|Round Rock|Georgetown|Cedar Park|Leander|Lakeway|Bee Cave|West Lake Hills|Rollingwood|Sunset Valley|Lost Creek|Shady Hollow|Barton Creek|Oak Hill|Jollyville|Anderson Mill|Wells Branch|Steiner Ranch|River Place|Four Points|Canyon Creek|Balcones|Great Hills|Arboretum|Northwest Hills|Allandale|Brentwood|Crestview|Hyde Park|Rosedale|Clarksville|Downtown|East Austin|Montopolis|Riverside|South Austin|Circle C|Slaughter|MoPac|Far West|West Campus|North Loop|Cherrywood|Mueller|Windsor Park|St. Johns|Pecan Springs|Delwood|Govalle|East Cesar Chavez|Pleasant Valley|Austin|Buda|Kyle|San Marcos|Lockhart|Bastrop|Elgin|Manor|Round Rock|Georgetown|Cedar Park|Leander|Lakeway|Bee Cave|West Lake Hills|Rollingwood|Sunset Valley|Lost Creek|Shady Hollow|Barton Creek|Oak Hill|Jollyville|Anderson Mill|Wells Branch|Steiner Ranch|River Place|Four Points|Canyon Creek|Balcones|Great Hills|Arboretum|Northwest Hills|Allandale|Brentwood|Crestview|Hyde Park|Rosedale|Clarksville|Downtown|East Austin|Montopolis|Riverside|South Austin|Circle C|Slaughter|MoPac|Far West|West Campus|North Loop|Cherrywood|Mueller|Windsor Park|St. Johns|Pecan Springs|Delwood|Govalle|East Cesar Chavez|Pleasant Valley|Austin|Buda|Kyle|San Marcos|Lockhart|Bastrop|Elgin|Manor|Round Rock|Georgetown|Cedar Park|Leander|Lakeway|Bee Cave|West Lake Hills|Rollingwood|Sunset Valley|Lost Creek|Shady Hollow|Barton Creek|Oak Hill|Jollyville|Anderson Mill|Wells Branch|Steiner Ranch|River Place|Four Points|Canyon Creek|Balcones|Great Hills|Arboretum|Northwest Hills|Allandale|Brentwood|Crestview|Hyde Park|Rosedale|Clarksville|Downtown|East Austin|Montopolis|Riverside|South Austin|Circle C|Slaughter|MoPac|Far West|West Campus|North Loop|Cherrywood|Mueller|Windsor Park|St. Johns|Pecan Springs|Delwood|Govalle|East Cesar Chavez|Pleasant Valley)"
+      - regex: "\\b[0-9]{5}(-[0-9]{4})?\\b"  # ZIP codes
+    context_boost:
+      - "live in"
+      - "from"
+      - "located in"
+      - "based in"
+      - "home"
+    remediation: immediate_removal
+
+  # HIGH: Behavioral pattern exposure via commit timestamps
+  - id: INV-004
+    name: no_behavioral_pattern
+    description: Commit timestamps revealing sleep patterns, health episodes, or irregular activity are inadmissible
+    severity: HIGH
+    action: DENY
+    detection:
+      - temporal_anomaly: "commits between 02:00-06:00 local time > 30% of total"
+      - temporal_anomaly: "gap in commits > 72 hours followed by burst > 20 commits in 6 hours"
+      - temporal_anomaly: "consistent pattern of commits at medical appointment times"
+    remediation: timestamp_obfuscation
+
+  # HIGH: Personal narrative of struggle or constraint
+  - id: INV-005
+    name: no_personal_narrative
+    description: Personal narratives of struggle, limitation, or constraint are inadmissible
+    severity: MEDIUM
+    action: DENY
+    patterns:
+      - keyword: "struggle"
+      - keyword: "difficult"
+      - keyword: "hard"
+      - keyword: "challenge"
+      - keyword: "overcome"
+      - keyword: "battle"
+      - keyword: "fight"
+      - keyword: "survive"
+      - keyword: "persevere"
+      - keyword: "endure"
+      - keyword: "cope"
+      - keyword: "manage"
+      - keyword: "deal with"
+      - keyword: "handle"
+      - keyword: "grateful"
+      - keyword: "blessed"
+      - keyword: "fortunate"
+      - keyword: "lucky"
+      - keyword: "thankful"
+    context_boost:
+      - "despite"
+      - "even though"
+      - "in spite of"
+      - "because of"
+      - "due to"
+      - "thanks to"
+      - "grateful for"
+      - "couldn't have"
+      - "wouldn't be"
+      - "without"
+    remediation: content_rewrite
+
+  # HIGH: Service identity requirement for public commits
+  - id: INV-006
+    name: service_identity_required
+    description: Public commits must originate from org service account, not personal identity
+    severity: HIGH
+    action: DENY
+    detection:
+      - author_email_domain: "!@stegverse.org"
+      - author_email_domain: "!@gcat-bcat.engine"
+      - author_email_domain: "!@aact-e.org"
+      - author_email_domain: "!@stegghost.io"
+      - author_name: "!StegVerse Bot"
+      - author_name: "!GCAT-BCAT Builder"
+    remediation: commit_rewriter
+
+  # MEDIUM: Financial vulnerability exposure
+  - id: INV-007
+    name: no_financial_vulnerability
+    description: References to financial stress, urgency, or personal economic situation are inadmissible
+    severity: MEDIUM
+    action: DENY
+    patterns:
+      - keyword: "broke"
+      - keyword: "poor"
+      - keyword: "struggling"
+      - keyword: "need money"
+      - keyword: "urgent"
+      - keyword: "desperate"
+      - keyword: "last chance"
+      - keyword: "final opportunity"
+      - keyword: "running out"
+      - keyword: "can't afford"
+      - keyword: "expensive"
+      - keyword: "costly"
+    context_boost:
+      - "for my family"
+      - "for my children"
+      - "security"
+      - "stable"
+      - "income"
+    remediation: content_rewrite
+
+  # MEDIUM: Temporal anchors that reveal age or generation
+  - id: INV-008
+    name: no_temporal_anchor
+    description: Specific dates or durations that reveal age, health timeline, or life events are inadmissible
+    severity: MEDIUM
+    action: DENY
+    patterns:
+      - regex: "since [0-9]{4}"
+      - regex: "for [0-9]+ years"
+      - regex: "[0-9]+ years ago"
+      - regex: "in [0-9]{4}"
+      - regex: "[0-9]{4}-present"
+    context_boost:
+      - "not worked"
+      - "haven't worked"
+      - "unable to"
+      - "stopped"
+      - "started"
+    remediation: content_rewrite
+
+# Severity escalation matrix
+severity_levels:
+  CRITICAL: 
+    response_time_minutes: 15
+    notification: [security_team, founder]
+    auto_remediate: true
+
+  HIGH:
+    response_time_hours: 4
+    notification: [security_team]
+    auto_remediate: false
+    require_approval: true
+
+  MEDIUM:
+    response_time_hours: 24
+    notification: [security_team]
+    auto_remediate: false
+    require_approval: false
+
+  LOW:
+    response_time_days: 7
+    notification: []
+    auto_remediate: false
+    require_approval: false

@@ -1,0 +1,81 @@
+# StegVerse Ecosystem Footprint Audit Configuration
+# Defines all organizations and repositories to be scanned
+# TV/TVC ephemeral authentication is required for all API access
+
+version: "0.2.0"
+last_updated: "2026-04-28"
+
+# Platform-agnostic: github adapter is default, gitlab and gitea supported
+platform:
+  type: github
+  api_version: "2022-11-28"
+  base_url: "https://api.github.com"
+
+# Ecosystem organizations
+organizations:
+  - name: StegVerse-org
+    tier: customer_facing
+    repos: "*"  # All repos
+    visibility: [public, private]
+    priority: critical
+
+  - name: StegVerse-Labs
+    tier: experimental
+    repos: "*"
+    visibility: [public, private]
+    priority: high
+
+  - name: GCAT-BCAT-Engine
+    tier: production
+    repos: "*"
+    visibility: [public, private]
+    priority: critical
+
+  - name: StegGhost
+    tier: sandbox
+    repos: "*"
+    visibility: [public]
+    priority: medium
+
+  - name: AaCT-E
+    tier: procurement
+    repos: "*"
+    visibility: [public, private]
+    priority: high
+
+  - name: ECAT-ICAT-Formal
+    tier: formalization
+    repos: "*"
+    visibility: [public]
+    priority: medium
+
+# Personal account(s) to audit
+personal_accounts:
+  - username: "${FOOTPRINT_AUDIT_TARGET_USER}"  # Set via TV/TVC secret
+    scan_profile: true
+    scan_contributions: true
+    scan_stars: false  # Starred repos may reveal interest patterns
+
+# Scan scope
+scan_scope:
+  commit_metadata: true
+  issue_content: true
+  pr_content: true
+  discussion_content: true
+  repo_settings: true
+  org_settings: true
+  profile_data: true
+  release_notes: true
+  wiki_pages: true
+
+# Historical depth
+history:
+  commits: "all"  # Full git history
+  issues: "all"   # Open and closed
+  prs: "all"      # Open, closed, merged
+
+# Rate limiting
+rate_limit:
+  requests_per_hour: 5000
+  burst_size: 100
+  retry_backoff: [1, 2, 4, 8, 16, 32]
