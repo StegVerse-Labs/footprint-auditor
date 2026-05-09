@@ -1,56 +1,17 @@
 Assumptions:
-1. classifier is now implemented and tested.
-2. reporter is the next placeholder-only capability to complete.
-3. This bundle adds reporter capability and makes src/__init__.py non-empty to remove the empty-file stub finding.
-4. It does not modify scanner, classifier implementation, config, README, docs, sanitizer, or existing classifier workflow.
-5. The workflow path is visible for iPhone upload; place it into GitHub's Actions workflow folder.
+1. The reporter-tests workflow passed because it only runs tests.
+2. It produced no reports because that workflow intentionally had no report-rendering step and no upload-artifact step.
+3. The correct fix is a separate artifact-producing workflow, not changing the test workflow.
+4. This bundle adds only one workflow file.
+5. The leading dot has been removed inside the bundle path for iPhone visibility.
 
 Done definition:
-1. src/reporter/finding_reporter.py exists and provides FindingReporter.
-2. src/reporter/__init__.py exports FindingReporter and FindingReport.
-3. src/__init__.py is non-empty.
-4. tests/test_finding_reporter.py covers summary, Markdown, JSON, and receipt output.
-5. github/workflows/reporter-tests.yml runs reporter tests.
-6. No source mutation outside intended reporter/test/workflow/package-marker files.
+1. github/workflows/report-artifact.yml exists.
+2. The workflow runs classifier and reporter tests.
+3. The workflow creates a deterministic demo findings input.
+4. The workflow runs the classifier and writes reports/classifier_summary.json.
+5. The workflow runs the reporter and writes reports/footprint_audit_report.md, reports/footprint_audit_report.json, and receipts/footprint_audit_receipts.jsonl.
+6. The workflow uploads all generated reports/receipts as downloadable artifacts.
 
-Local verification:
-python -m py_compile src/reporter/finding_reporter.py
-python -m pytest -q
-
-py_compile stdout:
-
-
-py_compile stderr:
-Spreadsheet runtime warmup failed during python startup
-Traceback (most recent call last):
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 720, in _warm_feature_flows
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 704, in _warm_collaboration_flows
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/generated/interface/models.py", line 48821, in hydrate_crdt_from_proto
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/remote.py", line 747, in __call__
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/client.py", line 150, in call
-artifact_tool.rpc.client.RemoteError: hydrateCrdtFromProto requires an empty collaborative document.
-
-
-pytest stdout:
-[32m.[0m[32m.[0m[32m.[0m[32m                                                                      [100%][0m
-[32m[32m[1m3 passed[0m[32m in 0.22s[0m[0m
-
-
-pytest stderr:
-Spreadsheet runtime warmup failed during python startup
-Traceback (most recent call last):
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 720, in _warm_feature_flows
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/spreadsheet_warmup.py", line 704, in _warm_collaboration_flows
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/generated/interface/models.py", line 48821, in hydrate_crdt_from_proto
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/remote.py", line 747, in __call__
-  File "/tmp/tmp.9eeVjt35CN/artifact_tool_v2-2.7.5/artifact_tool/rpc/client.py", line 150, in call
-artifact_tool.rpc.client.RemoteError: hydrateCrdtFromProto requires an empty collaborative document.
-
-
-Exit codes:
-py_compile=0
-pytest=0
+Expected artifact:
+footprint-auditor-report-artifacts
