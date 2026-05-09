@@ -1,19 +1,20 @@
 Assumptions:
-1. footprint-auditor has scanner, config, and operations docs seeded.
-2. classifier is placeholder-only and is the first capability to complete.
-3. This bundle adds classifier capability only.
-4. It does not modify scanner, config, README, docs, sanitizer, reporter, or existing workflows.
+1. classifier is now implemented and tested.
+2. reporter is the next placeholder-only capability to complete.
+3. This bundle adds reporter capability and makes src/__init__.py non-empty to remove the empty-file stub finding.
+4. It does not modify scanner, classifier implementation, config, README, docs, sanitizer, or existing classifier workflow.
 5. The workflow path is visible for iPhone upload; place it into GitHub's Actions workflow folder.
 
 Done definition:
-1. src/classifier/finding_classifier.py exists and provides FindingClassifier.
-2. src/classifier/__init__.py exports FindingClassifier, ClassificationResult, and SeverityRule.
-3. tests/test_finding_classifier.py covers keyword DENY, service identity DENY, allowed service identity, scanner-preclassified findings, and summary counts.
-4. github/workflows/classifier-tests.yml runs pytest.
-5. No source mutation outside intended classifier/test/workflow files.
+1. src/reporter/finding_reporter.py exists and provides FindingReporter.
+2. src/reporter/__init__.py exports FindingReporter and FindingReport.
+3. src/__init__.py is non-empty.
+4. tests/test_finding_reporter.py covers summary, Markdown, JSON, and receipt output.
+5. github/workflows/reporter-tests.yml runs reporter tests.
+6. No source mutation outside intended reporter/test/workflow/package-marker files.
 
 Local verification:
-python -m py_compile src/classifier/finding_classifier.py
+python -m py_compile src/reporter/finding_reporter.py
 python -m pytest -q
 
 py_compile stdout:
@@ -33,8 +34,8 @@ artifact_tool.rpc.client.RemoteError: hydrateCrdtFromProto requires an empty col
 
 
 pytest stdout:
-[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                    [100%][0m
-[32m[32m[1m5 passed[0m[32m in 0.42s[0m[0m
+[32m.[0m[32m.[0m[32m.[0m[32m                                                                      [100%][0m
+[32m[32m[1m3 passed[0m[32m in 0.22s[0m[0m
 
 
 pytest stderr:
