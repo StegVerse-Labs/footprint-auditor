@@ -1,0 +1,83 @@
+name: footprint-auditor report artifact
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/classifier/**'
+      - 'src/reporter/**'
+      - 'config/severity_rules.yaml'
+      - 'github/workflows/report-artifact.yml'
+
+jobs:
+  report-artifact:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install pyyaml pytest
+
+      - name: Run classifier and reporter tests
+        run: python -m pytest -q tests/test_finding_classifier.py tests/test_finding_reporter.py
+
+      - name: Create demo findings input
+        run: |
+          mkdir -p tmp reports receipts
+          cat > tmp/demo_findings.json <<'JSON'
+          {
+            "findings": [
+              {
+                "repo": "StegVerse-Labs/footprint-auditor",
+                "message": "routine service metadata audit",
+                "author_email": "builder@stegverse.org",
+                "author_name": "StegVerse Bot"
+              },
+              {
+                "repo": "StegVerse-Labs/footprint-auditor",
+                "message": "remove medical note from public metadata",
+                "author_email": "builder@stegverse.org",
+                "author_name": "StegVerse Bot"
+              },
+              {
+                "repo": "StegVerse-Labs/footprint-auditor",
+                "message": "ordinary commit from personal account",
+                "author_email": "person@example.com",
+                "author_name": "Person"
+              }
+            ]
+          }
+          JSON
+
+      - name: Classify demo findings
+        run: |
+          python -m src.classifier.finding_classifier \
+            --rules config/severity_rules.yaml \
+            --input tmp/demo_findings.json \
+            --output reports/classifier_summary.json
+
+      - name: Render footprint audit report
+        run: |
+          python -m src.reporter.finding_reporter \
+            --input reports/classifier_summary.json \
+            --reports-dir reports \
+            --receipts-dir receipts
+
+      - name: Upload footprint audit report artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: footprint-auditor-report-artifacts
+          path: |
+            tmp/demo_findings.json
+            reports/classifier_summary.json
+            reports/footprint_audit_report.md
+            reports/footprint_audit_report.json
+            receipts/footprint_audit_receipts.jsonl
+          if-no-files-found: error
