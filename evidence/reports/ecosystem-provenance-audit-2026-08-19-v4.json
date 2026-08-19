@@ -28,7 +28,7 @@
     "dependency_provenance_execution_complete": false,
     "dependency_scanner_implementation_complete": true,
     "external_infrastructure_complete": false,
-    "full_203_repository_scanner_execution_complete": false,
+    "full_219_repository_scanner_execution_complete": false,
     "github_workflow_high_authority_sweep_complete": false,
     "historical_identity_complete": false,
     "historical_visibility_complete": false,
@@ -63,94 +63,17 @@
     "total": 11
   },
   "findings": [
-    {
-      "finding_id": "GCAT-WORKFLOWS-REMOTE-VERIFIER-PROVENANCE-2026-08-19",
-      "open": true,
-      "repository": "GCAT-BCAT-Engine/workflows",
-      "source_blob_sha": "35a02a87dc034bf6fa36090b5a28734259fffeb1",
-      "source_ref": "evidence/findings/2026-08-19-gcat-verifier-remote-execution-provenance-gap.json",
-      "status": "PROVENANCE_GAP"
-    },
-    {
-      "finding_id": "ECOSYSTEM-PAT-AUTOPATCH-AUTHORITY-2026-08-19",
-      "open": true,
-      "repository": "MULTI_REPOSITORY",
-      "source_blob_sha": "ef71450d6d9cbf28b607f098efbb20b99f34d29f",
-      "source_ref": "evidence/findings/2026-08-19-pat-backed-autopatch-authority-containment.json",
-      "status": "AUTHORIZED_UNEXPLAINED"
-    },
-    {
-      "finding_id": "SV-AUDIT-SCW-LEGACY-BRIDGE-CREDENTIAL-001",
-      "open": true,
-      "repository": "StegVerse-Labs/SCW",
-      "source_blob_sha": "49c2c7d329c40e0e3f24260c2c0c374c02f7b2e4",
-      "source_ref": "evidence/findings/2026-08-19-scw-legacy-bridge-credential-path.json",
-      "status": "PROVENANCE_GAP"
-    },
-    {
-      "finding_id": "SCW-ADMIN-CREDENTIAL-BOOTSTRAP-EXPORT-2026-08-19",
-      "open": true,
-      "repository": "StegVerse-Labs/StegVerse-SCW",
-      "source_blob_sha": "1125240b8b6c1ca7859e69aa9f07bfaef952b0ff",
-      "source_ref": "evidence/findings/2026-08-19-scw-admin-credential-bootstrap-export.json",
-      "status": "AUTHORIZED_UNEXPLAINED"
-    },
-    {
-      "finding_id": "STEGDB-SECRET-CONTRACT-POLICY-DRIFT-2026-08-19",
-      "open": true,
-      "repository": "StegVerse-Labs/StegDB",
-      "source_blob_sha": "c89732cbbd924a3296e8a983eb9711afd0d81623",
-      "source_ref": "evidence/findings/2026-08-19-stegdb-secret-contract-policy-drift.json",
-      "status": "AUTHORIZED_UNEXPLAINED"
-    },
-    {
-      "finding_id": "TV-CREDENTIAL-PROCESSING-POLICY-DRIFT-2026-08-19",
-      "open": true,
-      "repository": "StegVerse-Labs/TV",
-      "source_blob_sha": "f584e2bc7a07c8eb37dfd1177cd014f2e7fc9eb0",
-      "source_ref": "evidence/findings/2026-08-19-tv-credential-processing-policy-drift.json",
-      "status": "AUTHORIZED_UNEXPLAINED"
-    },
-    {
-      "confirmed_compromise": true,
-      "finding_id": "TV-SCW-VAULT-KEY-EXPOSURE-2025-11-25",
-      "open": true,
-      "repository": "StegVerse-Labs/TV",
-      "source_blob_sha": "64a036fdec88b4e8749b9fe41db572927cad4141",
-      "source_ref": "evidence/findings/2026-08-19-tv-scw-vault-key-exposure.json",
-      "status": "AUTHORIZED_UNEXPLAINED"
-    },
-    {
-      "finding_id": "TVC-ACTIONS-USER-WRITE-TEST-2026-05-18",
-      "open": true,
-      "repository": "StegVerse-Labs/TVC",
-      "source_ref": "evidence/findings/2026-08-19-tvc-actions-user-write-test.json",
-      "status": "THIRD_PARTY_UNEXPLAINED"
-    },
-    {
-      "finding_id": "GOVERNANCE-STEGTRACE-BOOTSTRAP-CREDENTIAL-AUTHORITY-2026-08-19",
-      "open": true,
-      "repository": "StegVerse-Labs/Governance",
-      "source_blob_sha": "839e0ee86bb295c4e11caf97ec71a9533d6ae7c0",
-      "source_ref": "evidence/findings/2026-08-19-governance-bootstrap-credential-authority-gap.json",
-      "status": "AUTHORIZED_UNEXPLAINED"
-    },
-    {
-      "finding_id": "HYBRID-BRIDGE-PROVIDER-CREDENTIAL-AUTHORITY-2026-08-19",
-      "open": true,
-      "repository": "StegVerse-Labs/hybrid-collab-bridge",
-      "source_blob_sha": "79a59d4775e289f5a22ec9041b2a104d6ba22d29",
-      "source_ref": "evidence/findings/2026-08-19-hybrid-bridge-provider-credential-authority.json",
-      "status": "AUTHORIZED_UNEXPLAINED"
-    },
-    {
-      "finding_id": "LABS-RESIDUAL-CREDENTIAL-CONTROL-CONTAINMENT-2026-08-19",
-      "open": true,
-      "repository": "MULTI_REPOSITORY",
-      "source_blob_sha": "1bbefa2ae7b7f7c322272067afb4a7495314ec70",
-      "source_ref": "evidence/findings/2026-08-19-labs-residual-credential-control-containment.json",
-      "status": "AUTHORIZED_UNEXPLAINED"
-    }
+    {"finding_id":"GCAT-WORKFLOWS-REMOTE-VERIFIER-PROVENANCE-2026-08-19","open":true,"repository":"GCAT-BCAT-Engine/workflows","source_blob_sha":"35a02a87dc034bf6fa36090b5a28734259fffeb1","source_ref":"evidence/findings/2026-08-19-gcat-verifier-remote-execution-provenance-gap.json","status":"PROVENANCE_GAP"},
+    {"finding_id":"ECOSYSTEM-PAT-AUTOPATCH-AUTHORITY-2026-08-19","open":true,"repository":"MULTI_REPOSITORY","source_blob_sha":"ef71450d6d9cbf28b607f098efbb20b99f34d29f","source_ref":"evidence/findings/2026-08-19-pat-backed-autopatch-authority-containment.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"SV-AUDIT-SCW-LEGACY-BRIDGE-CREDENTIAL-001","open":true,"repository":"StegVerse-Labs/SCW","source_blob_sha":"49c2c7d329c40e0e3f24260c2c0c374c02f7b2e4","source_ref":"evidence/findings/2026-08-19-scw-legacy-bridge-credential-path.json","status":"PROVENANCE_GAP"},
+    {"finding_id":"SCW-ADMIN-CREDENTIAL-BOOTSTRAP-EXPORT-2026-08-19","open":true,"repository":"StegVerse-Labs/StegVerse-SCW","source_blob_sha":"1125240b8b6c1ca7859e69aa9f07bfaef952b0ff","source_ref":"evidence/findings/2026-08-19-scw-admin-credential-bootstrap-export.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"STEGDB-SECRET-CONTRACT-POLICY-DRIFT-2026-08-19","open":true,"repository":"StegVerse-Labs/StegDB","source_blob_sha":"c89732cbbd924a3296e8a983eb9711afd0d81623","source_ref":"evidence/findings/2026-08-19-stegdb-secret-contract-policy-drift.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"TV-CREDENTIAL-PROCESSING-POLICY-DRIFT-2026-08-19","open":true,"repository":"StegVerse-Labs/TV","source_blob_sha":"f584e2bc7a07c8eb37dfd1177cd014f2e7fc9eb0","source_ref":"evidence/findings/2026-08-19-tv-credential-processing-policy-drift.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"confirmed_compromise":true,"finding_id":"TV-SCW-VAULT-KEY-EXPOSURE-2025-11-25","open":true,"repository":"StegVerse-Labs/TV","source_blob_sha":"64a036fdec88b4e8749b9fe41db572927cad4141","source_ref":"evidence/findings/2026-08-19-tv-scw-vault-key-exposure.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"TVC-ACTIONS-USER-WRITE-TEST-2026-05-18","open":true,"repository":"StegVerse-Labs/TVC","source_ref":"evidence/findings/2026-08-19-tvc-actions-user-write-test.json","status":"THIRD_PARTY_UNEXPLAINED"},
+    {"finding_id":"GOVERNANCE-STEGTRACE-BOOTSTRAP-CREDENTIAL-AUTHORITY-2026-08-19","open":true,"repository":"StegVerse-Labs/Governance","source_blob_sha":"839e0ee86bb295c4e11caf97ec71a9533d6ae7c0","source_ref":"evidence/findings/2026-08-19-governance-bootstrap-credential-authority-gap.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"HYBRID-BRIDGE-PROVIDER-CREDENTIAL-AUTHORITY-2026-08-19","open":true,"repository":"StegVerse-Labs/hybrid-collab-bridge","source_blob_sha":"79a59d4775e289f5a22ec9041b2a104d6ba22d29","source_ref":"evidence/findings/2026-08-19-hybrid-bridge-provider-credential-authority.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"LABS-RESIDUAL-CREDENTIAL-CONTROL-CONTAINMENT-2026-08-19","open":true,"repository":"MULTI_REPOSITORY","source_blob_sha":"1bbefa2ae7b7f7c322272067afb4a7495314ec70","source_ref":"evidence/findings/2026-08-19-labs-residual-credential-control-containment.json","status":"AUTHORIZED_UNEXPLAINED"}
   ],
   "generated_at": "2026-08-19T19:37:00Z",
   "hard_evidence_gates": [
@@ -173,53 +96,18 @@
     "current_public": 76,
     "exact_count_receipt": "evidence/inventory/accessible-repository-count-2026-08-19-v2.json",
     "exact_count_receipt_sha256": "add29415fb80543aeaf285c3d69d197f28999b93cb151a95ae935c7ee248ae9d",
-    "installation_listing_baseline": {
-      "current_private": 128,
-      "current_public": 75,
-      "manifest": "evidence/inventory/connected-repositories-2026-08-19.csv",
-      "manifest_sha256": "59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166",
-      "repositories": 203,
-      "status": "SUPERSEDED_AS_COMPLETE_INVENTORY"
-    },
+    "installation_listing_baseline": {"current_private":128,"current_public":75,"manifest":"evidence/inventory/connected-repositories-2026-08-19.csv","manifest_sha256":"59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166","repositories":203,"status":"SUPERSEDED_AS_COMPLETE_INVENTORY"},
     "installations": 11
   },
   "machine_owned_remediation": {
-    "GCAT-PROVENANCE-012": {
-      "issue": "GCAT-BCAT-Engine/workflows#15",
-      "state": "OPEN_SUCCESSOR_SECURITY_TASK"
-    },
-    "GITHUB-ORG-AUDIT-LOG": {
-      "issue": "StegVerse-Labs/footprint-auditor#1",
-      "state": "UNAVAILABLE_THROUGH_CONNECTED_GITHUB_TOOL"
-    },
-    "GOVERNANCE-STEGTRACE-ENGINE-V0-BOOTSTRAP": {
-      "issue": "StegVerse-Labs/Governance#1",
-      "state": "MACHINE_OWNED_CREDENTIAL_MIGRATION_REQUIRED"
-    },
-    "HYBRID-BRIDGE-PROVIDER-REPLACEMENT": {
-      "issue": "StegVerse-Labs/hybrid-collab-bridge#14",
-      "state": "OPEN_SUCCESSOR_SECURITY_TASK"
-    },
-    "STEGDB-SEC-001": {
-      "completion_observed": false,
-      "current_policy_contract_v2_observed": true,
-      "issue": "StegVerse-Labs/StegDB#13",
-      "state": "MACHINE_OWNED"
-    },
-    "TVC-PRIVATE-SOURCE-READ-001": {
-      "issue": "StegVerse-Labs/TVC#33",
-      "state": "OPEN_NOT_ACTIVATED"
-    },
-    "TVC-SCW-VAULT-ROTATION-088": {
-      "actual_rotation_observed": false,
-      "issue": "StegVerse-Labs/TVC#88",
-      "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED"
-    },
-    "TVC-TV-CREDENTIAL-MIGRATION-089": {
-      "credential_bearing_tvc_execution_observed": false,
-      "issue": "StegVerse-Labs/TVC#89",
-      "state": "OPEN_MACHINE_OWNED"
-    }
+    "GCAT-PROVENANCE-012":{"issue":"GCAT-BCAT-Engine/workflows#15","state":"OPEN_SUCCESSOR_SECURITY_TASK"},
+    "GITHUB-ORG-AUDIT-LOG":{"issue":"StegVerse-Labs/footprint-auditor#1","state":"UNAVAILABLE_THROUGH_CONNECTED_GITHUB_TOOL"},
+    "GOVERNANCE-STEGTRACE-ENGINE-V0-BOOTSTRAP":{"issue":"StegVerse-Labs/Governance#1","state":"MACHINE_OWNED_CREDENTIAL_MIGRATION_REQUIRED"},
+    "HYBRID-BRIDGE-PROVIDER-REPLACEMENT":{"issue":"StegVerse-Labs/hybrid-collab-bridge#14","state":"OPEN_SUCCESSOR_SECURITY_TASK"},
+    "STEGDB-SEC-001":{"completion_observed":false,"current_policy_contract_v2_observed":true,"issue":"StegVerse-Labs/StegDB#13","state":"MACHINE_OWNED"},
+    "TVC-PRIVATE-SOURCE-READ-001":{"issue":"StegVerse-Labs/TVC#33","state":"OPEN_NOT_ACTIVATED"},
+    "TVC-SCW-VAULT-ROTATION-088":{"actual_rotation_observed":false,"issue":"StegVerse-Labs/TVC#88","state":"BLOCKED_DEPENDENCY_MACHINE_OWNED"},
+    "TVC-TV-CREDENTIAL-MIGRATION-089":{"credential_bearing_tvc_execution_observed":false,"issue":"StegVerse-Labs/TVC#89","state":"OPEN_MACHINE_OWNED"}
   },
   "notes": [
     "Containment, handoff, issue creation, machine ownership, and source migration are not completion or activation.",
@@ -228,7 +116,7 @@
     "Negative signature searches are bounded evidence, not a clean-audit conclusion.",
     "No secret values are included in this report."
   ],
-  "report_sha256_excluding_report_sha256": "421552349e243bad8cf2c8f6ebecfce1363f0e56ab47a9b71bd3766a1a8a5a79",
+  "report_sha256_excluding_report_sha256": "88f8d87cf6e1920959fafd3ef69eded97b015d4658e4b007bcae067c9bd48575",
   "schema": "stegverse.ecosystem-provenance-audit.v1",
   "security_conclusion": {
     "confirmed_malicious_third_party_event": "NONE_ESTABLISHED",
@@ -238,13 +126,6 @@
     "historical_public_private_exposure_certified": false,
     "unresolved_third_party_identity": "YES — TVC actions-user write test"
   },
-  "supersedes": [
-    "evidence/reports/ecosystem-provenance-audit-2026-08-19.json",
-    "evidence/reports/ecosystem-provenance-audit-2026-08-19-v2.json",
-    "evidence/reports/ecosystem-provenance-audit-2026-08-19-v3.json"
-  ],
-  "verification_receipts": [
-    "evidence/verification/2026-08-19-scw-generic-pat-workflow-containment.json",
-    "evidence/verification/2026-08-19-nonlabs-high-risk-signature-sweep.json"
-  ]
+  "supersedes": ["evidence/reports/ecosystem-provenance-audit-2026-08-19.json","evidence/reports/ecosystem-provenance-audit-2026-08-19-v2.json","evidence/reports/ecosystem-provenance-audit-2026-08-19-v3.json"],
+  "verification_receipts": ["evidence/verification/2026-08-19-scw-generic-pat-workflow-containment.json","evidence/verification/2026-08-19-nonlabs-high-risk-signature-sweep.json"]
 }
