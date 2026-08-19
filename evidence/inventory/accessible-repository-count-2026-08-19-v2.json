@@ -1,0 +1,39 @@
+{
+  "schema": "stegverse.accessible-repository-count.v2",
+  "observed_at": "2026-08-19T19:30:00Z",
+  "installations": 11,
+  "accessible_repositories": 219,
+  "current_public": 76,
+  "current_private": 143,
+  "method": {
+    "StegVerse-Labs": {
+      "installation_listing_returned": 100,
+      "organization_search_exact_count": 116,
+      "organization_search_public_count": 42,
+      "organization_search_private_count": 74,
+      "count_method": "GitHub repository search, per_page=1; page 116 nonempty and page 117 empty; visibility-qualified search page 42 nonempty and page 43 empty",
+      "listing_truncation_confirmed": true
+    },
+    "other_organizations": {
+      "baseline_total": 103,
+      "current_public": 34,
+      "current_private": 69,
+      "verification": "For each organization with <100 installation-listed repos, repository search page N+1 was empty where N was the installation count."
+    }
+  },
+  "previous_installation_manifest": {
+    "repositories": 203,
+    "current_public": 75,
+    "current_private": 128,
+    "path": "evidence/inventory/connected-repositories-2026-08-19.csv",
+    "sha256": "59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166",
+    "status": "SUPERSEDED_AS_COMPLETE_INVENTORY; retained as installation-listing baseline"
+  },
+  "enumeration_state": {
+    "exact_count_verified": true,
+    "complete_per_repository_manifest_verified": false,
+    "reason": "GitHub installation listing truncates StegVerse-Labs at 100 while repository search exposes 116; a complete exact-name manifest has not yet been reconstructed from one reliable listing surface."
+  },
+  "historical_visibility_complete": false,
+  "receipt_sha256": "add29415fb80543aeaf285c3d69d197f28999b93cb151a95ae935c7ee248ae9d"
+}
