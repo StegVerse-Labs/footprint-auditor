@@ -27,6 +27,12 @@ from .report import (
     render_markdown,
     verify_report,
 )
+from .ecosystem_dependencies import (
+    DependencyFinding,
+    DependencyStatus,
+    scan_dependency_file,
+    summarize as summarize_ecosystem_dependencies,
+)
 
 __all__ = [
     "AuditBoundary",
@@ -48,4 +54,8 @@ __all__ = [
     "normalize_finding",
     "render_markdown",
     "verify_report",
+    "DependencyFinding",
+    "DependencyStatus",
+    "scan_dependency_file",
+    "summarize_ecosystem_dependencies",
 ]
