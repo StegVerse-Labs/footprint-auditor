@@ -1,0 +1,36 @@
+{
+  "schema": "stegverse.security-signature-sweep.v1",
+  "verification_id": "NONLABS-HIGH-RISK-CREDENTIAL-SIGNATURE-SWEEP-2026-08-19",
+  "recorded_at": "2026-08-19T19:20:00Z",
+  "scope": {
+    "installations": [
+      "Admissible-Existence",
+      "AdmittedCode",
+      "Data-Continuation",
+      "GCAT-BCAT-Engine",
+      "master-records",
+      "StegGhost",
+      "StegVerse-002",
+      "StegVerse-org",
+      "formalism-tests"
+    ],
+    "repository_count_from_connected_inventory": 103,
+    "search_surface": "connected GitHub code-search index",
+    "current_tree_only_claim": true
+  },
+  "signatures": {
+    "x-access-token": {"organizations_with_hits": []},
+    "secrets.GH_": {"organizations_with_hits": []},
+    "ADMIN_TOKEN": {"organizations_with_hits": []},
+    "fernet_key": {"organizations_with_hits": []}
+  },
+  "result": "NO_INDEXED_HITS_FOR_THE_FOUR_NAMED_SIGNATURES_IN_THE_NINE_NONLABS_INSTALLATIONS",
+  "limitations": [
+    "This is not malware detection or a clean-audit conclusion.",
+    "Code-search index freshness/completeness is not independently proven.",
+    "Historical deleted/replaced content is not excluded by a current-index negative result.",
+    "Different secret names, encoded values, runtime-only values, dependencies, binaries, artifacts, logs, or external infrastructure are outside these four signatures.",
+    "Historical actor/token/application/visibility evidence remains dependent on organization audit/security logs."
+  ],
+  "correlation": "The confirmed credential/key exposures and generic-PAT mutation surfaces found so far are concentrated in StegVerse-Labs current/historical evidence, while GCAT-BCAT-Engine/workflows separately has a mutable remote-verifier provenance gap."
+}
