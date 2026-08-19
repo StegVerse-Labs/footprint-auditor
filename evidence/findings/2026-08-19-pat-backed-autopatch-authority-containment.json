@@ -1,14 +1,14 @@
 {
   "finding_id": "ECOSYSTEM-PAT-AUTOPATCH-AUTHORITY-2026-08-19",
   "recorded_at": "2026-08-19T19:05:00Z",
-  "last_updated_at": "2026-08-19T19:12:00Z",
+  "last_updated_at": "2026-08-19T19:23:00Z",
   "audit_status": "AUTHORIZED_UNEXPLAINED",
   "security_condition": "LEGACY_NON_TV_TVC_CREDENTIAL_MUTATION_AUTHORITY",
   "severity": "CRITICAL",
   "malice_confirmed": false,
   "unauthorized_actor_confirmed": false,
   "secret_values_observed": false,
-  "contained_path_count": 19,
+  "contained_path_count": 23,
   "repositories": [
     {
       "repository": "StegVerse-Labs/hybrid-collab-bridge",
@@ -142,6 +142,34 @@
       "prior_conditions": ["legacy_pat_fallback", "global_bearer_git_url_rewrite", "cross_repository_mutation_source"],
       "containment_commit": "454716eb0060cf19526613885e2d9adf06f29794",
       "current_state": "RETIRED_FAIL_CLOSED"
+    },
+    {
+      "repository": "StegVerse-Labs/StegVerse-SCW",
+      "path": ".github/workflows/export-hcb.yml",
+      "prior_conditions": ["contents_write", "pull_requests_write", "non_tv_tvc_bot_token", "global_bearer_clone_url", "cross_repository_create", "cross_repository_push", "force_tag_push", "release_creation"],
+      "containment_commit": "3e276f9e84ee4d90c858dcd38b491f640b3de2eb",
+      "current_state": "CONTAINED_FAIL_CLOSED"
+    },
+    {
+      "repository": "StegVerse-Labs/StegVerse-SCW",
+      "path": ".github/workflows/propagate-commit-template.yml",
+      "prior_conditions": ["contents_write", "non_tv_tvc_bot_token", "global_bearer_clone_url", "cross_repository_branch_push", "cross_repository_pr_creation"],
+      "containment_commit": "f24f53a9b1f1ed37333407fa6cff685b8b10de86",
+      "current_state": "CONTAINED_FAIL_CLOSED"
+    },
+    {
+      "repository": "StegVerse-Labs/StegVerse-SCW",
+      "path": ".github/workflows/propagate-readme-badges.yml",
+      "prior_conditions": ["id_token_write", "non_tv_tvc_bot_token", "global_bearer_clone_url", "cross_repository_push_or_pr", "propagated_scheduled_write_authority_workflow"],
+      "containment_commit": "54b7fd1a12e8ce025f303226c527535fe4f7c271",
+      "current_state": "CONTAINED_FAIL_CLOSED"
+    },
+    {
+      "repository": "StegVerse-Labs/StegVerse-SCW",
+      "path": ".github/workflows/propagate-commit-template-v1_1.yml",
+      "prior_conditions": ["contents_write", "pull_requests_write", "non_tv_tvc_bot_token", "global_bearer_clone_url", "cross_repository_branch_delete_reset", "cross_repository_push", "cross_repository_pr_creation"],
+      "containment_commit": "78e6da4bdc7bb27c6c8bd88e5dee1f5de6800026",
+      "current_state": "CONTAINED_FAIL_CLOSED"
     }
   ],
   "replacement_contract": {
