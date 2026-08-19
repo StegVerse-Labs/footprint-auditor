@@ -1,0 +1,184 @@
+{
+  "allowed_conclusion": "audit remains open; unresolved evidence or coverage gaps prevent a clean-audit conclusion",
+  "boundary_end": "2026-08-19T19:16:00Z",
+  "boundary_start": "ecosystem-origin",
+  "clean_audit_permitted": false,
+  "containment": {
+    "legacy_pat_autopatch_paths_contained": 19,
+    "scw_legacy_bridge_path_contained": true,
+    "tv_obsolete_bridge_dispatch_contained": true,
+    "tv_obsolete_generic_pat_autopatch_contained": true,
+    "tv_obsolete_one_time_workflow_repair_contained": true,
+    "tv_scw_vault_live_tree_key_redacted": true,
+    "tv_scw_vault_unsafe_bootstrap_rotate_check_paths_contained": true,
+    "tvc_legacy_generic_pat_autopatch_contained": true,
+    "tvc_legacy_write_test_contained": true
+  },
+  "coverage": {
+    "current_repository_inventory_complete": true,
+    "dependency_provenance_execution_complete": false,
+    "dependency_scanner_implementation_complete": true,
+    "external_infrastructure_complete": false,
+    "github_workflow_high_authority_sweep_complete": false,
+    "historical_identity_complete": false,
+    "historical_visibility_complete": false,
+    "tvc_credential_rotation_complete": false,
+    "tvc_tv_credential_migration_complete": false
+  },
+  "coverage_complete": false,
+  "finding_counts": {
+    "by_status": {
+      "AUTHORIZED_UNEXPLAINED": 5,
+      "PROVENANCE_GAP": 2,
+      "THIRD_PARTY_UNEXPLAINED": 1
+    },
+    "confirmed_compromise": 1,
+    "confirmed_malicious": 0,
+    "confirmed_unauthorized_actor": 0,
+    "open": 8,
+    "total": 8
+  },
+  "findings": [
+    {
+      "confirmed_compromise": false,
+      "finding_id": "GCAT-WORKFLOWS-REMOTE-VERIFIER-PROVENANCE-2026-08-19",
+      "malicious_confirmed": false,
+      "open": true,
+      "repository": "GCAT-BCAT-Engine/workflows",
+      "source_ref": "evidence/findings/2026-08-19-gcat-verifier-remote-execution-provenance-gap.json",
+      "status": "PROVENANCE_GAP",
+      "title": "Reusable provenance verifier code can be selected by mutable/unvalidated refs",
+      "unauthorized_actor_confirmed": false
+    },
+    {
+      "confirmed_compromise": false,
+      "finding_id": "ECOSYSTEM-PAT-AUTOPATCH-AUTHORITY-2026-08-19",
+      "malicious_confirmed": false,
+      "open": true,
+      "repository": "MULTI_REPOSITORY",
+      "source_ref": "evidence/findings/2026-08-19-pat-backed-autopatch-authority-containment.json",
+      "status": "AUTHORIZED_UNEXPLAINED",
+      "title": "Legacy non-TV/TVC credential mutation authority across contained autopatch/guardian paths",
+      "unauthorized_actor_confirmed": false
+    },
+    {
+      "confirmed_compromise": false,
+      "finding_id": "SV-AUDIT-SCW-LEGACY-BRIDGE-CREDENTIAL-001",
+      "malicious_confirmed": false,
+      "open": true,
+      "repository": "StegVerse-Labs/SCW",
+      "source_ref": "evidence/findings/2026-08-19-scw-legacy-bridge-credential-path.json",
+      "status": "PROVENANCE_GAP",
+      "title": "Live PR workflow directly consumed legacy non-TV/TVC GitHub credential path",
+      "unauthorized_actor_confirmed": false
+    },
+    {
+      "confirmed_compromise": false,
+      "finding_id": "SCW-ADMIN-CREDENTIAL-BOOTSTRAP-EXPORT-2026-08-19",
+      "malicious_confirmed": false,
+      "open": true,
+      "repository": "StegVerse-Labs/StegVerse-SCW",
+      "source_ref": "evidence/findings/2026-08-19-scw-admin-credential-bootstrap-export.json",
+      "status": "AUTHORIZED_UNEXPLAINED",
+      "title": "Non-TV/TVC admin credential bootstrap/export and external config seeding paths",
+      "unauthorized_actor_confirmed": false
+    },
+    {
+      "confirmed_compromise": false,
+      "finding_id": "STEGDB-SECRET-CONTRACT-POLICY-DRIFT-2026-08-19",
+      "malicious_confirmed": false,
+      "open": true,
+      "repository": "StegVerse-Labs/StegDB",
+      "source_ref": "evidence/findings/2026-08-19-stegdb-secret-contract-policy-drift.json",
+      "status": "AUTHORIZED_UNEXPLAINED",
+      "title": "Canonical secret contract conflicts with current TV/TVC and StegDB security policy",
+      "unauthorized_actor_confirmed": false
+    },
+    {
+      "confirmed_compromise": false,
+      "finding_id": "TV-CREDENTIAL-PROCESSING-POLICY-DRIFT-2026-08-19",
+      "malicious_confirmed": false,
+      "open": true,
+      "repository": "StegVerse-Labs/TV",
+      "source_ref": "evidence/findings/2026-08-19-tv-credential-processing-policy-drift.json",
+      "status": "AUTHORIZED_UNEXPLAINED",
+      "title": "TV credential-bearing workflows drift from bounded TVC execution policy",
+      "unauthorized_actor_confirmed": false
+    },
+    {
+      "confirmed_compromise": true,
+      "finding_id": "TV-SCW-VAULT-KEY-EXPOSURE-2025-11-25",
+      "malicious_confirmed": false,
+      "open": true,
+      "repository": "StegVerse-Labs/TV",
+      "source_ref": "evidence/findings/2026-08-19-tv-scw-vault-key-exposure.json",
+      "status": "AUTHORIZED_UNEXPLAINED",
+      "title": "Confirmed SCW credential key exposure in Git history",
+      "unauthorized_actor_confirmed": false
+    },
+    {
+      "confirmed_compromise": false,
+      "finding_id": "TVC-ACTIONS-USER-WRITE-TEST-2026-05-18",
+      "malicious_confirmed": false,
+      "open": true,
+      "repository": "StegVerse-Labs/TVC",
+      "source_ref": "evidence/findings/2026-08-19-tvc-actions-user-write-test.json",
+      "status": "THIRD_PARTY_UNEXPLAINED",
+      "title": "Historical actions-user credential-bearing repository write test remains unattributed",
+      "unauthorized_actor_confirmed": false
+    }
+  ],
+  "generated_at": "2026-08-19T19:16:00Z",
+  "hard_evidence_gates": [
+    "GitHub organization/security audit-log evidence for historical actor/token/app and repository visibility intervals",
+    "Actual TV/TVC secret-bearing SCW key rotation and payload re-encryption receipt",
+    "Actual bounded TVC migration/execution for remaining TV credential-bearing functions followed by fresh TV operational proof",
+    "Full 203-repository dependency/workflow execution using the installed scanners",
+    "External runtime/DNS/package-registry/deployment provenance for claims outside GitHub observability"
+  ],
+  "inventory": {
+    "current_private": 128,
+    "current_public": 75,
+    "installations": 11,
+    "manifest": "evidence/inventory/connected-repositories-2026-08-19.csv",
+    "manifest_sha256": "59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166",
+    "repositories": 203
+  },
+  "machine_owned_remediation": {
+    "GCAT-PROVENANCE-012": {
+      "issue": "GCAT-BCAT-Engine/workflows#15",
+      "state": "OPEN_SUCCESSOR_SECURITY_TASK",
+      "successor_contract_installed": false
+    },
+    "STEGDB-SEC-001": {
+      "issue": "StegVerse-Labs/StegDB#13",
+      "resolution_observed": false,
+      "state": "MACHINE_OWNED_EXTERNAL_TO_AUDIT_LANE"
+    },
+    "TVC-SCW-VAULT-ROTATION-088": {
+      "actual_rotation_observed": false,
+      "issue": "StegVerse-Labs/TVC#88",
+      "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED"
+    },
+    "TVC-TV-CREDENTIAL-MIGRATION-089": {
+      "credential_bearing_tvc_execution_observed": false,
+      "issue": "StegVerse-Labs/TVC#89",
+      "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED"
+    }
+  },
+  "notes": [
+    "Containment and task ownership are not completion.",
+    "Current repository privacy is not evidence of historical privacy.",
+    "Mutable or unattributed dependencies/identities are provenance gaps, not accusations of malicious intent.",
+    "No secret values are included in this report."
+  ],
+  "report_sha256": "acc0ff3d920ecbfc56e7116cdbc8a845bc779791ce0d02ce673699d975dfc472",
+  "schema": "stegverse.ecosystem-provenance-audit.v1",
+  "security_conclusion": {
+    "confirmed_malicious_third_party_event": "NONE_ESTABLISHED",
+    "confirmed_security_compromise": "YES — SCW vault key material was committed into TV Git history",
+    "confirmed_unauthorized_actor": "NONE_ESTABLISHED",
+    "historical_public_private_exposure_certified": false,
+    "unresolved_third_party_identity": "YES — TVC actions-user write test"
+  }
+}
