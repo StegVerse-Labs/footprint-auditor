@@ -3,7 +3,7 @@
 Status: ACTIVE — ECOSYSTEM PROVENANCE / THIRD-PARTY INFLUENCE AUDIT
 
 Date established: 2026-08-19
-Last updated: 2026-08-19
+Last updated: 2026-08-19 13:38 America/Chicago
 
 ## Governing objective
 Perform a historical ecosystem audit from ecosystem origin through 2026-08-19 and determine whether every consequential state transition can be attributed to an authorized actor, automation, dependency, build, release, deployment, or explicitly documented third party. Do not equate absence of detected malware with absence of unexplained influence.
@@ -40,11 +40,15 @@ Unresolved transitions remain open; they are never silently treated as benign.
 Installed during this audit session:
 - `src/provenance/__init__.py`
 - `src/provenance/historical.py`
+- `src/provenance/workflow_dependencies.py`
+- `src/provenance/workflow_authority.py`
 - `tests/test_historical_provenance.py`
+- `tests/test_workflow_dependencies.py`
+- `tests/test_workflow_authority.py`
 - `config/provenance_audit.yaml`
 - `.github/workflows/provenance-tests.yml`
 
-The historical provenance layer now represents time-bounded audit boundaries, public/private exposure intervals, explicit authority/third-party classification, unresolved provenance gaps, deterministic JSONL event ordering, aggregate evidence digesting, and coverage accounting.
+The provenance layer now represents time-bounded audit boundaries, public/private exposure intervals, explicit authority/third-party classification, unresolved provenance gaps, deterministic evidence digests, mutable-vs-immutable GitHub Action/reusable-workflow references, repository write permission detection, direct workflow `git push`, and elevated manual-trigger paths.
 
 ## Connected ecosystem inventory state
 Connected GitHub installations have been enumerated for:
@@ -72,24 +76,41 @@ A first high-authority commit chronology sample has been taken across:
 
 The connected commit-search surface returned SHAs, messages, repositories, and timestamps but did not populate actor/author/committer identity fields in that sample. Therefore those events are NOT considered identity-attributed and must remain unresolved for authority certification until commit metadata and/or organization audit-log evidence resolves the actor path.
 
-No confirmed malicious or confirmed unauthorized event has been established by this initial sample. This is not a clean-audit conclusion; historical coverage is incomplete and identity evidence remains unresolved.
+## Workflow/dependency provenance findings
+Current high-authority workflow inspection has established at least these open evidence exceptions:
+
+1. `GCAT-BCAT-Engine/workflows/.github/workflows/gcat_bcat_tamper_detection.yml` references `actions/checkout@v4`, `actions/setup-python@v5`, and `actions/upload-artifact@v4`. These are mutable major-version tags rather than immutable 40-character commit SHAs. This does not imply compromise, but the workflow file alone cannot identify the exact third-party action implementation executed at a historical time.
+
+2. `StegVerse-Labs/TV/.github/workflows/fix_chained_uses.yml` is manually dispatchable, grants `contents: write`, executes direct `git push`, uses `actions/checkout@v4`, and rewrites reusable-workflow references to `StegVerse/TV/...@main`. The resulting repository mutations cannot be certified authorized solely from the workflow source; initiating actor/token/run evidence and exact referenced source state are required.
+
+3. Code search across TV/TVC/StegOps-Orchestrator identifies numerous workflow files using `actions/checkout@...`; each must be normalized and classified by exact revision rather than assumed safe based on action publisher.
+
+These are audit exceptions, not accusations of malicious intent.
+
+## Durable audit exceptions/issues
+- Issue #1: ingest GitHub organization audit logs for identity/visibility provenance.
+- Issue #2: reconstruct and retire mutable/write-authority workflow paths.
+
+## Current preliminary result
+No confirmed malicious or confirmed unauthorized event has been established by the work completed so far. This is NOT a clean-audit conclusion: historical coverage is incomplete; commit actor identity remains unresolved in sampled search results; mutable action references prevent deterministic historical reconstruction without additional evidence; and organization audit logs remain unavailable through the current connector.
 
 ## Validation state
-A provenance test workflow is installed. The GitHub connector did not surface a status check for the workflow-creation commit at the time of inspection, so CI is not recorded as passed. Local network cloning is unavailable in this session environment, so source-installed is not being equated with validated/runtime.
+Provenance test workflows/source tests are installed. The GitHub connector has not surfaced an applicable workflow run/status for the source-install commits through its PR-filtered commit-workflow-run endpoint, so CI is not recorded as passed. Source-installed is not being equated with validated/runtime.
 
 ## Current tool boundary
 Connected GitHub access can inspect repositories, private/public state, files, commit history, PRs, diffs, branches, workflow runs/jobs/logs/artifacts, statuses, and repository metadata. The current connector does not expose the full GitHub organization audit-log API, so final certification of identity/access history requires later audit-log ingestion/export or equivalent evidence.
 
 ## Immediate executable work
-1. Continue historical commit/branch/tag/workflow provenance sampling across all inventoried repositories.
-2. Build a durable current inventory snapshot and visibility baseline.
-3. Add workflow/dependency provenance ingestion and exception generation.
+1. Continue ecosystem-wide `.github/workflows/**` inventory and mutable/write-authority classification.
+2. Continue historical commit/branch/tag provenance sampling across all inventoried repositories.
+3. Build a durable current repository/visibility inventory snapshot.
 4. Add commit-authority resolver that fails closed on absent actor metadata.
-5. Add public/private exposure interval ingestion from audit-log evidence when available.
-6. Add deterministic report output and verification receipts.
-7. Run against accessible ecosystem repositories and preserve evidence/results.
+5. Add package/dependency manifest and lockfile provenance scanning.
+6. Add public/private exposure interval ingestion from audit-log evidence when available.
+7. Add deterministic report output and verification receipts over real ecosystem findings.
 8. Reconcile organization audit-log/security-log evidence when access becomes available.
 9. Extend to external package/runtime/DNS/deployment evidence where claims cross GitHub's boundary.
+10. Only after provenance preservation, evaluate remediation of mutable/write-authority workflows and preserve exact before/after evidence.
 
 ## Completion criteria
 This goal is not complete merely because source code exists or a workflow passes. Completion requires implemented audit ingestion, historical coverage, validated classification, durable evidence, cross-repo execution, unresolved-exception accounting, and an explicit statement of coverage limits. A finding of "no evidence of unauthorized third-party influence" is permitted only when unresolved provenance gaps are zero within the stated audited boundary.
