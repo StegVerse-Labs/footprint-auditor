@@ -1,0 +1,15 @@
+{
+  "schema": "stegverse.audit-validation-boundary.v1",
+  "observed_at": "2026-08-19T19:50:00Z",
+  "repository": "StegVerse-Labs/footprint-auditor",
+  "attempt": "credentialless public git clone followed by python -m pytest -q",
+  "credential_used": false,
+  "result": "BLOCKED_BEFORE_CLONE",
+  "failure_class": "NETWORK_DNS_UNAVAILABLE",
+  "failure_summary": "git could not resolve github.com from the local execution sandbox",
+  "source_validation_completed": false,
+  "tests_executed": false,
+  "authority_effect": false,
+  "completion_effect": false,
+  "interpretation": "This is an environment/tooling boundary. It is not evidence that the source passes or fails its test suite, and source-installed must remain distinct from validated/runtime."
+}
