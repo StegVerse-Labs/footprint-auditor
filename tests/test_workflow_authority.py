@@ -85,3 +85,41 @@ def test_status_object_to_summary_is_flagged():
         'cat ".github/token_vault/SCW.bootstrap.status.json" >> "$GITHUB_STEP_SUMMARY"\n',
     )
     assert any(f.finding_type == "STATUS_OBJECT_TO_STEP_SUMMARY" for f in result)
+
+
+def test_detects_credential_bootstrap_output_and_artifact_export_without_values():
+    text = """
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  seed:
+    steps:
+      - name: Bootstrap
+        run: |
+          resp="$(curl -sS -X POST https://runtime.invalid/admin/bootstrap -d '{}')"
+          echo "Raw bootstrap response: ${resp}"
+          token="synthetic-test-value"
+          echo "token=$token" >> "$GITHUB_OUTPUT"
+          echo "$token" > /tmp/NEW_ADMIN_TOKEN.txt
+      - name: Upload token artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: NEW_ADMIN_TOKEN
+          path: /tmp/NEW_ADMIN_TOKEN.txt
+"""
+    result = scan_workflow_authority("org/repo", ".github/workflows/x.yml", text)
+    lookup = {f.finding_type: f for f in result}
+    assert lookup["BOOTSTRAP_CREDENTIAL_ISSUANCE"].severity == "CRITICAL"
+    assert lookup["CREDENTIAL_TO_GITHUB_OUTPUT"].severity == "CRITICAL"
+    assert lookup["CREDENTIAL_ARTIFACT_EXPORT"].severity == "CRITICAL"
+    assert lookup["CREDENTIAL_RESPONSE_LOGGING"].severity == "CRITICAL"
+    for finding in result:
+        assert "synthetic-test-value" not in finding.evidence
+
+
+def test_boolean_output_is_not_misclassified_as_credential_value():
+    text = 'echo "new_token=1" >> "$GITHUB_OUTPUT"\n'
+    assert "CREDENTIAL_TO_GITHUB_OUTPUT" not in types(text)
