@@ -40,6 +40,30 @@ steps:
         "AUTHORIZED_EXPECTED",
         "AUTHORIZED_EXPECTED",
     ]
+    assert findings[0].expected_third_party is True
+    assert findings[1].immutable is True
+    assert findings[2].dependency_kind == "LOCAL"
+
+
+def test_docker_tag_is_gap_and_digest_is_immutable():
+    tag = scan_workflow("org/repo", ".github/workflows/x.yml", "- uses: docker://alpine:3.20\n")[0]
+    digest = scan_workflow(
+        "org/repo", ".github/workflows/x.yml",
+        "- uses: docker://alpine@sha256:" + ("b" * 64) + "\n",
+    )[0]
+    assert tag.classification == "PROVENANCE_GAP"
+    assert tag.immutable is False
+    assert digest.classification == "AUTHORIZED_EXPECTED"
+    assert digest.immutable is True
+
+
+def test_dynamic_uses_reference_fails_closed():
+    finding = scan_workflow(
+        "org/repo", ".github/workflows/x.yml",
+        "- uses: owner/action@${{ inputs.ref }}\n",
+    )[0]
+    assert finding.classification == "PROVENANCE_GAP"
+    assert finding.dependency_kind == "DYNAMIC"
 
 
 def test_summary_is_deterministic_and_counts_gaps():
@@ -52,3 +76,6 @@ def test_summary_is_deterministic_and_counts_gaps():
     second = summarize(reversed(findings))
     assert first["evidence_digest_sha256"] == second["evidence_digest_sha256"]
     assert first["classification_counts"]["PROVENANCE_GAP"] == 1
+    assert first["immutable_dependencies"] == 1
+    assert first["unresolved_dependencies"] == 1
+    assert first["coverage_ratio"] == 0.5
