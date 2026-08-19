@@ -1,0 +1,43 @@
+{
+  "schema": "stegverse.security-current-tree-verification.v1",
+  "verification_id": "SCW-GENERIC-PAT-WORKFLOW-CONTAINMENT-2026-08-19",
+  "recorded_at": "2026-08-19T19:13:00Z",
+  "repository": "StegVerse-Labs/StegVerse-SCW",
+  "current_visibility": "private",
+  "search_basis": "The connected code-search index returned 17 workflow paths containing historical/indexed GH_STEGVERSE_PAT references. Every returned path was then resolved against current main rather than trusting indexed content.",
+  "search_index_freshness": "STALE_RELATIVE_TO_TODAY_CONTAINMENT_COMMITS",
+  "current_tree_result": "ALL_17_INDEXED_GENERIC_PAT_WORKFLOW_PATHS_CONTAINED_OR_RETIRED",
+  "secret_values_read": false,
+  "paths": [
+    {"path": ".github/workflows/auto_patch.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "1bb61a8fd51cf2166e742e44ad917f006875f8df"},
+    {"path": ".github/workflows/kick-autopatch.yml", "state": "CONTAINED_FAIL_CLOSED", "containment_commit": "0f55375e7a9048af95b90c7078890bc206b249bb"},
+    {"path": ".github/workflows/autopatch.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "b04270115ac0d5c670c9413373fb7a97eb9d135e"},
+    {"path": ".github/workflows/multi-autopatch.yml", "state": "RETIRED_FAIL_CLOSED", "current_blob_sha": "f15df354d1d3bddc869be629c9fd513e14493609"},
+    {"path": ".github/workflows/alignment_check.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "062f9b46825bcfc50260b74990223e97b9372641"},
+    {"path": ".github/workflows/pat_auditor.yml", "state": "RETIRED_FAIL_CLOSED", "current_blob_sha": "887b9a145815ba73a3b133ff647fcbedbc5b846c"},
+    {"path": ".github/workflows/entities_runner.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "5bc152f8cfd9102000ad6c9868b49a6822f2e4ef"},
+    {"path": ".github/workflows/guardian_repo_alignment_check.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "221176f63d73cf8ac478de243bd9616034be0d62"},
+    {"path": ".github/workflows/guardian_repo_alignment.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "b9775a77fa2fe68109c42d4df38a34db95d13b75"},
+    {"path": ".github/workflows/guardian_worker_READMEs.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "05c18756a0303120c875f1755d196b17b250f47e"},
+    {"path": ".github/workflows/stegverse-multi-autopatch.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "500391672802a439687fbb556a034e70ed55c984"},
+    {"path": ".github/workflows/stegtvc_connectivity_sync.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "8df01567480d45c917873f907a948f7e87745852"},
+    {"path": ".github/workflows/revenue_event_manual.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "8e73070f35626b7a76ed202b1caba58adb29e166"},
+    {"path": ".github/workflows/stegtvc_connectivity_autopatch.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "a1004abe8b57d456f79f3d86d7c8695b5ddc14ff"},
+    {"path": ".github/workflows/guardian_worker_workflows.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "4cff083dd7205ebf83f5621066a908c1509a39f3"},
+    {"path": ".github/workflows/guardian_repo_alignment_fixer.yml", "state": "CONTAINED_FAIL_CLOSED", "current_blob_sha": "52bb972e02a16f32e2e5288255693055d89dfc9a"},
+    {"path": ".github/workflows/autopatch_stegtv_connectivity.yml", "state": "CONTAINED_FAIL_CLOSED", "containment_commit": "c0b880355986671d7236c028865f505b12a234c4"}
+  ],
+  "not_proven_by_this_receipt": [
+    "historical executions did not occur",
+    "historical credentials were never exposed",
+    "historical visibility was private at all relevant times",
+    "all non-PAT credential paths in the repository are safe",
+    "replacement TV/TVC execution is activated"
+  ],
+  "next_gates": [
+    "SCW issue #22 TV/TVC replacement",
+    "SCW issue #23 credential bootstrap/config replacement",
+    "organization audit-log visibility and actor/token history",
+    "historical workflow-run/artifact review"
+  ]
+}
