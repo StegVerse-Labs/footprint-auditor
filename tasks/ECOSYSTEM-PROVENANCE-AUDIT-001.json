@@ -8,16 +8,20 @@
   "canonical_issues": [1, 2, 3],
   "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED",
   "claimant": "footprint-auditor provenance engine + TVC private-source-read / credential-admission capability",
-  "claim_reconciled_at": "2026-08-19T14:20:00-05:00",
+  "claim_reconciled_at": "2026-08-19T14:36:00-05:00",
   "scope": {
     "boundary_start": "ecosystem-origin",
-    "boundary_end": "2026-08-19T19:19:00Z",
+    "boundary_end": "2026-08-19T19:36:00Z",
     "connected_installations": 11,
-    "connected_repositories": 203,
-    "current_public": 75,
-    "current_private": 128,
-    "inventory_manifest": "evidence/inventory/connected-repositories-2026-08-19.csv",
-    "inventory_manifest_sha256": "59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166"
+    "accessible_repositories_exact_count": 219,
+    "current_public": 76,
+    "current_private": 143,
+    "exact_count_receipt": "evidence/inventory/accessible-repository-count-2026-08-19-v2.json",
+    "installation_listing_baseline_repositories": 203,
+    "installation_listing_manifest": "evidence/inventory/connected-repositories-2026-08-19.csv",
+    "installation_listing_manifest_sha256": "59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166",
+    "complete_per_repository_manifest_verified": false,
+    "inventory_note": "StegVerse-Labs installation listing truncates at 100 while repository search establishes 116 accessible Labs repositories; exact total is 219 but a complete exact-name 219-row manifest remains to be reconstructed."
   },
   "installed_scanners": [
     "src/provenance/historical.py",
@@ -27,16 +31,19 @@
     "src/provenance/python_dependencies.py",
     "src/provenance/ecosystem_dependencies.py",
     "src/provenance/inventory.py",
-    "src/provenance/report.py"
+    "src/provenance/report.py",
+    "src/provenance/repository_executor.py"
   ],
   "required_execution": [
+    "reconstruct a complete exact-name manifest for all 219 currently accessible repositories",
     "materialize each private source through exact-SHA TVC private-source-read without credential export to the audit engine",
     "obtain public sources without credential-bearing authority",
+    "run repository_executor against each exact materialized SHA and preserve deterministic secret-safe receipts",
     "scan all reachable Git history, workflow history, dependency manifests/locks, remote executable references, and current control paths",
     "normalize commit actors only from dated evidence; never infer historical authorization from current membership",
     "reconstruct repository visibility intervals from organization audit/security logs",
     "preserve exact evidence hashes and unresolved exceptions",
-    "generate a superseding deterministic audit receipt after all 203 repositories and external evidence surfaces complete"
+    "generate a superseding deterministic audit receipt after all 219 repositories and external evidence surfaces complete"
   ],
   "authority": {
     "credential_authority": "TV/TVC",
@@ -50,10 +57,15 @@
   },
   "dependencies": [
     {
+      "id": "COMPLETE-219-REPOSITORY-MANIFEST",
+      "repository": "StegVerse-Labs/footprint-auditor",
+      "state": "INCOMPLETE_MANIFEST_EXACT_COUNT_KNOWN"
+    },
+    {
       "id": "TVC-PRIVATE-SOURCE-READ-001",
       "repository": "StegVerse-Labs/TVC",
       "issue": 33,
-      "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED"
+      "state": "OPEN_NOT_ACTIVATED"
     },
     {
       "id": "GITHUB-ORG-AUDIT-LOG",
@@ -71,16 +83,34 @@
       "id": "TVC-TV-CREDENTIAL-MIGRATION-089",
       "repository": "StegVerse-Labs/TVC",
       "issue": 89,
-      "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED"
+      "state": "OPEN_MACHINE_OWNED"
+    },
+    {
+      "id": "STEGDB-SEC-001",
+      "repository": "StegVerse-Labs/StegDB",
+      "issue": 13,
+      "state": "MACHINE_OWNED_DEFERRED_WORKFLOWS_REMAIN"
+    },
+    {
+      "id": "GOVERNANCE-STEGTRACE-BOOTSTRAP-CREDENTIAL-MIGRATION",
+      "repository": "StegVerse-Labs/Governance",
+      "issue": 1,
+      "state": "MACHINE_OWNED"
+    },
+    {
+      "id": "GCAT-PROVENANCE-012",
+      "repository": "GCAT-BCAT-Engine/workflows",
+      "issue": 15,
+      "state": "OPEN_SUCCESSOR_SECURITY_TASK"
     }
   ],
   "latest_receipt": {
-    "path": "evidence/reports/ecosystem-provenance-audit-2026-08-19-v2.json",
-    "report_sha256": "80d356362bb3166f1d13636f619e9bfa8a1551efb9b4e3d9540ffb4ff9a24f23",
+    "path": "evidence/reports/ecosystem-provenance-audit-2026-08-19-v4.json",
     "clean_audit_permitted": false,
-    "open_findings": 8
+    "open_findings": 11,
+    "receipt_state": "TO_BE_COMMITTED_IMMEDIATELY_AFTER_TASK_RECONCILIATION"
   },
-  "completion_gate": "OPEN_UNTIL_ALL_203_REPOSITORIES_SCANNED_HISTORICAL_AUTHORITY_AND_VISIBILITY_RECONSTRUCTED_EXTERNAL_PROVENANCE_RECONCILED_AND_ZERO_UNRESOLVED_FINDINGS_OR_EXPLICIT_NONCLEAN_FINAL_VERDICT_RETAINED",
+  "completion_gate": "OPEN_UNTIL_ALL_219_REPOSITORIES_EXACTLY_ENUMERATED_AND_SCANNED_HISTORICAL_AUTHORITY_AND_VISIBILITY_RECONSTRUCTED_EXTERNAL_PROVENANCE_RECONCILED_REQUIRED_TV_TVC_REMEDIATIONS_EXECUTED_AND_ZERO_UNRESOLVED_FINDINGS_OR_EXPLICIT_NONCLEAN_FINAL_VERDICT_RETAINED",
   "authority_effect": false,
   "activation_effect": false
 }
