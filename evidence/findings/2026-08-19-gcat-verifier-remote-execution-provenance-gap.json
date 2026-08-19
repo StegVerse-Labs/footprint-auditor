@@ -1,0 +1,43 @@
+{
+  "finding_id": "GCAT-WORKFLOWS-REMOTE-VERIFIER-PROVENANCE-2026-08-19",
+  "recorded_at": "2026-08-19T19:15:00Z",
+  "audit_status": "PROVENANCE_GAP",
+  "security_condition": "PROVENANCE_VERIFIER_CODE_CAN_BE_FETCHED_FROM_MUTABLE_REF_AND_EXECUTED_WITHOUT_CONTENT_DIGEST_BINDING",
+  "severity": "HIGH",
+  "malice_confirmed": false,
+  "unauthorized_actor_confirmed": false,
+  "repository": "GCAT-BCAT-Engine/workflows",
+  "affected_paths": [
+    {
+      "path": ".github/workflows/handoff-authority-reusable.yml",
+      "blob_sha": "3bda0b8f4367df6edb317a1feb01d3efcbe3ef79",
+      "condition": "verifier_ref defaults to main; raw GitHub Python verifier is downloaded and executed without SHA-format enforcement or artifact digest verification"
+    },
+    {
+      "path": ".github/workflows/handoff-semantics-reusable.yml",
+      "blob_sha": "3f799c767417ef3d5b2da5850f13c217862861f4",
+      "condition": "verifier_ref defaults to main; multiple raw GitHub verifier/config files are downloaded and executed/consumed without SHA-format enforcement or content digest verification"
+    },
+    {
+      "path": ".github/workflows/continuity-provenance-reusable.yml",
+      "blob_sha": "c71009b9200e5060e783e016ed1336e1914113ad",
+      "condition": "verifier_ref is required but workflow does not itself enforce a 40-character immutable commit before downloading and executing verifier code"
+    }
+  ],
+  "caller_check": {
+    "known_live_caller_repository": "StegVerse-002/core-lite",
+    "handoff_authority_caller_pinned": true,
+    "handoff_authority_ref": "a859be95c29245f9b5fa7fab1a824920ac0b10ed",
+    "handoff_semantics_caller_pinned": true,
+    "handoff_semantics_ref": "ec8dc192617b4f145ccfe850d58a9cb803016d19",
+    "note": "Known caller evidence reduces immediate exposure but does not make the reusable contract intrinsically immutable."
+  },
+  "repository_continuity_constraint": "docs/WORKFLOWS_MIRROR_HANDOFF.md requires successor claims/continuity records for future contract changes; audit lane therefore records and routes remediation instead of silently mutating the contract.",
+  "required_resolution": [
+    "require verifier_ref to match an immutable 40-character commit SHA in every reusable verifier workflow",
+    "remove mutable default main from authority/semantic verifier contracts",
+    "prefer repository checkout at immutable ref or verify downloaded verifier/config SHA-256 before execution",
+    "preserve successor continuity/change record and revalidate all adopted callers"
+  ],
+  "completion_gate": "OPEN_UNTIL_SUCCESSOR_WORKFLOW_CONTRACT_IS_IMMUTABLY_BOUND_AND_CALLERS_REVALIDATED"
+}
