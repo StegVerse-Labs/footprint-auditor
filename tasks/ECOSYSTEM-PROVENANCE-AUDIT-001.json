@@ -1,0 +1,86 @@
+{
+  "schema_version": "STEGVERSE-TASK-v1",
+  "task_id": "ECOSYSTEM-PROVENANCE-AUDIT-001",
+  "title": "Execute full historical provenance and supply-chain audit across connected ecosystem",
+  "repository": "StegVerse-Labs/footprint-auditor",
+  "branch": "main",
+  "canonical_handoff": "FOOTPRINT_AUDITOR_MIRROR_HANDOFF.md",
+  "canonical_issues": [1, 2, 3],
+  "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED",
+  "claimant": "footprint-auditor provenance engine + TVC private-source-read / credential-admission capability",
+  "claim_reconciled_at": "2026-08-19T14:20:00-05:00",
+  "scope": {
+    "boundary_start": "ecosystem-origin",
+    "boundary_end": "2026-08-19T19:19:00Z",
+    "connected_installations": 11,
+    "connected_repositories": 203,
+    "current_public": 75,
+    "current_private": 128,
+    "inventory_manifest": "evidence/inventory/connected-repositories-2026-08-19.csv",
+    "inventory_manifest_sha256": "59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166"
+  },
+  "installed_scanners": [
+    "src/provenance/historical.py",
+    "src/provenance/commit_authority.py",
+    "src/provenance/workflow_dependencies.py",
+    "src/provenance/workflow_authority.py",
+    "src/provenance/python_dependencies.py",
+    "src/provenance/ecosystem_dependencies.py",
+    "src/provenance/inventory.py",
+    "src/provenance/report.py"
+  ],
+  "required_execution": [
+    "materialize each private source through exact-SHA TVC private-source-read without credential export to the audit engine",
+    "obtain public sources without credential-bearing authority",
+    "scan all reachable Git history, workflow history, dependency manifests/locks, remote executable references, and current control paths",
+    "normalize commit actors only from dated evidence; never infer historical authorization from current membership",
+    "reconstruct repository visibility intervals from organization audit/security logs",
+    "preserve exact evidence hashes and unresolved exceptions",
+    "generate a superseding deterministic audit receipt after all 203 repositories and external evidence surfaces complete"
+  ],
+  "authority": {
+    "credential_authority": "TV/TVC",
+    "non_tv_tvc_secret_or_token_allowed": false,
+    "github_actions_production_or_control_authority": false,
+    "audit_engine_receives_private_source_credential": false,
+    "private_source_capability": "tvc.private-source-read.v1",
+    "write_authority": false,
+    "release_authority": false,
+    "runtime_authority": false
+  },
+  "dependencies": [
+    {
+      "id": "TVC-PRIVATE-SOURCE-READ-001",
+      "repository": "StegVerse-Labs/TVC",
+      "issue": 33,
+      "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED"
+    },
+    {
+      "id": "GITHUB-ORG-AUDIT-LOG",
+      "repository": "external GitHub organization/security log evidence",
+      "issue": "StegVerse-Labs/footprint-auditor#1",
+      "state": "UNAVAILABLE_THROUGH_CONNECTED_GITHUB_TOOL"
+    },
+    {
+      "id": "TVC-SCW-VAULT-ROTATION-088",
+      "repository": "StegVerse-Labs/TVC",
+      "issue": 88,
+      "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED"
+    },
+    {
+      "id": "TVC-TV-CREDENTIAL-MIGRATION-089",
+      "repository": "StegVerse-Labs/TVC",
+      "issue": 89,
+      "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED"
+    }
+  ],
+  "latest_receipt": {
+    "path": "evidence/reports/ecosystem-provenance-audit-2026-08-19-v2.json",
+    "report_sha256": "80d356362bb3166f1d13636f619e9bfa8a1551efb9b4e3d9540ffb4ff9a24f23",
+    "clean_audit_permitted": false,
+    "open_findings": 8
+  },
+  "completion_gate": "OPEN_UNTIL_ALL_203_REPOSITORIES_SCANNED_HISTORICAL_AUTHORITY_AND_VISIBILITY_RECONSTRUCTED_EXTERNAL_PROVENANCE_RECONCILED_AND_ZERO_UNRESOLVED_FINDINGS_OR_EXPLICIT_NONCLEAN_FINAL_VERDICT_RETAINED",
+  "authority_effect": false,
+  "activation_effect": false
+}
