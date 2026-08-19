@@ -1,0 +1,46 @@
+{
+  "finding_id": "TV-SCW-VAULT-KEY-EXPOSURE-2025-11-25",
+  "recorded_at": "2026-08-19T18:38:00Z",
+  "repository": "StegVerse-Labs/TV",
+  "event_commit": "1a6892c19eaf7892a5db6b7e3db8f8dfdd73c9c8",
+  "event_time": "2025-11-25T12:32:01Z",
+  "actor_observed": "StegVerse Bot",
+  "audit_status": "AUTHORIZED_UNEXPLAINED",
+  "security_condition": "CONFIRMED_CREDENTIAL_KEY_EXPOSURE_IN_GIT_HISTORY",
+  "severity": "CRITICAL",
+  "malice_confirmed": false,
+  "unauthorized_actor_confirmed": false,
+  "historical_visibility_at_event": "UNRESOLVED_PENDING_ORG_AUDIT_LOG",
+  "current_visibility": "private",
+  "affected_paths": [
+    ".github/vault/SCW.bootstrap.status.json",
+    ".github/vault/SCW.enc",
+    ".github/vault/SCW.meta.json",
+    ".github/workflows/vault_bootstrap.yml",
+    ".github/workflows/vault_rotate.yml",
+    ".github/workflows/vault_check.yml"
+  ],
+  "evidence": {
+    "bootstrap_commit_contains_key_literal": true,
+    "bootstrap_commit_contains_ciphertext": true,
+    "current_ciphertext_matches_bootstrap_ciphertext": true,
+    "subsequent_rotation_commit_found": false,
+    "key_value_redacted_from_audit_artifact": true,
+    "key_value_must_not_be_reproduced": true
+  },
+  "risk": [
+    "The decryption key was committed into Git history in the same transition as the encrypted artifact.",
+    "The bootstrap workflow also writes key material to a status object and step summary by design.",
+    "The currently stored ciphertext is the same artifact introduced by the exposure commit.",
+    "If the repository was public at any time while the commit was reachable, public exposure severity increases; historical visibility is not yet proven either way."
+  ],
+  "required_remediation": [
+    "Treat SCW_VAULT_FERNET_KEY as compromised.",
+    "Rotate the TV/TVC-managed key through an authority-preserving secret channel.",
+    "Re-encrypt any payload that depended on the compromised key.",
+    "Remove all workflow behavior that writes, commits, prints, summarizes, or artifacts raw key material.",
+    "Preserve the historical commit as evidence; do not claim removal from current main erases Git history.",
+    "Resolve repository visibility on 2025-11-25 from organization audit-log evidence."
+  ],
+  "completion_gate": "OPEN_UNTIL_ROTATION_AND_VISIBILITY_EVIDENCE"
+}
