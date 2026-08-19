@@ -1,0 +1,70 @@
+audit:
+  name: stegverse-ecosystem-provenance
+  start: ecosystem-origin
+  end: 2026-08-19T23:59:59Z
+  unresolved_must_fail: true
+  require_visibility_timeline: true
+  require_authority_timeline: true
+  require_repository_timeline: true
+  require_external_evidence_for_non_github_claims: true
+
+classifications:
+  - AUTHORIZED_EXPECTED
+  - AUTHORIZED_UNEXPLAINED
+  - THIRD_PARTY_EXPECTED
+  - THIRD_PARTY_UNEXPLAINED
+  - PROVENANCE_GAP
+  - SUSPICIOUS
+  - CONFIRMED_UNAUTHORIZED
+  - CONFIRMED_MALICIOUS
+
+authority:
+  primary: StegVerse
+  credential_boundary: TV/TVC_ONLY
+  github_actions_control_plane_authority: false
+  unknown_actor_default: unresolved
+
+organizations:
+  - StegVerse
+  - StegVerse-Labs
+  - Admissible-Existence
+  - AdmittedCode
+  - Data-Continuation
+  - GCAT-BCAT-Engine
+  - master-records
+  - StegGhost
+  - StegVerse-002
+  - StegVerse-org
+  - formalism-tests
+
+required_evidence:
+  repository:
+    - commits_all_refs
+    - parent_graph
+    - branches
+    - tags
+    - releases
+    - pull_requests
+    - reviews
+    - workflow_definitions
+    - workflow_runs
+    - workflow_artifacts
+    - dependencies
+    - visibility_intervals
+  authority:
+    - actor_identity
+    - actor_kind
+    - authorization_basis
+    - github_app_or_programmatic_source
+  external_when_available:
+    - organization_audit_log
+    - security_log
+    - package_registry_provenance
+    - dns_and_domain_events
+    - deployment_runtime_receipts
+
+propagation_targets:
+  - StegVerse-Labs/Site
+  - GCAT-BCAT-Engine/Publisher
+  - StegVerse-Labs/admissibility-wiki
+  - stegguardian-wiki
