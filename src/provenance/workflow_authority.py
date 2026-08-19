@@ -1,6 +1,6 @@
 """Detect GitHub Actions constructs that widen provenance or authority risk.
 
-Findings are evidence exceptions, not accusations of malicious intent.  Sensitive
+Findings are evidence exceptions, not accusations of malicious intent. Sensitive
 values are never read or reproduced; only secret names and static source patterns
 are classified.
 """
@@ -34,6 +34,13 @@ WORKFLOW_DISPATCH_RE = re.compile(r"(?m)^\s*workflow_dispatch\s*:")
 SECRET_RE = re.compile(r"secrets\.([A-Za-z0-9_]+)")
 REMOTE_FETCH_RE = re.compile(r"\b(?:curl|wget)\b.*https?://", re.IGNORECASE)
 DIRECT_PIP_RE = re.compile(r"\bpip\s+install\s+(.+)$")
+CREDENTIAL_OUTPUT_RE = re.compile(
+    r"(?:token|secret|credential|api[_-]?key|access[_-]?key|admin[_-]?token)\s*=\s*\$[^\s\"']+.*GITHUB_OUTPUT",
+    re.IGNORECASE,
+)
+BOOTSTRAP_CREDENTIAL_RE = re.compile(r"/(?:admin|auth|credential|token)/bootstrap\b", re.IGNORECASE)
+RAW_CREDENTIAL_RESPONSE_RE = re.compile(r"(?:raw\s+)?(?:bootstrap|auth|token|credential).*response", re.IGNORECASE)
+SENSITIVE_ARTIFACT_NAME_RE = re.compile(r"(?:token|secret|credential|private[_-]?key|api[_-]?key)", re.IGNORECASE)
 
 
 def _line_number(text: str, start: int) -> int:
@@ -68,6 +75,40 @@ def _contains_unpinned_package(args: str) -> bool:
     return False
 
 
+def _artifact_export_findings(repository: str, workflow_path: str, source: str) -> List[WorkflowAuthorityFinding]:
+    """Detect upload-artifact blocks that appear to export credential-bearing files.
+
+    Only static artifact names/paths are retained as evidence; no file is read.
+    """
+    lines = source.splitlines()
+    findings: List[WorkflowAuthorityFinding] = []
+    for idx, line in enumerate(lines):
+        if not re.search(r"uses:\s*actions/upload-artifact@", line, re.IGNORECASE):
+            continue
+        window = lines[idx:min(len(lines), idx + 12)]
+        for offset, candidate in enumerate(window[1:], start=1):
+            stripped = candidate.strip()
+            if re.match(r"-\s+name:\s*", stripped) and offset > 1:
+                break
+            field_match = re.match(r"(?:name|path):\s*(.+)$", stripped, re.IGNORECASE)
+            if not field_match:
+                continue
+            static_value = field_match.group(1).strip()
+            if SENSITIVE_ARTIFACT_NAME_RE.search(static_value):
+                findings.append(_finding(
+                    repository,
+                    workflow_path,
+                    "CREDENTIAL_ARTIFACT_EXPORT",
+                    "SUSPICIOUS",
+                    "credential-like artifact name/path [VALUE_NOT_READ]",
+                    "workflow uploads an artifact whose static name/path indicates credential material; artifact bytes require containment and historical run review",
+                    "CRITICAL",
+                    idx + offset + 1,
+                ))
+                break
+    return findings
+
+
 def scan_workflow_authority(
     repository: str,
     workflow_path: str,
@@ -77,7 +118,7 @@ def scan_workflow_authority(
 ) -> List[WorkflowAuthorityFinding]:
     """Return static authority/provenance exceptions for one workflow.
 
-    ``allowed_secret_prefixes`` defaults to TV_/TVC_.  This naming check is only
+    ``allowed_secret_prefixes`` defaults to TV_/TVC_. This naming check is only
     one signal: even a correctly named secret can violate authority if it is
     interpolated in a repository that is not the admitted credential executor.
     """
@@ -123,6 +164,20 @@ def scan_workflow_authority(
             "CRITICAL", _line_number(source, match.start()),
         ))
 
+    findings.extend(_artifact_export_findings(repository, workflow_path, source))
+
+    for match in BOOTSTRAP_CREDENTIAL_RE.finditer(source):
+        findings.append(_finding(
+            repository,
+            workflow_path,
+            "BOOTSTRAP_CREDENTIAL_ISSUANCE",
+            "SUSPICIOUS",
+            "credential bootstrap endpoint [VALUE_NOT_READ]",
+            "workflow can invoke a credential/bootstrap endpoint; issuance authority, returned value handling, and historical runs require explicit provenance",
+            "CRITICAL",
+            _line_number(source, match.start()),
+        ))
+
     for idx, line in enumerate(source.splitlines(), start=1):
         stripped = line.strip()
         if "x-access-token:${TOKEN}@github.com" in line or "x-access-token:$TOKEN@github.com" in line:
@@ -147,6 +202,30 @@ def scan_workflow_authority(
                 stripped,
                 "generated status object is copied to Actions summary and requires sensitivity review",
                 "HIGH", idx,
+            ))
+
+        if "GITHUB_OUTPUT" in line and CREDENTIAL_OUTPUT_RE.search(stripped):
+            findings.append(_finding(
+                repository,
+                workflow_path,
+                "CREDENTIAL_TO_GITHUB_OUTPUT",
+                "SUSPICIOUS",
+                "credential-like value written to GITHUB_OUTPUT [VALUE_REDACTED]",
+                "workflow writes a credential-like value into GitHub step outputs, widening its execution-surface exposure",
+                "CRITICAL",
+                idx,
+            ))
+
+        if RAW_CREDENTIAL_RESPONSE_RE.search(stripped) and ("echo" in stripped or "print" in stripped):
+            findings.append(_finding(
+                repository,
+                workflow_path,
+                "CREDENTIAL_RESPONSE_LOGGING",
+                "SUSPICIOUS",
+                "credential/bootstrap response logging expression [VALUE_REDACTED]",
+                "workflow source indicates a credential/bootstrap response may be logged; historical run logs require review",
+                "CRITICAL",
+                idx,
             ))
 
         pip_match = DIRECT_PIP_RE.search(stripped)
