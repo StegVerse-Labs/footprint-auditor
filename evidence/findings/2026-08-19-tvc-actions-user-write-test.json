@@ -1,0 +1,35 @@
+{
+  "finding_id": "TVC-ACTIONS-USER-WRITE-TEST-2026-05-18",
+  "recorded_at": "2026-08-19T18:45:00Z",
+  "repository": "StegVerse-Labs/TVC",
+  "event_commit": "3e74e0979ec91b55e47395eb2282bd936a118a05",
+  "event_time": "2026-05-18T22:04:45Z",
+  "event_type": "credential_bearing_repository_write_test",
+  "commit_actor": "actions-user",
+  "commit_actor_current_permission": "none",
+  "pull_request": 2,
+  "pull_request_user": "StegVerse",
+  "merge_commit": "8752e77008f0b7b46ab66b6eee11c66dbf1f0a5a",
+  "merged_at": "2026-06-11T02:47:24Z",
+  "audit_status": "THIRD_PARTY_UNEXPLAINED",
+  "malice_confirmed": false,
+  "unauthorized_actor_confirmed": false,
+  "evidence": {
+    "workflow_path": ".github/workflows/write_test.yml",
+    "workflow_secret_reference": "GH_STEGVERSE_AI_TOKEN",
+    "workflow_intent": "verify AI write permissions",
+    "commit_changed_only_marker_file": true,
+    "pr_opened_by_primary_account": true,
+    "pr_merged": true,
+    "current_collaborator_permission_for_commit_actor": "none",
+    "historical_token_owner_and_authorization_basis": "UNRESOLVED_PENDING_AUDIT_LOG"
+  },
+  "assessment": "Observed content and PR context are consistent with an intentional write-capability test, not covert payload injection. The credential identity that produced the commit is nevertheless not attributable to TV/TVC from currently available evidence, so the event remains open.",
+  "required_resolution": [
+    "Resolve the historical owner/application identity behind GH_STEGVERSE_AI_TOKEN at the event time.",
+    "Resolve whether actions-user was an authorized bot/service identity on 2026-05-18.",
+    "Confirm token creation/installation/revocation events from GitHub organization/security logs.",
+    "Retire or migrate the legacy write-test credential path if it is no longer required."
+  ],
+  "completion_gate": "OPEN_PENDING_HISTORICAL_AUTHORITY_EVIDENCE"
+}
