@@ -1,0 +1,94 @@
+{
+  "finding_id": "ECOSYSTEM-PAT-AUTOPATCH-AUTHORITY-2026-08-19",
+  "recorded_at": "2026-08-19T19:05:00Z",
+  "audit_status": "AUTHORIZED_UNEXPLAINED",
+  "security_condition": "LEGACY_NON_TV_TVC_CREDENTIAL_MUTATION_AUTHORITY",
+  "severity": "CRITICAL",
+  "malice_confirmed": false,
+  "unauthorized_actor_confirmed": false,
+  "secret_values_observed": false,
+  "repositories": [
+    {
+      "repository": "StegVerse-Labs/hybrid-collab-bridge",
+      "path": ".github/workflows/autopatch.yml",
+      "prior_conditions": [
+        "contents_write",
+        "non_tv_tvc_secret_names",
+        "platform_token_interpolation",
+        "direct_git_push"
+      ],
+      "containment_commit": "8be6c58206f2d3c57d823533d57593a68838e4c3",
+      "current_state": "RETIRED_FAIL_CLOSED"
+    },
+    {
+      "repository": "StegVerse-Labs/StegVerse-SCW",
+      "path": ".github/workflows/autopatch.yml",
+      "prior_conditions": [
+        "contents_write",
+        "actions_write",
+        "non_tv_tvc_pat_fallback",
+        "global_bearer_git_url_rewrite",
+        "cross_repository_mutation"
+      ],
+      "containment_commit": "b2db45e36b5efcd5fc162fdca0a08b9fd9975fe0",
+      "current_state": "CONTAINED_FAIL_CLOSED"
+    },
+    {
+      "repository": "StegVerse-Labs/StegVerse-SCW",
+      "path": ".github/workflows/auto_patch.yml",
+      "prior_conditions": [
+        "contents_write",
+        "actions_write",
+        "non_tv_tvc_pat_fallback",
+        "global_bearer_git_url_rewrite",
+        "cross_repository_mutation"
+      ],
+      "containment_commit": "b082e6f1f720b7b6dbb8985c00e655e2465887c3",
+      "current_state": "CONTAINED_FAIL_CLOSED"
+    },
+    {
+      "repository": "StegVerse-Labs/StegVerse-SCW",
+      "path": ".github/workflows/stegverse-multi-autopatch.yml",
+      "prior_conditions": [
+        "scheduled_execution",
+        "contents_write",
+        "actions_write",
+        "non_tv_tvc_pat_fallback",
+        "global_bearer_git_url_rewrite",
+        "cross_repository_mutation",
+        "direct_git_push"
+      ],
+      "containment_commit": "4fb29940baa7400be73fc4953533b46903de2335",
+      "current_state": "CONTAINED_FAIL_CLOSED"
+    },
+    {
+      "repository": "StegVerse-Labs/StegVerse-SCW",
+      "path": ".github/workflows/stegtvc_connectivity_autopatch.yml",
+      "prior_conditions": [
+        "scheduled_execution",
+        "contents_write",
+        "actions_write",
+        "non_tv_tvc_pat_fallback",
+        "global_bearer_git_url_rewrite",
+        "cross_repository_access",
+        "direct_git_push"
+      ],
+      "containment_commit": "63c8d1cb38b61b757e04dd07c9dc7c3698dffdac",
+      "current_state": "CONTAINED_FAIL_CLOSED"
+    }
+  ],
+  "replacement_contract": {
+    "credential_authority": "TV/TVC",
+    "non_tv_tvc_secret_or_token_allowed": false,
+    "target_scope_must_be_explicit": true,
+    "authority_preflight_required": true,
+    "actor_token_provenance_required": true,
+    "unavailable_authority_behavior": "FAIL_CLOSED_BEFORE_MUTATION",
+    "secret_value_persistence_allowed": false,
+    "github_actions_control_plane_authority": false
+  },
+  "durable_task_refs": [
+    "StegVerse-Labs/StegVerse-SCW#22"
+  ],
+  "completion_gate": "OPEN_UNTIL_TV_TVC_REPLACEMENT_AND_HISTORICAL_RUN_PROVENANCE"
+}
