@@ -8,19 +8,21 @@
   "canonical_issues": [1, 2, 3],
   "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED",
   "claimant": "footprint-auditor provenance engine + TVC private-source-read / credential-admission capability",
-  "claim_reconciled_at": "2026-08-19T14:38:00-05:00",
+  "claim_reconciled_at": "2026-08-19T14:49:00-05:00",
   "scope": {
     "boundary_start": "ecosystem-origin",
-    "boundary_end": "2026-08-19T19:38:00Z",
+    "boundary_end": "2026-08-19T19:49:00Z",
     "connected_installations": 11,
     "accessible_repositories_exact_count": 219,
     "current_public": 76,
     "current_private": 143,
     "exact_count_receipt": "evidence/inventory/accessible-repository-count-2026-08-19-v2.json",
+    "exact_count_receipt_blob_sha": "6e74825f2f222341fcdbdb978ec60f9fe8be3c73",
     "installation_listing_baseline_repositories": 203,
     "installation_listing_manifest": "evidence/inventory/connected-repositories-2026-08-19.csv",
     "installation_listing_manifest_sha256": "59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166",
-    "complete_per_repository_manifest_verified": false
+    "complete_per_repository_manifest_verified": false,
+    "inventory_note": "StegVerse-Labs installation listing truncates at 100 while repository search establishes 116 accessible Labs repositories; exact total is 219 but a complete exact-name 219-row manifest remains to be reconstructed."
   },
   "installed_scanners": [
     "src/provenance/historical.py",
@@ -62,13 +64,24 @@
     {"id":"TVC-TV-CREDENTIAL-MIGRATION-089","repository":"StegVerse-Labs/TVC","issue":89,"state":"OPEN_MACHINE_OWNED"},
     {"id":"STEGDB-SEC-001","repository":"StegVerse-Labs/StegDB","issue":13,"state":"MACHINE_OWNED_DEFERRED_WORKFLOWS_REMAIN"},
     {"id":"GOVERNANCE-STEGTRACE-BOOTSTRAP-CREDENTIAL-MIGRATION","repository":"StegVerse-Labs/Governance","issue":1,"state":"MACHINE_OWNED"},
-    {"id":"GCAT-PROVENANCE-012","repository":"GCAT-BCAT-Engine/workflows","issue":15,"state":"OPEN_SUCCESSOR_SECURITY_TASK"}
+    {"id":"GCAT-PROVENANCE-012","repository":"GCAT-BCAT-Engine/workflows","issue":15,"state":"OPEN_SUCCESSOR_SECURITY_TASK"},
+    {"id":"GCAT-PROVIDER-CREDENTIAL-MIGRATION","repository":"GCAT-BCAT-Engine/workflows","issue":16,"state":"OPEN_SUCCESSOR_SECURITY_TASK"},
+    {"id":"HYBRID-BRIDGE-PROVIDER-REPLACEMENT","repository":"StegVerse-Labs/hybrid-collab-bridge","issue":14,"state":"OPEN_SUCCESSOR_SECURITY_TASK"},
+    {"id":"SITE-BUNDLE-INGEST-TVC-MUTATION","repository":"StegVerse-Labs/Site","issue":398,"state":"OPEN_LATENT_SOURCE_UNREACHABLE_PENDING_REFACTOR"}
   ],
   "latest_receipt": {
-    "path": "evidence/reports/ecosystem-provenance-audit-2026-08-19-v4.json",
-    "report_sha256": "88f8d87cf6e1920959fafd3ef69eded97b015d4658e4b007bcae067c9bd48575",
+    "path": "evidence/reports/ecosystem-provenance-audit-2026-08-19-v5.json",
+    "report_sha256_excluding_report_sha256": "91af76ca27027d70bb9cb40d439d68590ac05f1dd06aa8526c74c9dd472afbaa",
     "clean_audit_permitted": false,
-    "open_findings": 11,
+    "open_findings": 13,
+    "finding_status_counts": {
+      "AUTHORIZED_UNEXPLAINED": 10,
+      "PROVENANCE_GAP": 2,
+      "THIRD_PARTY_UNEXPLAINED": 1
+    },
+    "confirmed_security_compromise": 1,
+    "confirmed_malicious": 0,
+    "confirmed_unauthorized_actor": 0,
     "receipt_state": "COMMITTED"
   },
   "completion_gate": "OPEN_UNTIL_ALL_219_REPOSITORIES_EXACTLY_ENUMERATED_AND_SCANNED_HISTORICAL_AUTHORITY_AND_VISIBILITY_RECONSTRUCTED_EXTERNAL_PROVENANCE_RECONCILED_REQUIRED_TV_TVC_REMEDIATIONS_EXECUTED_AND_ZERO_UNRESOLVED_FINDINGS_OR_EXPLICIT_NONCLEAN_FINAL_VERDICT_RETAINED",
