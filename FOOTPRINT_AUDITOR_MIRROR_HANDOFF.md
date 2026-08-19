@@ -2,11 +2,11 @@
 
 Status: ACTIVE — BLOCKED DEPENDENCY / MACHINE OWNED
 
-Date established: 2026-08-19
-Last updated: 2026-08-19 14:38 America/Chicago
+Date established: 2026-08-19  
+Last updated: 2026-08-19 14:49 America/Chicago
 
 ## Governing objective
-Perform a historical ecosystem security/provenance audit from ecosystem origin through 2026-08-19. Attribute every consequential transition to dated actor, automation, dependency, build, release, deployment, runtime, or explicitly documented third-party evidence. Never treat missing evidence, current privacy, current membership, source containment, issue creation, or workflow success as proof of historical authorization or benign intent.
+Perform a historical ecosystem security/provenance audit from ecosystem origin through 2026-08-19. Attribute every consequential transition to dated actor, automation, dependency, build, release, deployment, runtime, or explicitly documented third-party evidence. Never treat missing evidence, current privacy, current membership, source containment, issue creation, machine ownership, readiness, or workflow success as proof of historical authorization, activation, runtime, completion, or benign intent.
 
 ## Authority contract
 - StegVerse primary; third-party fallback only when required.
@@ -16,28 +16,29 @@ Perform a historical ecosystem security/provenance audit from ecosystem origin t
 - Audit engine receives no private-source credential.
 - Unresolved transitions remain open and fail closed.
 
-## Current connected boundary
-Exact current accessible count is **219 repositories across 11 installations**:
+## Current accessible boundary
+Exact accessible count is **219 repositories across 11 installations/accounts**:
 - current public: 76
 - current private: 143
 
 Exact-count evidence:
 - `evidence/inventory/accessible-repository-count-2026-08-19-v2.json`
-- receipt SHA-256: `add29415fb80543aeaf285c3d69d197f28999b93cb151a95ae935c7ee248ae9d`
+- Git blob: `6e74825f2f222341fcdbdb978ec60f9fe8be3c73`
 
-The earlier 203-row installation-listing CSV is retained only as a baseline. StegVerse-Labs installation listing truncates at 100 while repository search establishes 116 accessible Labs repositories. A complete exact-name 219-row manifest has not yet been reconstructed from one reliable connector listing surface. Current visibility is not historical visibility evidence.
+The earlier 203-row installation-listing CSV is retained only as a superseded baseline. StegVerse-Labs installation listing truncates at 100 while repository search establishes 116 accessible Labs repositories. A complete exact-name 219-row manifest has not yet been reconstructed from one reliable connector listing surface. Current visibility is not historical visibility evidence.
 
 ## Canonical audit receipt
 Current superseding receipt:
-- `evidence/reports/ecosystem-provenance-audit-2026-08-19-v4.json`
-- deterministic report SHA-256 excluding its self-hash field: `88f8d87cf6e1920959fafd3ef69eded97b015d4658e4b007bcae067c9bd48575`
+- `evidence/reports/ecosystem-provenance-audit-2026-08-19-v5.json`
+- deterministic report SHA-256 excluding the self-hash field: `91af76ca27027d70bb9cb40d439d68590ac05f1dd06aa8526c74c9dd472afbaa`
+- finding artifacts bound by exact Git blob SHA: 13
 - clean audit permitted: false
-- open findings: 11
+- open findings: 13
 
-v4 supersedes the original, v2, and v3 receipts. v3 used the superseded 203-repository denominator and is not authoritative.
+v5 supersedes the original, v2, v3, and v4 receipts.
 
 ## Installed audit engine
-Canonical modules now include:
+Canonical modules:
 - `src/provenance/historical.py`
 - `src/provenance/commit_authority.py`
 - `src/provenance/workflow_dependencies.py`
@@ -48,118 +49,108 @@ Canonical modules now include:
 - `src/provenance/report.py`
 - `src/provenance/repository_executor.py`
 
-`repository_executor.py` is the exact-SHA materialized-repository execution path. It accepts no credential and performs no network access; it requires immutable expected SHA, verifies HEAD/worktree cleanliness, hashes Git identities, scans workflow/dependency/control surfaces, scrubs committed token literals from retained evidence, and emits a deterministic secret-safe receipt. Private source must be materialized before it runs by an admitted TVC read capability.
+The exact-SHA repository executor accepts no credential and performs no network access. It requires an immutable expected SHA, verifies HEAD and worktree cleanliness, hashes Git identities rather than retaining raw identity values, runs workflow/dependency/control scans, scrubs committed token literals from retained evidence, and emits a deterministic secret-safe receipt. Private source must first be materialized by admitted TVC read authority.
 
-Workflow authority scanning additionally detects credential/bootstrap issuance, credential-to-GitHub-output propagation, credential-like artifact export, and credential/bootstrap response logging without reading secret values.
+The canonical provenance test workflow includes all installed scanner/executor tests. A qualifying latest-source CI pass has not been observed through the connected GitHub status surface; source-installed is therefore not treated as validated/runtime.
 
 ## Confirmed security event
 ### TV SCW vault key exposure
 Finding: `evidence/findings/2026-08-19-tv-scw-vault-key-exposure.json`
 
-A usable SCW Fernet key was committed into `StegVerse-Labs/TV` Git history on 2025-11-25 in the same transition as the encrypted vault artifact. The raw key must never be reproduced.
+A usable SCW Fernet key was committed into `StegVerse-Labs/TV` Git history on 2025-11-25 in the same transition as the encrypted vault artifact. The raw historical key must never be reproduced.
 
-Current-tree containment is complete:
-- live key value redacted and marked compromised;
-- legacy bootstrap, rotation, and checker workflows fail closed.
-
-Actual remediation is NOT complete. `StegVerse-Labs/TVC#88` / `tasks/TVC-SCW-VAULT-ROTATION-088.json` remains `BLOCKED_DEPENDENCY_MACHINE_OWNED` with:
-- replacement key rotation observed: false
-- payload re-encryption observed: false
-- secret-free rotation receipt observed: false
-- historical visibility resolved: false
+Current-tree containment is complete: live key value redacted/marked compromised and unsafe bootstrap/rotation/check paths fail closed. Actual remediation is NOT complete. `StegVerse-Labs/TVC#88` / `TVC-SCW-VAULT-ROTATION-088` still lacks observed replacement-key rotation, payload re-encryption, secret-free rotation receipt, and historical visibility resolution.
 
 ## Current finding ledger
-11 findings remain open:
-- AUTHORIZED_UNEXPLAINED: 8
+**13 findings remain open**:
+- AUTHORIZED_UNEXPLAINED: 10
 - PROVENANCE_GAP: 2
 - THIRD_PARTY_UNEXPLAINED: 1
-- CONFIRMED_MALICIOUS: 0
-- CONFIRMED_UNAUTHORIZED actor: 0
-- confirmed security compromise: 1
+- confirmed malicious events: 0
+- confirmed unauthorized actors: 0
+- confirmed security compromises: 1
 
-Key durable findings:
-- `2026-08-19-tv-scw-vault-key-exposure.json`
-- `2026-08-19-tvc-actions-user-write-test.json`
-- `2026-08-19-tv-credential-processing-policy-drift.json`
-- `2026-08-19-stegdb-secret-contract-policy-drift.json`
-- `2026-08-19-pat-backed-autopatch-authority-containment.json`
-- `2026-08-19-scw-admin-credential-bootstrap-export.json`
-- `2026-08-19-scw-legacy-bridge-credential-path.json`
-- `2026-08-19-gcat-verifier-remote-execution-provenance-gap.json`
-- `2026-08-19-governance-bootstrap-credential-authority-gap.json`
-- `2026-08-19-hybrid-bridge-provider-credential-authority.json`
-- `2026-08-19-labs-residual-credential-control-containment.json`
+Canonical finding files:
+1. `2026-08-19-consumer-credential-export-mutation-paths.json`
+2. `2026-08-19-gcat-provider-credential-authority-drift.json`
+3. `2026-08-19-gcat-verifier-remote-execution-provenance-gap.json`
+4. `2026-08-19-governance-bootstrap-credential-authority-gap.json`
+5. `2026-08-19-hybrid-bridge-provider-credential-authority.json`
+6. `2026-08-19-labs-residual-credential-control-containment.json`
+7. `2026-08-19-pat-backed-autopatch-authority-containment.json`
+8. `2026-08-19-scw-admin-credential-bootstrap-export.json`
+9. `2026-08-19-scw-legacy-bridge-credential-path.json`
+10. `2026-08-19-stegdb-secret-contract-policy-drift.json`
+11. `2026-08-19-tv-credential-processing-policy-drift.json`
+12. `2026-08-19-tv-scw-vault-key-exposure.json`
+13. `2026-08-19-tvc-actions-user-write-test.json`
 
 ## Current-tree containment performed/consumed
-The audit has durably contained or consumed containment for dozens of credential/control-plane paths. Major groups include:
-- 23 legacy PAT/autopatch/cross-repository mutation paths recorded in `2026-08-19-pat-backed-autopatch-authority-containment.json`;
-- 14 additional Labs credential/control paths recorded in `2026-08-19-labs-residual-credential-control-containment.json`;
-- 2 SCW admin bootstrap/config seeding paths, including former credential-to-output/artifact behavior;
-- 4 hybrid bridge hosted-provider/entity paths;
+Major durable containment/migration groups now include:
+- 23 legacy PAT/autopatch/cross-repository mutation paths in the StegVerse-SCW/HCB cluster;
+- 14 additional Labs credential/control-plane paths;
+- 2 SCW admin bootstrap/config seeding paths;
+- 4 hosted-provider hybrid bridge paths;
 - obsolete TV generic-PAT/bridge/self-repair paths;
 - TV SCW unsafe vault bootstrap/rotate/check paths;
-- StegDB generic-PAT contract and multiple token-backed mutation/ingest paths;
-- stale FREE-DOM and Governance bridge forwarders;
-- legacy StegAgents scheduled provider indexer;
-- StegBrain generic-PAT auto-heal path;
-- legacy `StegVerse-Labs/SCW` generic-token bridge;
-- currently public Maxwellality generic-token bridge.
+- StegDB generic-PAT contract replaced by TV/TVC contract v2 and multiple token-backed paths contained/hardened;
+- stale FREE-DOM, Governance, Maxwellality, StegAgents, StegBrain, and SCW credential/control paths;
+- `StegVerse-Labs/Comms-Gateway/tools/push_m1_tag_via_git.py` contained; exact M1 tag mutation remains exclusively in the repository's existing TVC lifecycle;
+- `StegVerse-Labs/crypto-bot/.github/workflows/finalize-paper-release.yml` converted from hosted credential-bearing tag mutation to validation-only; exact tag authority remains TVC-only;
+- `StegVerse-Labs/StegOps-Orchestrator/.github/workflows/stegops-mirror-status-to-deliverables.yml` retired fail-closed;
+- Site bundle-ingest latent apply source remains present, but live `app/resolver.py` prohibits raw credential export and makes that path unreachable; Site #398 owns removal/refactor to TVC mutation authority.
 
-Containment preserves history. It does not prove historical executions were authorized/benign and does not constitute replacement or activation.
+Containment preserves history. It does not prove historical executions were authorized or benign, and it is not replacement activation.
 
 ## Bounded negative evidence
-`evidence/verification/2026-08-19-nonlabs-high-risk-signature-sweep.json` records no current indexed hits across the nine non-Labs organization installations for four named signatures:
-- `x-access-token`
-- `secrets.GH_`
-- `ADMIN_TOKEN`
-- `fernet_key`
-
-This is a bounded signature result only, not a clean-audit conclusion. Search-index freshness, historical deleted content, different names/encodings, runtime-only values, artifacts, dependencies, binaries, logs, and external infrastructure remain outside that result.
+`evidence/verification/2026-08-19-nonlabs-high-risk-signature-sweep.json` records no current indexed hits across the nine non-Labs organization installations for the named high-risk signature sweep. This is bounded search evidence only; search-index freshness, deleted history, alternate names/encodings, runtime values, artifacts, dependencies, binaries, logs, and external infrastructure remain outside that result.
 
 ## Machine-owned remediation / collision boundaries
 Do not race these owners:
 - `StegVerse-Labs/TVC#33` — activate `tvc.private-source-read.v1`; currently open/not activated.
 - `StegVerse-Labs/TVC#88` — actual SCW replacement-key rotation/re-encryption; blocked dependency/machine owned.
-- `StegVerse-Labs/TVC#89` — migrate remaining TV credential-bearing operations into bounded TVC execution; actual credential-bearing migrated execution not yet observed.
-- `StegVerse-Labs/StegDB#13` — `STEGDB-SEC-001`; TV/TVC secret contract v2 and substantial containment landed, but deferred workflows/immutable dependency enforcement remain and issue is open.
-- `StegVerse-Labs/Governance#1` — machine-owned StegTrace bootstrap; credential migration required, audit recorded/routed exception but did not race workflow ownership.
-- `GCAT-BCAT-Engine/workflows#15` — mutable remote verifier provenance successor task.
-- `StegVerse-Labs/hybrid-collab-bridge#14` — StegVerse-primary/TV-TVC replacement for contained hosted-provider paths.
+- `StegVerse-Labs/TVC#89` — migrate remaining TV credential-bearing operations into bounded TVC execution; actual credential-bearing migrated execution not observed.
+- `StegVerse-Labs/StegDB#13` — `STEGDB-SEC-001`; current TV/TVC contract v2 observed, but deferred workflows/immutable dependency work and historical attribution remain.
+- `StegVerse-Labs/Governance#1` — machine-owned StegTrace bootstrap credential migration.
+- `GCAT-BCAT-Engine/workflows#15` — immutable remote verifier successor task.
+- `GCAT-BCAT-Engine/workflows#16` — provider credential/admissibility authority migration.
+- `StegVerse-Labs/hybrid-collab-bridge#14` — StegVerse-primary / TV-TVC provider replacement.
+- `StegVerse-Labs/Site#398` — remove/refactor latent bundle-ingest token-export apply code into TVC mutation authority.
+
+Canonical execution task: `tasks/ECOSYSTEM-PROVENANCE-AUDIT-001.json`.
 
 ## Hard evidence/tool boundaries
 The audit cannot truthfully certify the full historical ecosystem until all of the following occur:
 1. reconstruct a complete exact-name manifest for all 219 accessible repositories;
 2. obtain GitHub organization/security audit-log evidence for historical actor/token/application access and public/private visibility intervals;
-3. recover historical private workflow-run/artifact evidence where the connected tool cannot enumerate run IDs;
+3. recover historical private workflow-run/artifact evidence where the connected tool cannot enumerate it;
 4. activate `tvc.private-source-read.v1` and materialize each private source at exact SHA without credential export;
 5. run the exact-SHA repository executor over all 219 repositories/reachable history and preserve receipts;
 6. execute TVC SCW replacement-key rotation and affected payload re-encryption with secret-free proof;
 7. execute remaining TV credential migration under TVC and obtain fresh TV operational proof;
 8. finish StegDB deferred workflow security/immutable dependency batches;
 9. migrate the Governance machine-owned bootstrap credential path;
-10. resolve GCAT mutable verifier and other mutable third-party execution provenance;
-11. reconcile package registries, runtime/deployment, DNS, signing, and other external infrastructure where claims exceed GitHub observability.
-
-## Validation state
-Source and tests are installed, including tests for the exact-SHA repository executor and credential-export detection. The connected GitHub surface has not produced a qualifying status/run proving the latest consolidated state passed, and the local sandbox cannot clone GitHub. Therefore latest-source validation remains unproven; source-installed is not equated with validated/runtime.
+10. resolve both GCAT verifier and provider-authority successor tasks;
+11. complete the hybrid provider replacement and Site bundle-ingest TVC mutation refactor;
+12. reconcile package registries, runtime/deployment, DNS, signing, and other external infrastructure where claims exceed GitHub observability.
 
 ## Current conclusion
 - Confirmed malicious third-party event: **NONE ESTABLISHED**.
 - Confirmed unauthorized actor: **NONE ESTABLISHED**.
 - Confirmed security compromise: **YES** — SCW vault key material was committed into TV Git history; replacement rotation/re-encryption is not yet proven.
-- Unresolved third-party identity: **YES** — TVC write-test identity remains historically unattributed to admitted TV/TVC actor/token/application evidence.
+- Unresolved third-party identity: **YES** — TVC `actions-user` write test remains historically unattributed to admitted actor/token/application evidence.
 - Historical public/private exposure certified: **NO**.
 - Clean-audit conclusion permitted: **NO**.
 
 ## Completion rule
-This session goal remains open. Do not archive, release, tag, or publish a clean-audit claim while any required evidence/remediation above remains blocked, unresolved, unvalidated, unexecuted, unreleased, undeployed, or unactivated.
+This goal remains open. Do not archive, release, tag, propagate, or publish a clean-audit claim while required evidence/remediation remains blocked, unresolved, unvalidated, unexecuted, unreleased, undeployed, or unactivated.
 
 ## Propagation targets when release-ready
-Only after the audit reaches a legitimate release threshold, propagate the exact released audit state to:
+Only after a legitimate release threshold, propagate the exact released audit state to:
 - `StegVerse-Labs/Site`
 - `GCAT-BCAT-Engine/Publisher`
 - `StegVerse-Labs/admissibility-wiki`
 - `StegVerse-002/stegguardian-wiki`
 
 ## Session continuity
-The repository now contains the implementation, findings, v4 receipt, task registry, and blocker state needed to continue without this chat thread. Continue automatically when machine-owned dependencies produce evidence; do not request routine approval checkpoints.
+The repository now contains implementation, exact-count evidence, 13 current findings, v5 receipt, task registry, and blocker state sufficient to continue without this chat history. Continue automatically when machine-owned dependencies produce evidence; do not request routine approval checkpoints.
