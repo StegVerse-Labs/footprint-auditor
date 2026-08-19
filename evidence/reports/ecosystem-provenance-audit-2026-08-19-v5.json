@@ -1,0 +1,144 @@
+{
+  "allowed_conclusion": "audit remains open; current-tree credential/control containment advanced substantially, but full exact-SHA execution, historical actor/visibility/run evidence, external provenance, and TVC-only live remediation remain incomplete",
+  "boundary_end": "2026-08-19T19:49:00Z",
+  "boundary_start": "ecosystem-origin",
+  "clean_audit_permitted": false,
+  "containment": {
+    "additional_residual_labs_paths_contained": 14,
+    "comms_gateway_direct_tag_helper_contained": true,
+    "consumer_side_expanded_sweep_paths_newly_contained_or_validation_only": 3,
+    "crypto_bot_hosted_paper_tag_mutation_removed": true,
+    "hybrid_provider_entity_paths_contained": 4,
+    "site_latent_apply_path_credential_export_blocked_by_resolver": true,
+    "stegdb_current_secret_contract_reconciled_to_tv_tvc": true,
+    "stegops_direct_deliverables_token_mirror_retired": true,
+    "stegverse_scw_and_related_legacy_pat_mutation_paths_documented_contained": 23,
+    "tv_obsolete_credential_mutation_paths_contained": 3,
+    "tv_scw_live_tree_key_redacted": true
+  },
+  "coverage": {
+    "accessible_repository_exact_count_verified": true,
+    "complete_219_repository_manifest_verified": false,
+    "dependency_provenance_execution_complete": false,
+    "dependency_scanner_implementation_complete": true,
+    "external_infrastructure_complete": false,
+    "full_219_repository_exact_sha_execution_complete": false,
+    "github_workflow_high_authority_sweep_complete": false,
+    "historical_identity_complete": false,
+    "historical_visibility_complete": false,
+    "historical_workflow_run_artifact_complete": false,
+    "materialized_repository_executor_ci_pass_observed": false,
+    "materialized_repository_executor_implemented": true,
+    "tvc_credential_rotation_complete": false,
+    "tvc_private_source_read_activated": false,
+    "tvc_tv_credential_migration_complete": false
+  },
+  "evidence_bindings": {
+    "finding_blob_count": 13,
+    "finding_blobs": [
+      {"blob_sha":"dd0df700ecc39e8aae66586c718cfc67089fb4f1","path":"evidence/findings/2026-08-19-consumer-credential-export-mutation-paths.json"},
+      {"blob_sha":"0343088b885056296398409a328306962bdb2af6","path":"evidence/findings/2026-08-19-gcat-provider-credential-authority-drift.json"},
+      {"blob_sha":"35a02a87dc034bf6fa36090b5a28734259fffeb1","path":"evidence/findings/2026-08-19-gcat-verifier-remote-execution-provenance-gap.json"},
+      {"blob_sha":"839e0ee86bb295c4e11caf97ec71a9533d6ae7c0","path":"evidence/findings/2026-08-19-governance-bootstrap-credential-authority-gap.json"},
+      {"blob_sha":"79a59d4775e289f5a22ec9041b2a104d6ba22d29","path":"evidence/findings/2026-08-19-hybrid-bridge-provider-credential-authority.json"},
+      {"blob_sha":"1bbefa2ae7b7f7c322272067afb4a7495314ec70","path":"evidence/findings/2026-08-19-labs-residual-credential-control-containment.json"},
+      {"blob_sha":"ef71450d6d9cbf28b607f098efbb20b99f34d29f","path":"evidence/findings/2026-08-19-pat-backed-autopatch-authority-containment.json"},
+      {"blob_sha":"1125240b8b6c1ca7859e69aa9f07bfaef952b0ff","path":"evidence/findings/2026-08-19-scw-admin-credential-bootstrap-export.json"},
+      {"blob_sha":"49c2c7d329c40e0e3f24260c2c0c374c02f7b2e4","path":"evidence/findings/2026-08-19-scw-legacy-bridge-credential-path.json"},
+      {"blob_sha":"c89732cbbd924a3296e8a983eb9711afd0d81623","path":"evidence/findings/2026-08-19-stegdb-secret-contract-policy-drift.json"},
+      {"blob_sha":"f584e2bc7a07c8eb37dfd1177cd014f2e7fc9eb0","path":"evidence/findings/2026-08-19-tv-credential-processing-policy-drift.json"},
+      {"blob_sha":"64a036fdec88b4e8749b9fe41db572927cad4141","path":"evidence/findings/2026-08-19-tv-scw-vault-key-exposure.json"},
+      {"blob_sha":"026728cbc2c046b26a6420ddfc3a400a3286ac56","path":"evidence/findings/2026-08-19-tvc-actions-user-write-test.json"}
+    ],
+    "inventory_exact_count_receipt_blob_sha": "6e74825f2f222341fcdbdb978ec60f9fe8be3c73"
+  },
+  "finding_counts": {
+    "by_status": {
+      "AUTHORIZED_UNEXPLAINED": 10,
+      "PROVENANCE_GAP": 2,
+      "THIRD_PARTY_UNEXPLAINED": 1
+    },
+    "confirmed_compromise": 1,
+    "confirmed_malicious": 0,
+    "confirmed_unauthorized_actor": 0,
+    "open": 13,
+    "total": 13
+  },
+  "findings": [
+    {"finding_id":"ECOSYSTEM-CONSUMER-CREDENTIAL-EXPORT-MUTATION-2026-08-19","open":true,"repository":"MULTI_REPOSITORY","source_blob_sha":"dd0df700ecc39e8aae66586c718cfc67089fb4f1","source_ref":"evidence/findings/2026-08-19-consumer-credential-export-mutation-paths.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"GCAT-PROVIDER-CREDENTIAL-AUTHORITY-DRIFT-2026-08-19","open":true,"repository":"GCAT-BCAT-Engine/workflows","source_blob_sha":"0343088b885056296398409a328306962bdb2af6","source_ref":"evidence/findings/2026-08-19-gcat-provider-credential-authority-drift.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"GCAT-WORKFLOWS-REMOTE-VERIFIER-PROVENANCE-2026-08-19","open":true,"repository":"GCAT-BCAT-Engine/workflows","source_blob_sha":"35a02a87dc034bf6fa36090b5a28734259fffeb1","source_ref":"evidence/findings/2026-08-19-gcat-verifier-remote-execution-provenance-gap.json","status":"PROVENANCE_GAP"},
+    {"finding_id":"GOVERNANCE-STEGTRACE-BOOTSTRAP-CREDENTIAL-AUTHORITY-2026-08-19","open":true,"repository":"StegVerse-Labs/Governance","source_blob_sha":"839e0ee86bb295c4e11caf97ec71a9533d6ae7c0","source_ref":"evidence/findings/2026-08-19-governance-bootstrap-credential-authority-gap.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"HYBRID-BRIDGE-PROVIDER-CREDENTIAL-AUTHORITY-2026-08-19","open":true,"repository":"StegVerse-Labs/hybrid-collab-bridge","source_blob_sha":"79a59d4775e289f5a22ec9041b2a104d6ba22d29","source_ref":"evidence/findings/2026-08-19-hybrid-bridge-provider-credential-authority.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"LABS-RESIDUAL-CREDENTIAL-CONTROL-CONTAINMENT-2026-08-19","open":true,"repository":"MULTI_REPOSITORY","source_blob_sha":"1bbefa2ae7b7f7c322272067afb4a7495314ec70","source_ref":"evidence/findings/2026-08-19-labs-residual-credential-control-containment.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"ECOSYSTEM-PAT-AUTOPATCH-AUTHORITY-2026-08-19","open":true,"repository":"MULTI_REPOSITORY","source_blob_sha":"ef71450d6d9cbf28b607f098efbb20b99f34d29f","source_ref":"evidence/findings/2026-08-19-pat-backed-autopatch-authority-containment.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"SCW-ADMIN-CREDENTIAL-BOOTSTRAP-EXPORT-2026-08-19","open":true,"repository":"StegVerse-Labs/StegVerse-SCW","source_blob_sha":"1125240b8b6c1ca7859e69aa9f07bfaef952b0ff","source_ref":"evidence/findings/2026-08-19-scw-admin-credential-bootstrap-export.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"SV-AUDIT-SCW-LEGACY-BRIDGE-CREDENTIAL-001","open":true,"repository":"StegVerse-Labs/SCW","source_blob_sha":"49c2c7d329c40e0e3f24260c2c0c374c02f7b2e4","source_ref":"evidence/findings/2026-08-19-scw-legacy-bridge-credential-path.json","status":"PROVENANCE_GAP"},
+    {"finding_id":"STEGDB-SECRET-CONTRACT-POLICY-DRIFT-2026-08-19","open":true,"repository":"StegVerse-Labs/StegDB","source_blob_sha":"c89732cbbd924a3296e8a983eb9711afd0d81623","source_ref":"evidence/findings/2026-08-19-stegdb-secret-contract-policy-drift.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"TV-CREDENTIAL-PROCESSING-POLICY-DRIFT-2026-08-19","open":true,"repository":"StegVerse-Labs/TV","source_blob_sha":"f584e2bc7a07c8eb37dfd1177cd014f2e7fc9eb0","source_ref":"evidence/findings/2026-08-19-tv-credential-processing-policy-drift.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"confirmed_compromise":true,"finding_id":"TV-SCW-VAULT-KEY-EXPOSURE-2025-11-25","open":true,"repository":"StegVerse-Labs/TV","source_blob_sha":"64a036fdec88b4e8749b9fe41db572927cad4141","source_ref":"evidence/findings/2026-08-19-tv-scw-vault-key-exposure.json","status":"AUTHORIZED_UNEXPLAINED"},
+    {"finding_id":"TVC-ACTIONS-USER-WRITE-TEST-2026-05-18","open":true,"repository":"StegVerse-Labs/TVC","source_blob_sha":"026728cbc2c046b26a6420ddfc3a400a3286ac56","source_ref":"evidence/findings/2026-08-19-tvc-actions-user-write-test.json","status":"THIRD_PARTY_UNEXPLAINED"}
+  ],
+  "generated_at": "2026-08-19T19:49:00Z",
+  "hard_evidence_gates": [
+    "reconstruct a complete exact-name manifest for all 219 currently accessible repositories",
+    "activate tvc.private-source-read.v1 and materialize exact-SHA private sources without credential export to the audit engine",
+    "execute repository_executor against all 219 exact materialized repositories and reachable Git history",
+    "ingest GitHub organization/security audit logs for historical actor/token/application provenance and public/private visibility intervals",
+    "reconcile historical workflow-run/artifact evidence for credential-bearing workflows",
+    "execute TVC SCW key rotation and affected payload re-encryption with a secret-free receipt",
+    "execute bounded TVC migration for remaining TV credential-bearing functions and obtain fresh TV operational proof",
+    "complete machine-owned StegDB, Governance, GCAT, hybrid-bridge, and Site successor security work",
+    "reconcile external runtime/DNS/package-registry/deployment provenance outside GitHub observability"
+  ],
+  "inventory": {
+    "accessible_repositories_exact_count": 219,
+    "complete_per_repository_manifest_verified": false,
+    "current_private": 143,
+    "current_public": 76,
+    "exact_count_receipt": "evidence/inventory/accessible-repository-count-2026-08-19-v2.json",
+    "exact_count_receipt_blob_sha": "6e74825f2f222341fcdbdb978ec60f9fe8be3c73",
+    "installation_listing_baseline": {
+      "manifest": "evidence/inventory/connected-repositories-2026-08-19.csv",
+      "manifest_sha256": "59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166",
+      "repositories": 203,
+      "status": "SUPERSEDED_AS_COMPLETE_INVENTORY"
+    },
+    "installations": 11
+  },
+  "machine_owned_remediation": {
+    "GCAT-PROVENANCE-012":{"issue":"GCAT-BCAT-Engine/workflows#15","state":"OPEN_SUCCESSOR_SECURITY_TASK"},
+    "GCAT-PROVIDER-CREDENTIAL-MIGRATION":{"issue":"GCAT-BCAT-Engine/workflows#16","state":"OPEN_SUCCESSOR_SECURITY_TASK"},
+    "GITHUB-ORG-AUDIT-LOG":{"issue":"StegVerse-Labs/footprint-auditor#1","state":"UNAVAILABLE_THROUGH_CONNECTED_GITHUB_TOOL"},
+    "GOVERNANCE-STEGTRACE-BOOTSTRAP":{"issue":"StegVerse-Labs/Governance#1","state":"MACHINE_OWNED_CREDENTIAL_MIGRATION_REQUIRED"},
+    "HYBRID-BRIDGE-PROVIDER-REPLACEMENT":{"issue":"StegVerse-Labs/hybrid-collab-bridge#14","state":"OPEN_SUCCESSOR_SECURITY_TASK"},
+    "SITE-BUNDLE-INGEST-TVC-MUTATION":{"issue":"StegVerse-Labs/Site#398","state":"OPEN_LATENT_SOURCE_UNREACHABLE_PENDING_REFACTOR"},
+    "STEGDB-SEC-001":{"completion_observed":false,"current_policy_contract_v2_observed":true,"issue":"StegVerse-Labs/StegDB#13","state":"MACHINE_OWNED"},
+    "TVC-PRIVATE-SOURCE-READ-001":{"issue":"StegVerse-Labs/TVC#33","state":"OPEN_NOT_ACTIVATED"},
+    "TVC-SCW-VAULT-ROTATION-088":{"actual_rotation_observed":false,"issue":"StegVerse-Labs/TVC#88","state":"BLOCKED_DEPENDENCY_MACHINE_OWNED"},
+    "TVC-TV-CREDENTIAL-MIGRATION-089":{"credential_bearing_tvc_execution_observed":false,"issue":"StegVerse-Labs/TVC#89","state":"OPEN_MACHINE_OWNED"}
+  },
+  "notes": [
+    "Containment, task ownership, handoff state, source installation, and workflow readiness are not completion or activation.",
+    "Current repository privacy is not evidence of historical privacy.",
+    "No secret values are included in this report.",
+    "The prior 203-repository manifest is retained only as a superseded installation-listing baseline.",
+    "Negative code-search results are bounded evidence and do not constitute a clean-audit conclusion."
+  ],
+  "report_sha256_excluding_report_sha256": "91af76ca27027d70bb9cb40d439d68590ac05f1dd06aa8526c74c9dd472afbaa",
+  "report_version": 5,
+  "schema": "stegverse.ecosystem-provenance-audit.v1",
+  "security_conclusion": {
+    "confirmed_malicious_third_party_event": "NONE_ESTABLISHED",
+    "confirmed_security_compromise": "YES — SCW vault key material was committed into TV Git history; replacement rotation/re-encryption not yet proven",
+    "confirmed_unauthorized_actor": "NONE_ESTABLISHED",
+    "historical_public_private_exposure_certified": false,
+    "unresolved_third_party_identity": "YES — TVC actions-user write test"
+  },
+  "supersedes": [
+    "evidence/reports/ecosystem-provenance-audit-2026-08-19.json",
+    "evidence/reports/ecosystem-provenance-audit-2026-08-19-v2.json",
+    "evidence/reports/ecosystem-provenance-audit-2026-08-19-v3.json",
+    "evidence/reports/ecosystem-provenance-audit-2026-08-19-v4.json"
+  ]
+}
