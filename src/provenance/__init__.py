@@ -33,6 +33,10 @@ from .ecosystem_dependencies import (
     scan_dependency_file,
     summarize as summarize_ecosystem_dependencies,
 )
+from .repository_executor import (
+    scan_materialized_repository,
+    verify_repository_receipt,
+)
 
 __all__ = [
     "AuditBoundary",
@@ -58,4 +62,6 @@ __all__ = [
     "DependencyStatus",
     "scan_dependency_file",
     "summarize_ecosystem_dependencies",
+    "scan_materialized_repository",
+    "verify_repository_receipt",
 ]
