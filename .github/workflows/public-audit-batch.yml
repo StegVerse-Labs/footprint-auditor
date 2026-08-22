@@ -10,6 +10,16 @@ on:
       - 'evidence/inventory/connected-repositories-2026-08-19-v2.csv'
       - 'src/provenance/**'
       - '.github/workflows/public-audit-batch.yml'
+  pull_request:
+    paths:
+      - 'scripts/materialize_public_batch.py'
+      - 'tests/test_public_materialization.py'
+      - 'tests/test_exact_inventory_manifest.py'
+      - 'config/public-audit-batch-001.txt'
+      - 'evidence/inventory/connected-repositories-2026-08-19-v2.csv'
+      - 'src/provenance/**'
+      - '.github/workflows/public-audit-batch.yml'
+      - 'evidence/verification/public-audit-batch-*.txt'
   workflow_dispatch:
 
 permissions:
