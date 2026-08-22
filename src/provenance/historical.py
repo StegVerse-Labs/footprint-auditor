@@ -92,19 +92,24 @@ class AuditEvent:
 
 
 def classify_event(event: AuditEvent) -> AuditStatus:
-    """Classify without treating missing evidence as benign."""
+    """Classify without treating missing evidence as benign.
+
+    ``authorized=False`` is reserved for evidence that an actor was actually
+    unauthorized. Merely being outside the internal actor set makes an actor a
+    third party; it does not by itself prove unauthorized access.
+    """
     if event.malicious_evidence:
         return AuditStatus.CONFIRMED_MALICIOUS
     if event.authorized is False:
         return AuditStatus.CONFIRMED_UNAUTHORIZED
     if event.suspicious_evidence:
         return AuditStatus.SUSPICIOUS
-    if event.authorized is None:
-        return AuditStatus.PROVENANCE_GAP
-    if event.third_party:
+    if event.third_party is True:
         if event.expected is True:
             return AuditStatus.THIRD_PARTY_EXPECTED
         return AuditStatus.THIRD_PARTY_UNEXPLAINED
+    if event.authorized is None:
+        return AuditStatus.PROVENANCE_GAP
     if event.authorized is True:
         if event.expected is True:
             return AuditStatus.AUTHORIZED_EXPECTED
@@ -144,8 +149,8 @@ class AuditLedger:
         if not self.boundary.contains(event.timestamp):
             return event
 
-        if event.actor and event.authorized is None:
-            event.authorized = event.actor in self.authorized_actors
+        if event.actor and event.authorized is None and event.actor in self.authorized_actors:
+            event.authorized = True
         if event.actor and event.third_party is None:
             event.third_party = event.actor not in self.authorized_actors
         if event.actor and event.expected is None and event.third_party:
