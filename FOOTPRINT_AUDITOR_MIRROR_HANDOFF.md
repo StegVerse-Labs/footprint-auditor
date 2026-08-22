@@ -1,9 +1,9 @@
 # FOOTPRINT_AUDITOR_MIRROR_HANDOFF
 
-Status: ACTIVE — 15/76 PUBLIC CUTOFF STATES EXECUTED / PRIVATE SOURCE ACTIVATION PENDING
+Status: ACTIVE — 30/76 PUBLIC CUTOFF STATES EXECUTED / PRIVATE SOURCE ACTIVATION PENDING
 
 Date established: 2026-08-19  
-Last updated: 2026-08-22 07:05 America/Chicago
+Last updated: 2026-08-22 07:10 America/Chicago
 
 ## Governing objective
 Perform a historical ecosystem security/provenance audit from ecosystem origin through 2026-08-19. Attribute every consequential transition to dated actor, automation, dependency, build, release, deployment, runtime, or explicitly documented third-party evidence. Never treat missing evidence, current privacy, current membership, source containment, issue creation, machine ownership, readiness, or workflow success as proof of historical authorization, activation, runtime, completion, or benign intent.
@@ -30,7 +30,7 @@ The superseding manifest reconciles the old 203-row installation listing with th
 Current visibility remains only current visibility. Historical public/private intervals still require dated audit/security-log evidence.
 
 ## Public exact-cutoff execution — ACTIVE
-Credentialless public execution is now operational independently of the private-source dependency.
+Credentialless public execution is operational independently of the private-source dependency.
 
 Materializer:
 - `scripts/materialize_public_batch.py`
@@ -74,14 +74,12 @@ Batch 001 predates complete artifact retention. Its exact SHAs and receipt hashe
 Evidence: `evidence/execution/public-audit-batch-002-2026-08-22.json`
 
 Canonical retained run `32571942363`, job `97028507067`:
-- 5/5 materialization-boundary tests PASS;
-- 10 previously unscanned public repositories anonymously materialized at exact cutoff SHAs;
+- 10 public repositories anonymously materialized at exact cutoff SHAs;
 - ten-repository audit execution PASS;
-- execution receipt verification PASS;
-- complete sanitized receipt + exact manifest uploaded through immutable-pinned artifact action;
+- complete receipt and exact manifest retained;
 - artifact ID `9475532566`;
 - artifact SHA-256 `7906e0a880280c7f60b810c8dca7b2ea9a6f09e8c86c8312dfdf6e0b5b870fe1`;
-- artifact was downloaded through the connected GitHub interface and its SHA-256 independently reverified;
+- artifact download/hash re-verification PASS;
 - downloaded execution receipt file SHA-256 `6784bebbfbb07fc7bd4ffc11145aebdaa0bb56aa7d7e6ad4b65d89831946a966`;
 - downloaded exact manifest SHA-256 `7f9cdccbacddcbc74619206eccf517c439cc48ed5b7e9207e173d3e4fd220f38`;
 - receipt internal hash recomputation PASS;
@@ -89,19 +87,34 @@ Canonical retained run `32571942363`, job `97028507067`:
 - `execution_complete=true`;
 - `audit_clean=false`.
 
-Exact states:
-- `Admissible-Existence/.github@fd027258a6a174a0a374517423143240c53fdbc7`
-- `Admissible-Existence/ECAT-ICAT@dcebc84af3dc597a46303dcfcbd71ea8078d88ab`
-- `Admissible-Existence/STCM@dca7e323b541d743cad5f3c797f608a24ca6d060`
-- `Admissible-Existence/learning-transition-governance@5ea5d46d81fdeb9c8042d6b7b6e61e85bd503e4f`
-- `AdmittedCode/admissibility-receipt@db6a69c1c97dbbf740ae3262dc7aee133d18e239`
-- `AdmittedCode/coherency-scanner@eb3a65f519eb78c44ce45a8f6b77c86e73d77d48`
-- `AdmittedCode/fleet-status@dfc04e24e29e62e1055916586c0827e2fba41bca`
-- `AdmittedCode/provider-harness@e33c667d2a88f740c4b4f94d80d6c398e014c695`
-- `Data-Continuation/RTG-Tests@a5cf2c5231aa90d9ca93ee18ec5da7f32d52c058`
-- `Data-Continuation/formalism-tests@8a8e7c8ac812b4763949ddaa12f5491955b56049`
+### Batch 003 — EXECUTED / COMPLETE RECEIPT RETAINED AND REVERIFIED
+Evidence: `evidence/execution/public-audit-batch-003-2026-08-22.json`
 
-Public execution denominator now stands at **15/76 unique repositories**, with **61 public repositories remaining**. The 143 private repositories remain on the sole admitted `tvc.private-source-read.v1` path.
+Canonical run `32572145027`, job `97029030499`:
+- 15 previously unscanned public repositories anonymously materialized at exact cutoff SHAs;
+- fifteen-repository audit execution PASS;
+- execution receipt verification PASS;
+- complete sanitized receipt + exact manifest retained through immutable-pinned artifact action;
+- artifact ID `9475588782`;
+- artifact size `355143` bytes;
+- artifact SHA-256 `297175dae07720b239d0cb4f06bc58f1111f8b1cbed71916b32a1a6f6954669b`;
+- artifact downloaded and its SHA-256 independently reverified;
+- downloaded execution receipt file SHA-256 `b9b338a3810fafcc41d88d93258e52b9e2f642df5be961e48f7b74c3156a3136`;
+- downloaded exact manifest SHA-256 `8225e196a2fbdd68865c2151fdcd5e63b5482cc8ea089c9a96a06ebc8d1308fa`;
+- receipt internal hash recomputation PASS;
+- execution receipt SHA-256 `b360090e83cb960d25482b1989a0006b63b99e6c0220aaf6792382ec6298ff9a`;
+- `execution_complete=true`;
+- `audit_clean=false`.
+
+Batch 003 exact states are retained in its evidence record. Aggregate unresolved scanner counts for the batch were:
+- ecosystem dependencies: 1
+- executor exceptions: 0
+- historical identity authority: 8074
+- Python dependencies: 32
+- workflow authority: 245
+- workflow dependencies: 135
+
+Public execution denominator now stands at **30/76 unique repositories**, with **46 public repositories remaining**. Complete retained/reverified receipt evidence exists for 25 of those 30 states; the five batch-001 states remain compact-proof-only pending deterministic evidence upgrade. The 143 private repositories remain on the sole admitted `tvc.private-source-read.v1` path.
 
 ## Canonical audit receipt
 Current aggregate finding receipt remains:
@@ -111,7 +124,7 @@ Current aggregate finding receipt remains:
 - clean audit permitted: false
 - open findings: 13
 
-v5 predates the new public multi-repository executions. It remains the canonical finding ledger until a superseding aggregate receipt is generated from the expanded execution population; do not silently reinterpret v5 as a 15-repository execution report.
+v5 predates the public multi-repository execution expansion. It remains the canonical finding ledger until a superseding aggregate receipt is generated from the expanded execution population; do not silently reinterpret v5 as a 30-repository execution report.
 
 ## Installed audit engine
 Canonical modules:
@@ -162,7 +175,7 @@ Canonical execution task: `tasks/ECOSYSTEM-PROVENANCE-AUDIT-001.json`.
 
 ## Hard evidence/tool boundaries
 The audit cannot truthfully certify the full historical ecosystem until all of the following occur:
-1. complete exact-cutoff execution for the remaining 61 public repositories and upgrade/supersede compact-only batch 001 evidence;
+1. complete exact-cutoff execution for the remaining 46 public repositories and upgrade/supersede compact-only batch 001 evidence;
 2. obtain GitHub organization/security audit-log evidence for historical actor/token/application access and public/private visibility intervals;
 3. recover historical private workflow-run/artifact evidence where the connected tool cannot enumerate it;
 4. activate `tvc.private-source-read.v1` and materialize each private source at exact SHA without credential export;
@@ -178,8 +191,8 @@ The audit cannot truthfully certify the full historical ecosystem until all of t
 ## Current conclusion
 - Exact 219-repository manifest: **COMPLETE / VALIDATED**.
 - End-to-end audit execution engine: **VALIDATED**.
-- Credentialless public exact-cutoff execution: **15/76 COMPLETE; 61 REMAINING**.
-- Complete retained public receipt evidence: **10/15 executed states**; batch 001 needs deterministic evidence upgrade.
+- Credentialless public exact-cutoff execution: **30/76 COMPLETE; 46 REMAINING**.
+- Complete retained public receipt evidence: **25/30 executed states**; batch 001 needs deterministic evidence upgrade.
 - Private source execution: **0/143 through TVC capability; authority activation not yet observed**.
 - Full 219-repository ecosystem execution: **NOT YET COMPLETE**.
 - Confirmed malicious third-party event: **NONE ESTABLISHED**.
@@ -199,4 +212,4 @@ Only after a legitimate release threshold, propagate the exact released audit st
 - `StegVerse-002/stegguardian-wiki`
 
 ## Session continuity
-The repository now contains a validated end-to-end audit runner, a validated exact-name 219-repository denominator, direct public execution evidence for 15 exact historical cutoff states, complete retained/reverified receipt evidence for batch 002, 13 current findings, v5 finding receipt, and the machine-owned blocker registry. The next nonduplicate execution priority is to continue public batches using complete retained receipt artifacts while `tvc.private-source-read.v1` remains the sole private-source authority path. Do not request routine approval checkpoints.
+The repository now contains a validated end-to-end audit runner, a validated exact-name 219-repository denominator, direct public execution evidence for 30 exact historical cutoff states, complete retained/reverified receipt evidence for batches 002 and 003, 13 current findings, v5 finding receipt, and the machine-owned blocker registry. The next nonduplicate execution priority is to continue public batches using complete retained receipt artifacts while `tvc.private-source-read.v1` remains the sole private-source authority path. Do not request routine approval checkpoints.
