@@ -1,0 +1,71 @@
+{
+  "schema": "stegverse.public-cutoff-audit-batch.v1",
+  "batch_id": "PUBLIC-AUDIT-BATCH-005",
+  "audit_boundary_end": "2026-08-19T23:59:59Z",
+  "observed_run": 32604339956,
+  "observed_job": 97107117463,
+  "workflow": ".github/workflows/public-audit-batch.yml",
+  "selection": "config/public-audit-batch-005.txt",
+  "inventory": "evidence/inventory/connected-repositories-2026-08-19-v2.csv",
+  "inventory_blob_sha": "434f03951354d8959e863c3f9aa0b6e5748a2d7b",
+  "materialization": {
+    "credential_received": false,
+    "repository_count": 15,
+    "transport": "anonymous HTTPS Git clone",
+    "exact_cutoff_resolution": true
+  },
+  "execution": {
+    "status": "SUCCESS",
+    "execution_complete": true,
+    "audit_clean": false,
+    "credential_received_by_runner": false,
+    "network_access_required_by_runner": false,
+    "execution_receipt_sha256": "baec427c5f9356d31e2f9d78c486a2fd8a964588a66d9906ecb9c93299e55c8d",
+    "unresolved_repository_scan_counts": {
+      "ecosystem_dependencies": 15,
+      "executor_exceptions": 0,
+      "historical_identity_authority": 10674,
+      "python_dependencies": 16,
+      "workflow_authority": 558,
+      "workflow_dependencies": 292
+    }
+  },
+  "artifact": {
+    "id": 9483728053,
+    "size_bytes": 534851,
+    "sha256": "01a66db27d2b1a67cc5bd2ed0ccfbe06e0ad27f553014f2b6b64255434e119e4",
+    "download_and_hash_reverified": true,
+    "downloaded_execution_receipt_file_sha256": "bb5a4579c5bc3eac1869ab1fbb57c475c48c273d962dce98f4ace964556709f0",
+    "downloaded_exact_manifest_sha256": "ecd5e61b587a225a31aa39e2574fb26a0eb5d143bd5435a8b3875bdfeaef6b71",
+    "receipt_internal_hash_recomputation": "PASS",
+    "repository_receipt_hash_recomputation": "15/15 PASS"
+  },
+  "repositories": [
+    {"repository":"AdmittedCode/.github","expected_sha":"c40c15efa0b869b0a62b39375378e1baf5d976a4","receipt_sha256":"4df3f9b36659f55a5504685876c08c1d8780a1c1e5ff9b36b8d3f822f6fd7bb5"},
+    {"repository":"StegVerse-Labs/HEE-Showcase","expected_sha":"5b6f4790aedd09f87c3fafefd2c85c1d3527e6d6","receipt_sha256":"6ae55a3f565d79f76e27e2673896e0732154bb4caabf5f023c6243ed1edb5fa2"},
+    {"repository":"StegVerse-Labs/HouseHold","expected_sha":"4fc12238a2fe6fdc356af1c80983e2b8a9bbddf3","receipt_sha256":"78f6ad4be55c1279fde68c9da74103e5d3da38f58746c74d67cbf4742defea33"},
+    {"repository":"StegVerse-Labs/HydraSafe","expected_sha":"2b5d8aeb0bf2eb71542656cabb0c6d3e8f3fb324","receipt_sha256":"69edd58afc360f026a0eb104f41cefc55d6fa0a83cf74e4c9b2816c9a1ca9686"},
+    {"repository":"StegVerse-Labs/JRRZ","expected_sha":"82c0debb475fdd828e04f37732d3e6f59531dd01","receipt_sha256":"05c030ceb788e158cc411ba63023688757a8371dd994d2417797be4438122f89"},
+    {"repository":"StegVerse-Labs/Maxwellality","expected_sha":"607102a89055f962bbd51a8b689327b404863d54","receipt_sha256":"acddfc3031765996f5cb6b3c6922094a8ab66d5dc18f4b4a777eb10a3fb51a42"},
+    {"repository":"StegVerse-Labs/Patents","expected_sha":"bfe7296a1328c74c2fce3acffd6c2358fa9d4141","receipt_sha256":"d8796bd3f1a61f2ae56e33b125ad6e2bb40875bb72d9351198ec00e364cec8f5"},
+    {"repository":"StegVerse-Labs/Randolph_Geneaology_Hub","expected_sha":"84f788d308a0dc3ca04bb6325e153273eb62eb46","receipt_sha256":"c53261fa2565d081efbe4e90d85fffde4d92c6bf00682bb62857496b53222829"},
+    {"repository":"StegVerse-Labs/ReactorOps","expected_sha":"4cf94e13571435230e4bd3439cf644f02287ca2c","receipt_sha256":"8b65bfb4bcf9e90fb5640c2b7ff187984b7f2253297a483ca6def9e4cf33a2e8"},
+    {"repository":"StegVerse-Labs/SDE","expected_sha":"958f9cf00e9300c3853bf9bd07173c17ada31519","receipt_sha256":"2108ecca0e39d8c4902258c792ac3696ef45bbda6c57dbd02b1ed04c945623e0"},
+    {"repository":"StegVerse-Labs/Site","expected_sha":"700a694bb2ed4530179844d4c8fff7f05f41b28e","receipt_sha256":"7e20c1d9de8089f16fa261b2b3597278d4d78a99f8e06a6f400a44b92ba130d5"},
+    {"repository":"StegVerse-Labs/StegBiography","expected_sha":"36f65d27f7dcf93332e917f6fdb37b385387fc86","receipt_sha256":"c12a2f353242a4a27ba2313312771d24bf650bc13f2b7ac00330c50b581c5925"},
+    {"repository":"StegVerse-Labs/StegCustody","expected_sha":"f867171df7a9cf8d206334e17b3c0ffb5c721316","receipt_sha256":"b5d161a9f05571537ce775654bffdb8a29da18fd890b3eeee126415b2d973401"},
+    {"repository":"StegVerse-Labs/StegDJ","expected_sha":"04f0a5280bb749f0fb5e98eee8b3a09dbdd07fc6","receipt_sha256":"f0464a89f62ea978af80e308e7dcb15b52d557a72afda59795a143884c29b7c8"},
+    {"repository":"StegVerse-Labs/StegLearn","expected_sha":"480d2b8893ed2ee3446fea6ea4bc45fe98f9dcac","receipt_sha256":"364579415a10457ba2015342076079c3355e1952282a277d667cf66dd41ef744"}
+  ],
+  "validation": {
+    "materialization_boundary_tests": "5/5 PASS",
+    "all_workflow_steps": "PASS",
+    "receipt_verification": "PASS",
+    "downloaded_artifact_verification": "PASS"
+  },
+  "authority_effect": false,
+  "release_effect": false,
+  "runtime_authority_effect": false,
+  "clean_audit_effect": false,
+  "note": "Direct exact-cutoff execution evidence for fifteen public repository states. Historical actor authorization and visibility remain unresolved until dated organization/security evidence is reconciled."
+}
