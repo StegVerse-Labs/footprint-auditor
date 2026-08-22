@@ -1,9 +1,9 @@
 # FOOTPRINT_AUDITOR_MIRROR_HANDOFF
 
-Status: ACTIVE — BLOCKED DEPENDENCY / MACHINE OWNED
+Status: ACTIVE — END-TO-END RUNNER VALIDATED / ECOSYSTEM AUDIT BLOCKED DEPENDENCY
 
 Date established: 2026-08-19  
-Last updated: 2026-08-19 14:49 America/Chicago
+Last updated: 2026-08-22 00:08 America/Chicago
 
 ## Governing objective
 Perform a historical ecosystem security/provenance audit from ecosystem origin through 2026-08-19. Attribute every consequential transition to dated actor, automation, dependency, build, release, deployment, runtime, or explicitly documented third-party evidence. Never treat missing evidence, current privacy, current membership, source containment, issue creation, machine ownership, readiness, or workflow success as proof of historical authorization, activation, runtime, completion, or benign intent.
@@ -48,10 +48,30 @@ Canonical modules:
 - `src/provenance/inventory.py`
 - `src/provenance/report.py`
 - `src/provenance/repository_executor.py`
+- `src/provenance/audit_runner.py`
 
 The exact-SHA repository executor accepts no credential and performs no network access. It requires an immutable expected SHA, verifies HEAD and worktree cleanliness, hashes Git identities rather than retaining raw identity values, runs workflow/dependency/control scans, scrubs committed token literals from retained evidence, and emits a deterministic secret-safe receipt. Private source must first be materialized by admitted TVC read authority.
 
-The canonical provenance test workflow includes all installed scanner/executor tests. A qualifying latest-source CI pass has not been observed through the connected GitHub status surface; source-installed is therefore not treated as validated/runtime.
+The end-to-end runner consumes a manifest of already materialized repositories bound to immutable expected SHAs, verifies each repository receipt, loads durable finding evidence, builds the aggregate audit report, and emits a deterministic execution receipt. Execution success is explicitly distinct from audit cleanliness: unresolved findings keep the audit open without falsely making the execution engine appear broken.
+
+### End-to-end validation proof — 2026-08-22
+A qualifying latest-source pull-request validation was directly observed through the connected GitHub Actions surface:
+- validation PR: `StegVerse-Labs/footprint-auditor#8` (disposable validation only; not product authority)
+- source base commit: `9b8ec0bddbc5d94a088fc41f25cab50617ebad8f`
+- validation merge commit: `22360cef5dd1f53aaaee2fa23f15f6e0f0183e64`
+- workflow run: `32553535659`
+- job: `96984020347`
+- provenance suite: **52/52 PASS**
+- exact-SHA worktree cleanup/verification: PASS
+- immutable self-scan manifest construction: PASS
+- end-to-end self audit: PASS
+- execution receipt verification: PASS
+- executed repository count: 1
+- execution complete: true
+- audit clean: false, correctly preserving the open audit state
+- execution receipt SHA-256: `d47bd9af93911ff3661b75f933e424b49421a33d0671fe893f99daa0b3622d9c`
+
+The validation workflow uses `contents: read`, disables persisted checkout credentials, fetches full history for the exact-SHA self-scan, and does not grant GitHub Actions production/runtime/control-plane authority. This proves the `footprint-auditor` execution path works end to end on an exact materialized repository. It does **not** prove the 219-repository ecosystem audit is complete or clean.
 
 ## Confirmed security event
 ### TV SCW vault key exposure
@@ -125,7 +145,7 @@ The audit cannot truthfully certify the full historical ecosystem until all of t
 2. obtain GitHub organization/security audit-log evidence for historical actor/token/application access and public/private visibility intervals;
 3. recover historical private workflow-run/artifact evidence where the connected tool cannot enumerate it;
 4. activate `tvc.private-source-read.v1` and materialize each private source at exact SHA without credential export;
-5. run the exact-SHA repository executor over all 219 repositories/reachable history and preserve receipts;
+5. run the validated exact-SHA audit runner over all 219 repositories/reachable history and preserve receipts;
 6. execute TVC SCW replacement-key rotation and affected payload re-encryption with secret-free proof;
 7. execute remaining TV credential migration under TVC and obtain fresh TV operational proof;
 8. finish StegDB deferred workflow security/immutable dependency batches;
@@ -135,6 +155,8 @@ The audit cannot truthfully certify the full historical ecosystem until all of t
 12. reconcile package registries, runtime/deployment, DNS, signing, and other external infrastructure where claims exceed GitHub observability.
 
 ## Current conclusion
+- End-to-end audit execution engine: **VALIDATED for an exact materialized repository**.
+- Full 219-repository ecosystem execution: **NOT YET COMPLETE**.
 - Confirmed malicious third-party event: **NONE ESTABLISHED**.
 - Confirmed unauthorized actor: **NONE ESTABLISHED**.
 - Confirmed security compromise: **YES** — SCW vault key material was committed into TV Git history; replacement rotation/re-encryption is not yet proven.
@@ -153,4 +175,4 @@ Only after a legitimate release threshold, propagate the exact released audit st
 - `StegVerse-002/stegguardian-wiki`
 
 ## Session continuity
-The repository now contains implementation, exact-count evidence, 13 current findings, v5 receipt, task registry, and blocker state sufficient to continue without this chat history. Continue automatically when machine-owned dependencies produce evidence; do not request routine approval checkpoints.
+The repository now contains a validated end-to-end audit runner, exact-count evidence, 13 current findings, v5 receipt, task registry, and blocker state sufficient to continue without this chat history. The next nonduplicate execution priority is full manifest/materialization activation and multi-repository execution; continue automatically when TVC/private-source and other machine-owned dependencies produce evidence. Do not request routine approval checkpoints.
