@@ -8,7 +8,7 @@
   "canonical_issues": [1, 2, 3],
   "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED",
   "claimant": "footprint-auditor provenance engine + TVC private-source-read / credential-admission capability",
-  "claim_reconciled_at": "2026-08-19T14:49:00-05:00",
+  "claim_reconciled_at": "2026-08-22T00:15:00-05:00",
   "scope": {
     "boundary_start": "ecosystem-origin",
     "boundary_end": "2026-08-19T19:49:00Z",
@@ -22,7 +22,7 @@
     "installation_listing_manifest": "evidence/inventory/connected-repositories-2026-08-19.csv",
     "installation_listing_manifest_sha256": "59879f7dc3e07f40bb7b5b8143e0368e470074c060ef5440ceb393261e030166",
     "complete_per_repository_manifest_verified": false,
-    "inventory_note": "StegVerse-Labs installation listing truncates at 100 while repository search establishes 116 accessible Labs repositories; exact total is 219 but a complete exact-name 219-row manifest remains to be reconstructed."
+    "inventory_note": "StegVerse-Labs installation listing truncates at 100 while repository search establishes 116 accessible Labs repositories; the other installations total 103. Exact total is 219, but the complete exact-name cutoff manifest remains to be retained as one deterministic artifact."
   },
   "installed_scanners": [
     "src/provenance/historical.py",
@@ -33,13 +33,29 @@
     "src/provenance/ecosystem_dependencies.py",
     "src/provenance/inventory.py",
     "src/provenance/report.py",
-    "src/provenance/repository_executor.py"
+    "src/provenance/repository_executor.py",
+    "src/provenance/audit_runner.py"
   ],
+  "execution_engine_proof": {
+    "state": "VALIDATED_EXACT_MATERIALIZED_REPOSITORY",
+    "source_base_commit": "9b8ec0bddbc5d94a088fc41f25cab50617ebad8f",
+    "validation_run": 32553535659,
+    "validation_job": 96984020347,
+    "tests": "52/52 PASS",
+    "exact_sha_clean_worktree": "PASS",
+    "immutable_self_scan_manifest": "PASS",
+    "end_to_end_self_audit": "PASS",
+    "execution_receipt_verification": "PASS",
+    "execution_receipt_sha256": "d47bd9af93911ff3661b75f933e424b49421a33d0671fe893f99daa0b3622d9c",
+    "execution_complete": true,
+    "audit_clean": false,
+    "note": "Execution success is intentionally distinct from audit cleanliness; open findings remain fail-closed audit state."
+  },
   "required_execution": [
-    "reconstruct a complete exact-name manifest for all 219 currently accessible repositories",
+    "retain a complete exact-name cutoff manifest for all 219 accessible repositories",
     "materialize each private source through exact-SHA TVC private-source-read without credential export to the audit engine",
     "obtain public sources without credential-bearing authority",
-    "run repository_executor against each exact materialized SHA and preserve deterministic secret-safe receipts",
+    "run audit_runner/repository_executor against each exact materialized SHA and preserve deterministic secret-safe receipts",
     "scan all reachable Git history, workflow history, dependency manifests/locks, remote executable references, and current control paths",
     "normalize commit actors only from dated evidence; never infer historical authorization from current membership",
     "reconstruct repository visibility intervals from organization audit/security logs",
@@ -58,7 +74,7 @@
   },
   "dependencies": [
     {"id":"COMPLETE-219-REPOSITORY-MANIFEST","repository":"StegVerse-Labs/footprint-auditor","state":"INCOMPLETE_MANIFEST_EXACT_COUNT_KNOWN"},
-    {"id":"TVC-PRIVATE-SOURCE-READ-001","repository":"StegVerse-Labs/TVC","issue":33,"state":"OPEN_NOT_ACTIVATED"},
+    {"id":"TVC-PRIVATE-SOURCE-READ-001","repository":"StegVerse-Labs/TVC","issue":33,"state":"SOURCE_IMPLEMENTED_AUTHORITY_ACTIVATION_PENDING","audit_consumer_comment_id":5378140090},
     {"id":"GITHUB-ORG-AUDIT-LOG","repository":"external GitHub organization/security log evidence","issue":"StegVerse-Labs/footprint-auditor#1","state":"UNAVAILABLE_THROUGH_CONNECTED_GITHUB_TOOL"},
     {"id":"TVC-SCW-VAULT-ROTATION-088","repository":"StegVerse-Labs/TVC","issue":88,"state":"BLOCKED_DEPENDENCY_MACHINE_OWNED"},
     {"id":"TVC-TV-CREDENTIAL-MIGRATION-089","repository":"StegVerse-Labs/TVC","issue":89,"state":"OPEN_MACHINE_OWNED"},
