@@ -1,0 +1,44 @@
+{
+  "schema": "stegverse.public-cutoff-audit-batch.v1",
+  "batch_id": "PUBLIC-AUDIT-BATCH-006",
+  "audit_boundary_end": "2026-08-19T23:59:59Z",
+  "observed_run": 32604459140,
+  "observed_job": 97107407327,
+  "workflow": ".github/workflows/public-audit-batch.yml",
+  "selection": "config/public-audit-batch-006.txt",
+  "inventory": "evidence/inventory/connected-repositories-2026-08-19-v2.csv",
+  "inventory_blob_sha": "434f03951354d8959e863c3f9aa0b6e5748a2d7b",
+  "materialization": {"credential_received":false,"repository_count":15,"transport":"anonymous HTTPS Git clone","exact_cutoff_resolution":true},
+  "execution": {
+    "status":"SUCCESS","execution_complete":true,"audit_clean":false,"credential_received_by_runner":false,"network_access_required_by_runner":false,
+    "execution_receipt_sha256":"d82819dd1c0d0a7fe54c0a479fa3123f16d16f57a4b2cbffd20dc8da4a6a79ba",
+    "unresolved_repository_scan_counts":{"ecosystem_dependencies":22,"executor_exceptions":0,"historical_identity_authority":8419,"python_dependencies":20,"workflow_authority":419,"workflow_dependencies":241}
+  },
+  "artifact": {
+    "id":9483756941,"size_bytes":452866,"sha256":"b19bc0e65e4be8fd529220391a7bcb356d173f41de213db0c4a34d66d42bff29",
+    "download_and_hash_reverified":true,
+    "downloaded_execution_receipt_file_sha256":"4c188bd2fdad9f0fb2f83b230926781fc05e4c9b3f9187d2c197c69c5fb858c8",
+    "downloaded_exact_manifest_sha256":"c0e6e6869ec9f82f127dfb0bf301233b57d1e9cf1ee814fed8403a263ccf10ca",
+    "receipt_internal_hash_recomputation":"PASS","repository_receipt_hash_recomputation":"15/15 PASS"
+  },
+  "repositories": [
+    {"repository":"StegVerse-Labs/StegScholar","expected_sha":"88830f95df06991cb974312536dbfa9b2f6c4756","receipt_sha256":"bae854713fd773951eadb92238b416d424848c4efde1b45b8364104f1d1f3354"},
+    {"repository":"StegVerse-Labs/StegSports-CFP","expected_sha":"e2ea94ca60b1cb10773c2960c07d109af6807dca","receipt_sha256":"2e50eb31fd88eccbf2e82dc069438eab80490b4dd115fc96377f75d8750c365a"},
+    {"repository":"StegVerse-Labs/StegTalk","expected_sha":"9c493f0943065de7ba7c3aa82aa00474d65af584","receipt_sha256":"02fd6e68ac38d2a0fbc562b6283dcd8ab37dbb8061a8109f8a814ba9f212448a"},
+    {"repository":"StegVerse-Labs/StegVerse-Healer","expected_sha":"fdc279de59c2ba2d601b30bd519548337bb790f1","receipt_sha256":"8a41b23719fb0d9053ac460f4ae5ed2ab7b3c269515923d077c9592b9aabc2bb"},
+    {"repository":"StegVerse-Labs/Talarico","expected_sha":"8c5792ff0c1157f12ed07a78471b56b8221ba801","receipt_sha256":"9b704942b6964185bffc9c22bc9c27a2ee44bc3db00dfc4cb7fd6a9842f596f0"},
+    {"repository":"StegVerse-Labs/Trumpality","expected_sha":"d0ab1a2c60f696d000813cf6edc21a33d26f6a9c","receipt_sha256":"8907456fe694a0c711dc5822dbfc80ced8cf2c668a708c72080dc21dc5d117c6"},
+    {"repository":"StegVerse-Labs/Value","expected_sha":"4e45c5896e2310ab18d7b3812d7d61d1853ecad0","receipt_sha256":"5d210160327ee1921826fb491d9f2b57fcad0c900459bdbff0e58feeeb4193ca"},
+    {"repository":"StegVerse-Labs/YieldOS","expected_sha":"2b6a40e17e3e74ef78edf88a815a546042670559","receipt_sha256":"6d86a8ac813e8eb41eaa9307fde5b46ff492aea7a8688161aa409d1ee403ff16"},
+    {"repository":"StegVerse-Labs/admissibility-wiki","expected_sha":"f67753ac5efd8b42b590899209d3f69dc4535d28","receipt_sha256":"8f1ea1cf8eed6cf3ec58efaa9486623c364910f6cc44eed614636ce12132ffe7"},
+    {"repository":"StegVerse-Labs/ara-admissibility-interop","expected_sha":"2a0ada472f7a3cc059961cb9af5baadecb5e0c9b","receipt_sha256":"3b8e7742dd3e845ef2a12b1f57fbb5e478fe6389e82c63afe1b3b2a815b0321e"},
+    {"repository":"StegVerse-Labs/continuity-vault-kit","expected_sha":"b1bf01b5a0d56c88b956775bdd5ec2e69913837c","receipt_sha256":"c2225c31d849cf9842bd4a5899409fd4b502ea43ae7a98cbf4f3f9185dbd91d1"},
+    {"repository":"StegVerse-Labs/footprint-auditor","expected_sha":"e0b2ffddb78513357d518ac195c8e7a4b9d920df","receipt_sha256":"8ba6b73355a21199f76786a761328931757036c9ec5b0227ef618e443d6f4edb"},
+    {"repository":"StegVerse-Labs/stegseed","expected_sha":"dd89af86e0a5d5fa4ebfa650695c8c3b67ec3f74","receipt_sha256":"125de0e20e37f2911b60938cd52356376721305ba3dd90e682c7be91d53f617a"},
+    {"repository":"StegVerse-Labs/stegtalk-wiki","expected_sha":"ae84f10a37de8aef176945f431e5bd37c81c8863","receipt_sha256":"ab17d4036e248138ecc926af74b8f5aacfea56dbb2fceb6c5d6c05c41787a447"},
+    {"repository":"StegVerse-org/stegverse-demo-suite","expected_sha":"c845bc0f6d0e7c8ec465f035337b996d8c597056","receipt_sha256":"0d56ae67e65e08641612e5244f49a592e33d890ad2429e1fbc56d54fc0ae2f9f"}
+  ],
+  "validation":{"materialization_boundary_tests":"5/5 PASS","all_workflow_steps":"PASS","receipt_verification":"PASS","downloaded_artifact_verification":"PASS"},
+  "authority_effect":false,"release_effect":false,"runtime_authority_effect":false,"clean_audit_effect":false,
+  "note":"Direct exact-cutoff execution evidence for fifteen public repository states. Historical actor authorization and visibility remain unresolved until dated organization/security evidence is reconciled."
+}
