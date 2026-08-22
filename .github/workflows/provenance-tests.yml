@@ -40,3 +40,4 @@ jobs:
           tests/test_repository_inventory.py
           tests/test_ecosystem_dependencies.py
           tests/test_repository_executor.py
+          tests/test_audit_runner.py
