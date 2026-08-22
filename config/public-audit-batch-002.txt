@@ -1,0 +1,10 @@
+Admissible-Existence/.github
+Admissible-Existence/ECAT-ICAT
+Admissible-Existence/STCM
+Admissible-Existence/learning-transition-governance
+AdmittedCode/admissibility-receipt
+AdmittedCode/coherency-scanner
+AdmittedCode/fleet-status
+AdmittedCode/provider-harness
+Data-Continuation/RTG-Tests
+Data-Continuation/formalism-tests
