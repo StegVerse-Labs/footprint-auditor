@@ -1,0 +1,39 @@
+{
+  "schema": "stegverse.public-cutoff-unresolved-surface.v1",
+  "audit_boundary_end": "2026-08-19T23:59:59Z",
+  "public_repository_states": 76,
+  "source_evidence": [
+    "evidence/execution/public-audit-batch-002-2026-08-22.json",
+    "evidence/execution/public-audit-batch-003-2026-08-22.json",
+    "evidence/execution/public-audit-batch-004-2026-08-22.json",
+    "evidence/execution/public-audit-batch-005-2026-08-22.json",
+    "evidence/execution/public-audit-batch-006-2026-08-22.json",
+    "evidence/execution/public-audit-batch-007-2026-08-22.json",
+    "evidence/execution/public-audit-batch-008-2026-08-22.json"
+  ],
+  "batch_001_retention": "SUPERSEDED_BY_BATCH_008_FOR_THE_SAME_FIVE_EXACT_SHAS",
+  "aggregate_non_deduplicated_scan_surface_counts": {
+    "historical_identity_authority": 37232,
+    "workflow_authority": 1985,
+    "workflow_dependencies": 1039,
+    "python_dependencies": 144,
+    "ecosystem_dependencies": 57,
+    "executor_exceptions": 0
+  },
+  "interpretation": {
+    "these_are_confirmed_malicious_events": false,
+    "these_are_confirmed_unauthorized_actors": false,
+    "counts_are_deduplicated_findings": false,
+    "historical_identity_authority_requires_dated_external_authority_evidence": true,
+    "dependency_and_workflow_items_require_classification_reconciliation": true,
+    "executor_exceptions_zero": true
+  },
+  "next_analysis": [
+    "deduplicate and rank workflow/dependency scan items by repository, ref, rule, and evidence hash",
+    "join hashed Git identities to dated organization/security evidence when available",
+    "distinguish expected third-party dependency use from mutable or unexplained provenance",
+    "carry unresolved public scan surfaces into the superseding aggregate ecosystem report after private execution"
+  ],
+  "audit_clean": false,
+  "note": "This aggregate intentionally sums the latest full-retention execution pass for each of the 76 unique public states. Batch 008 replaces batch 001 for scan-surface accounting. Counts are review surfaces, not distinct malicious findings, and may contain repeated rule hits across files/commits."
+}
