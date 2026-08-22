@@ -1,0 +1,102 @@
+name: public-audit-batch
+
+on:
+  push:
+    paths:
+      - 'scripts/materialize_public_batch.py'
+      - 'tests/test_public_materialization.py'
+      - 'tests/test_exact_inventory_manifest.py'
+      - 'config/public-audit-batch-001.txt'
+      - 'evidence/inventory/connected-repositories-2026-08-19-v2.csv'
+      - 'src/provenance/**'
+      - '.github/workflows/public-audit-batch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-cutoff-audit:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      GIT_TERMINAL_PROMPT: '0'
+    steps:
+      - name: Checkout auditor source without persisted credential
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+
+      - name: Install bounded validation dependency
+        run: python -m pip install pytest==8.4.1
+
+      - name: Validate inventory and credentialless materialization boundary
+        run: >-
+          python -m pytest -q
+          tests/test_exact_inventory_manifest.py
+          tests/test_public_materialization.py
+
+      - name: Materialize exact public cutoff batch anonymously
+        shell: bash
+        run: |
+          rm -rf /tmp/public-materialized /tmp/public-manifest.json
+          python scripts/materialize_public_batch.py \
+            --inventory evidence/inventory/connected-repositories-2026-08-19-v2.csv \
+            --selection config/public-audit-batch-001.txt \
+            --root /tmp/public-materialized \
+            --cutoff 2026-08-19T23:59:59Z \
+            --output /tmp/public-manifest.json
+
+      - name: Emit secret-free exact cutoff manifest
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path('/tmp/public-manifest.json').read_text())
+          assert manifest['schema'] == 'stegverse.materialized-repository-manifest.v1'
+          assert len(manifest['repositories']) == 5
+          for row in sorted(manifest['repositories'], key=lambda x: x['repository']):
+              print(f"MATERIALIZED {row['repository']} {row['expected_sha']}")
+          PY
+
+      - name: Execute five-repository provenance audit
+        shell: bash
+        run: |
+          inventory_digest="$(sha256sum evidence/inventory/connected-repositories-2026-08-19-v2.csv | awk '{print $1}')"
+          python -m src.provenance.audit_runner \
+            --manifest /tmp/public-manifest.json \
+            --findings-dir evidence/findings \
+            --output /tmp/public-audit-batch-001-receipt.json \
+            --boundary-end 2026-08-19T23:59:59Z \
+            --installation-count 5 \
+            --inventory-digest "$inventory_digest" \
+            --observed-at 2026-08-22T11:55:00Z
+
+      - name: Verify and emit compact batch receipt
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from src.provenance.audit_runner import verify_execution_receipt
+          receipt = json.loads(Path('/tmp/public-audit-batch-001-receipt.json').read_text())
+          assert receipt['execution_complete'] is True
+          assert receipt['executed_repository_count'] == 5
+          assert receipt['audit_open'] is True
+          assert receipt['credential_received_by_runner'] is False
+          assert receipt['network_access_required_by_runner'] is False
+          assert verify_execution_receipt(receipt)
+          print('BATCH_EXECUTION_RECEIPT', receipt['execution_receipt_sha256'])
+          print('BATCH_UNRESOLVED', json.dumps(receipt['unresolved_repository_scan_counts'], sort_keys=True, separators=(',', ':')))
+          for row in sorted(receipt['repository_receipts'], key=lambda x: x['repository']):
+              assert row['credential_received_by_executor'] is False
+              assert row['network_access_required'] is False
+              print('REPOSITORY_RECEIPT', row['repository'], row['expected_sha'], row['receipt_sha256'])
+          PY
