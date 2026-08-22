@@ -1,0 +1,76 @@
+{
+  "schema": "stegverse.public-cutoff-audit-batch.v1",
+  "batch_id": "PUBLIC-AUDIT-BATCH-003",
+  "audit_boundary_end": "2026-08-19T23:59:59Z",
+  "canonical_run": 32572145027,
+  "canonical_job": 97029030499,
+  "workflow": ".github/workflows/public-audit-batch.yml",
+  "selection": "config/public-audit-batch-003.txt",
+  "inventory": "evidence/inventory/connected-repositories-2026-08-19-v2.csv",
+  "inventory_blob_sha": "434f03951354d8959e863c3f9aa0b6e5748a2d7b",
+  "materialization": {
+    "credential_received": false,
+    "repository_count": 15,
+    "transport": "anonymous HTTPS Git clone",
+    "exact_cutoff_resolution": true
+  },
+  "execution": {
+    "status": "SUCCESS",
+    "execution_complete": true,
+    "audit_clean": false,
+    "credential_received_by_runner": false,
+    "network_access_required_by_runner": false,
+    "execution_receipt_sha256": "b360090e83cb960d25482b1989a0006b63b99e6c0220aaf6792382ec6298ff9a",
+    "execution_receipt_file_sha256": "b9b338a3810fafcc41d88d93258e52b9e2f642df5be961e48f7b74c3156a3136",
+    "exact_manifest_file_sha256": "8225e196a2fbdd68865c2151fdcd5e63b5482cc8ea089c9a96a06ebc8d1308fa",
+    "unresolved_repository_scan_counts": {
+      "ecosystem_dependencies": 1,
+      "executor_exceptions": 0,
+      "historical_identity_authority": 8074,
+      "python_dependencies": 32,
+      "workflow_authority": 245,
+      "workflow_dependencies": 135
+    }
+  },
+  "retained_artifact": {
+    "artifact_id": 9475588782,
+    "name": "public-audit-batch-003-receipts",
+    "size_in_bytes": 355143,
+    "sha256": "297175dae07720b239d0cb4f06bc58f1111f8b1cbed71916b32a1a6f6954669b",
+    "expires_at": "2026-09-21T12:08:09Z",
+    "upload_action": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+    "downloaded_and_reverified": true,
+    "receipt_internal_hash_reverified": true
+  },
+  "repositories": [
+    {"repository":"GCAT-BCAT-Engine/Documentation","expected_sha":"0a44ab7382981e2e774623e5910b8856757b8607","receipt_sha256":"191217a0fba619d91379b415e86fbbb7949a2760f1a1da4ccc874aa49b59e1b2"},
+    {"repository":"GCAT-BCAT-Engine/Publisher","expected_sha":"e2a11877dbe39aeeaab7f53654496e9158b35dbb","receipt_sha256":"e09d119f3b6d39345097dcd2d88f111544a6ae759d5226ccf05c5fd689d67d5e"},
+    {"repository":"GCAT-BCAT-Engine/StegSim","expected_sha":"a3d419e20771f010d3454e435cbfd55be4db9d64","receipt_sha256":"d0cf7e519628adb0ca3bf5bfae31539bb2a1f6b38be04984bfbd6c2b3ff86b10"},
+    {"repository":"GCAT-BCAT-Engine/Triage","expected_sha":"6692a1241f5a5bb522d9bd969bfc5fdde69d9952","receipt_sha256":"9e351d60b0ebd5ad9a57bcf018b4151103dbeebc50edc346ec78f8fe8f15fd8d"},
+    {"repository":"GCAT-BCAT-Engine/core-lite","expected_sha":"bc999df55529c0ce2ec0e0c0f5972d3b973dabf2","receipt_sha256":"efe81692e3bba6d3bb9265b1fcb71c5276e51601fba4975c34fb6a05c394c4cc"},
+    {"repository":"GCAT-BCAT-Engine/core-lite-prod","expected_sha":"dba0dcd4a11a119b307fd51090e77c6489e46fcf","receipt_sha256":"c49500fa6bb32b536df5d950febf8c1c5ac01867b2ad515088a4ef9c07571bbb"},
+    {"repository":"StegVerse-002/stegguardian-wiki","expected_sha":"82c58a47241dea9ced746d17e07d370f135fd7ee","receipt_sha256":"c09a3cb3eb7bef7357b44dea41e9a18adefbcfd87a8b8269958721031bca924c"},
+    {"repository":"StegVerse-org/.github","expected_sha":"e4c992ebdbfefb3e1d2c2252e3d3fce398d946ba","receipt_sha256":"5005e1c7358a8c2b70bffb0c520673876715b19333a7214fc1918d4ec80e0979"},
+    {"repository":"StegVerse-org/LLM-adapter","expected_sha":"4a93b8cf2e00c6dcfecbd2211f36190487bbc620","receipt_sha256":"e8afe6aa5d0adcdb12b83fafa58f40a990887d4bc06ffd8acd6ed2f97ddcb934"},
+    {"repository":"StegVerse-org/demo-sandbox","expected_sha":"76bbccc0dfc275f2c2fb58197077890902042681","receipt_sha256":"963866f1847113093982097c1191ffa0043f98888345faec27135f84910a9df4"},
+    {"repository":"StegVerse-org/demo-suite-runner","expected_sha":"ac3cf2183579db2d866b3a698959d347a1426d2e","receipt_sha256":"165081220b1ffadc55f7cf5d489f9347991dc94431fb775de43924585c3cd1da"},
+    {"repository":"StegVerse-org/demo_ingest_engine","expected_sha":"6b4e055e2271bc94e48130c8ca208a1ff799ef70","receipt_sha256":"5148beaeb9558242fc064be9df4a6a91cb794c65b5723dfbf1231d24a7a06c69"},
+    {"repository":"StegVerse-org/discovery","expected_sha":"7d151e2692effad8ccf58ac3f41434490b380061","receipt_sha256":"e0c874b054f62f433a00857404349b014a357cb7d7e993fe9dc92c4adf389a34"},
+    {"repository":"StegVerse-org/manifests","expected_sha":"eade7e214a31ca1e18e7159d080b6d374feb3ea4","receipt_sha256":"df659e2ad4c33c8ab760e0f02fae4194c7468c4962cf03f4fa7279543c02b57d"},
+    {"repository":"StegVerse-org/stegverse-gsl","expected_sha":"00dcd364c45389214c76d46dd88c85157a001b05","receipt_sha256":"67c51a81b401eefb69d9dbc5548ba3bf8a237b7435699f7b6743100c3f9b5913"}
+  ],
+  "validation": {
+    "materialization_boundary_tests": "5/5 PASS",
+    "all_workflow_steps": "PASS",
+    "receipt_verification": "PASS",
+    "artifact_upload": "PASS",
+    "artifact_download": "PASS",
+    "artifact_sha256_verification": "PASS",
+    "downloaded_execution_receipt_verification": "PASS"
+  },
+  "authority_effect": false,
+  "release_effect": false,
+  "runtime_authority_effect": false,
+  "clean_audit_effect": false,
+  "note": "Direct exact-cutoff execution evidence for fifteen public repositories. Complete sanitized receipt and exact manifest were retained, downloaded, and independently hash-verified. Historical actor authorization and visibility remain separate evidence requirements."
+}
