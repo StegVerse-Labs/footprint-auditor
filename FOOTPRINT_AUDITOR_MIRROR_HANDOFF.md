@@ -1,9 +1,9 @@
 # FOOTPRINT_AUDITOR_MIRROR_HANDOFF
 
-Status: ACTIVE — END-TO-END RUNNER VALIDATED / ECOSYSTEM AUDIT BLOCKED DEPENDENCY
+Status: ACTIVE — EXACT 219-REPOSITORY MANIFEST VALIDATED / ECOSYSTEM EXECUTION CONTINUES
 
 Date established: 2026-08-19  
-Last updated: 2026-08-22 00:08 America/Chicago
+Last updated: 2026-08-22 06:53 America/Chicago
 
 ## Governing objective
 Perform a historical ecosystem security/provenance audit from ecosystem origin through 2026-08-19. Attribute every consequential transition to dated actor, automation, dependency, build, release, deployment, runtime, or explicitly documented third-party evidence. Never treat missing evidence, current privacy, current membership, source containment, issue creation, machine ownership, readiness, or workflow success as proof of historical authorization, activation, runtime, completion, or benign intent.
@@ -16,16 +16,49 @@ Perform a historical ecosystem security/provenance audit from ecosystem origin t
 - Audit engine receives no private-source credential.
 - Unresolved transitions remain open and fail closed.
 
-## Current accessible boundary
-Exact accessible count is **219 repositories across 11 installations/accounts**:
-- current public: 76
-- current private: 143
+## Exact accessible boundary — COMPLETE / VALIDATED
+The accessible denominator is now retained as one exact-name manifest containing **219 unique repositories across 11 installations/accounts**:
+- public: 76
+- private: 143
 
-Exact-count evidence:
-- `evidence/inventory/accessible-repository-count-2026-08-19-v2.json`
-- Git blob: `6e74825f2f222341fcdbdb978ec60f9fe8be3c73`
+Canonical manifest:
+- `evidence/inventory/connected-repositories-2026-08-19-v2.csv`
+- Git blob: `434f03951354d8959e863c3f9aa0b6e5748a2d7b`
 
-The earlier 203-row installation-listing CSV is retained only as a superseded baseline. StegVerse-Labs installation listing truncates at 100 while repository search establishes 116 accessible Labs repositories. A complete exact-name 219-row manifest has not yet been reconstructed from one reliable connector listing surface. Current visibility is not historical visibility evidence.
+The superseding manifest reconciles the old 203-row installation listing with the 16 StegVerse-Labs repositories omitted by that installation surface's 100-repository truncation. The retained 16 are:
+- `StegVerse-Labs/Comms-Gateway`
+- `StegVerse-Labs/Consumer-Redress-Ledger`
+- `StegVerse-Labs/StegBrowser`
+- `StegVerse-Labs/StegHealth`
+- `StegVerse-Labs/StegMemory`
+- `StegVerse-Labs/StegNeuro`
+- `StegVerse-Labs/StegNutrition`
+- `StegVerse-Labs/StegOps-Notifs`
+- `StegVerse-Labs/VCCL`
+- `StegVerse-Labs/continuity-search`
+- `StegVerse-Labs/device-continuity-layer`
+- `StegVerse-Labs/fresh-fruit-scanning`
+- `StegVerse-Labs/governed-llm`
+- `StegVerse-Labs/media-governance`
+- `StegVerse-Labs/repo-standards`
+- `StegVerse-Labs/video-engine`
+
+Validation-only PR #10 exercised the canonical provenance workflow after `tests/test_exact_inventory_manifest.py` was added to the explicit test gate. Directly observed proof:
+- run: `32571449626`
+- job: `97027372810`
+- **54/54 tests PASS**
+- exact manifest row count: 219
+- unique repository names: 219
+- public count: 76
+- private count: 143
+- all sixteen truncation omissions present
+- exact-SHA worktree cleanup: PASS
+- immutable self-scan manifest: PASS
+- end-to-end self audit: PASS
+- execution receipt verification: PASS
+- validation execution receipt SHA-256: `00a277f4e1ef4c1de9b8245be8dd03484ef30bbfe610b0ebaad0e38b26e91b7b`
+
+Current visibility remains only current visibility. Historical public/private intervals still require dated audit/security-log evidence.
 
 ## Canonical audit receipt
 Current superseding receipt:
@@ -54,24 +87,19 @@ The exact-SHA repository executor accepts no credential and performs no network 
 
 The end-to-end runner consumes a manifest of already materialized repositories bound to immutable expected SHAs, verifies each repository receipt, loads durable finding evidence, builds the aggregate audit report, and emits a deterministic execution receipt. Execution success is explicitly distinct from audit cleanliness: unresolved findings keep the audit open without falsely making the execution engine appear broken.
 
-### End-to-end validation proof — 2026-08-22
-A qualifying latest-source pull-request validation was directly observed through the connected GitHub Actions surface:
-- validation PR: `StegVerse-Labs/footprint-auditor#8` (disposable validation only; not product authority)
-- source base commit: `9b8ec0bddbc5d94a088fc41f25cab50617ebad8f`
-- validation merge commit: `22360cef5dd1f53aaaee2fa23f15f6e0f0183e64`
-- workflow run: `32553535659`
-- job: `96984020347`
-- provenance suite: **52/52 PASS**
-- exact-SHA worktree cleanup/verification: PASS
-- immutable self-scan manifest construction: PASS
-- end-to-end self audit: PASS
-- execution receipt verification: PASS
-- executed repository count: 1
-- execution complete: true
-- audit clean: false, correctly preserving the open audit state
-- execution receipt SHA-256: `d47bd9af93911ff3661b75f933e424b49421a33d0671fe893f99daa0b3622d9c`
+## End-to-end engine proof
+Latest qualifying proof is run `32571449626`, job `97027372810`, against validation merge SHA `ce1e6726e31afc06c0e60673b52e4cd6a1d4cc43`.
 
-The validation workflow uses `contents: read`, disables persisted checkout credentials, fetches full history for the exact-SHA self-scan, and does not grant GitHub Actions production/runtime/control-plane authority. This proves the `footprint-auditor` execution path works end to end on an exact materialized repository. It does **not** prove the 219-repository ecosystem audit is complete or clean.
+Observed:
+- 54/54 provenance + exact-inventory tests PASS
+- clean worktree enforcement PASS
+- exact-SHA self scan PASS
+- aggregate audit execution PASS
+- receipt verification PASS
+- execution complete: true
+- audit clean: false
+
+This proves the audit execution path works on exact materialized source and that the exact 219-repository denominator is internally consistent. It does not prove all 219 sources have been executed.
 
 ## Confirmed security event
 ### TV SCW vault key exposure
@@ -127,7 +155,7 @@ Containment preserves history. It does not prove historical executions were auth
 
 ## Machine-owned remediation / collision boundaries
 Do not race these owners:
-- `StegVerse-Labs/TVC#33` — activate `tvc.private-source-read.v1`; currently open/not activated.
+- `StegVerse-Labs/TVC#33` — `tvc.private-source-read.v1`; source implemented, authority activation not yet observed. The ecosystem audit is registered as a bounded consumer.
 - `StegVerse-Labs/TVC#88` — actual SCW replacement-key rotation/re-encryption; blocked dependency/machine owned.
 - `StegVerse-Labs/TVC#89` — migrate remaining TV credential-bearing operations into bounded TVC execution; actual credential-bearing migrated execution not observed.
 - `StegVerse-Labs/StegDB#13` — `STEGDB-SEC-001`; current TV/TVC contract v2 observed, but deferred workflows/immutable dependency work and historical attribution remain.
@@ -141,10 +169,10 @@ Canonical execution task: `tasks/ECOSYSTEM-PROVENANCE-AUDIT-001.json`.
 
 ## Hard evidence/tool boundaries
 The audit cannot truthfully certify the full historical ecosystem until all of the following occur:
-1. reconstruct a complete exact-name manifest for all 219 accessible repositories;
-2. obtain GitHub organization/security audit-log evidence for historical actor/token/application access and public/private visibility intervals;
-3. recover historical private workflow-run/artifact evidence where the connected tool cannot enumerate it;
-4. activate `tvc.private-source-read.v1` and materialize each private source at exact SHA without credential export;
+1. obtain GitHub organization/security audit-log evidence for historical actor/token/application access and public/private visibility intervals;
+2. recover historical private workflow-run/artifact evidence where the connected tool cannot enumerate it;
+3. activate `tvc.private-source-read.v1` and materialize each private source at exact SHA without credential export;
+4. materialize public source without credential-bearing production/control authority and run the validated runner over the exact public population;
 5. run the validated exact-SHA audit runner over all 219 repositories/reachable history and preserve receipts;
 6. execute TVC SCW replacement-key rotation and affected payload re-encryption with secret-free proof;
 7. execute remaining TV credential migration under TVC and obtain fresh TV operational proof;
@@ -155,7 +183,8 @@ The audit cannot truthfully certify the full historical ecosystem until all of t
 12. reconcile package registries, runtime/deployment, DNS, signing, and other external infrastructure where claims exceed GitHub observability.
 
 ## Current conclusion
-- End-to-end audit execution engine: **VALIDATED for an exact materialized repository**.
+- Exact 219-repository manifest: **COMPLETE / VALIDATED**.
+- End-to-end audit execution engine: **VALIDATED for exact materialized source**.
 - Full 219-repository ecosystem execution: **NOT YET COMPLETE**.
 - Confirmed malicious third-party event: **NONE ESTABLISHED**.
 - Confirmed unauthorized actor: **NONE ESTABLISHED**.
@@ -175,4 +204,4 @@ Only after a legitimate release threshold, propagate the exact released audit st
 - `StegVerse-002/stegguardian-wiki`
 
 ## Session continuity
-The repository now contains a validated end-to-end audit runner, exact-count evidence, 13 current findings, v5 receipt, task registry, and blocker state sufficient to continue without this chat history. The next nonduplicate execution priority is full manifest/materialization activation and multi-repository execution; continue automatically when TVC/private-source and other machine-owned dependencies produce evidence. Do not request routine approval checkpoints.
+The repository now contains a validated end-to-end audit runner, a validated exact-name 219-repository denominator, 13 current findings, v5 receipt, task registry, and blocker state sufficient to continue without this chat history. The next nonduplicate execution priority is multi-repository execution: begin with credentialless/public materialization where feasible while `tvc.private-source-read.v1` remains the sole private-source authority path. Continue automatically when TVC/private-source and other machine-owned dependencies produce evidence. Do not request routine approval checkpoints.
