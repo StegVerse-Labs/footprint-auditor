@@ -1,0 +1,2 @@
+Validation-only trigger for credentialless exact-cutoff public audit batch 003 with complete sanitized receipt retention.
+No authority, release, runtime, production, or clean-audit effect.
