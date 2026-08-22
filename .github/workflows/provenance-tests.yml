@@ -43,6 +43,7 @@ jobs:
           tests/test_commit_authority.py
           tests/test_provenance_report.py
           tests/test_repository_inventory.py
+          tests/test_exact_inventory_manifest.py
           tests/test_ecosystem_dependencies.py
           tests/test_repository_executor.py
           tests/test_audit_runner.py
