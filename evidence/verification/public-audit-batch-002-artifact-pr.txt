@@ -1,0 +1,2 @@
+Validation-only trigger to prove immutable-pinned artifact retention for complete sanitized public audit batch 002 receipts.
+No authority, release, runtime, production, or clean-audit effect.
