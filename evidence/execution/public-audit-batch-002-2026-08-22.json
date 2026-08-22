@@ -1,0 +1,56 @@
+{
+  "schema": "stegverse.public-cutoff-audit-batch.v1",
+  "batch_id": "PUBLIC-AUDIT-BATCH-002",
+  "audit_boundary_end": "2026-08-19T23:59:59Z",
+  "observed_run": 32571810078,
+  "observed_job": 97028190156,
+  "workflow": ".github/workflows/public-audit-batch.yml",
+  "selection": "config/public-audit-batch-002.txt",
+  "inventory": "evidence/inventory/connected-repositories-2026-08-19-v2.csv",
+  "inventory_blob_sha": "434f03951354d8959e863c3f9aa0b6e5748a2d7b",
+  "materialization": {
+    "credential_received": false,
+    "repository_count": 10,
+    "transport": "anonymous HTTPS Git clone",
+    "exact_cutoff_resolution": true
+  },
+  "execution": {
+    "status": "SUCCESS",
+    "execution_complete": true,
+    "audit_clean": false,
+    "credential_received_by_runner": false,
+    "network_access_required_by_runner": false,
+    "execution_receipt_sha256": "b55b554e9e68767c4b03a46ec07900f6fdc1cf6105de5bc783c1e7d620fb6fc0",
+    "unresolved_repository_scan_counts": {
+      "ecosystem_dependencies": 0,
+      "executor_exceptions": 0,
+      "historical_identity_authority": 1895,
+      "python_dependencies": 13,
+      "workflow_authority": 135,
+      "workflow_dependencies": 67
+    }
+  },
+  "repositories": [
+    {"repository":"Admissible-Existence/.github","expected_sha":"fd027258a6a174a0a374517423143240c53fdbc7","receipt_sha256":"a00bbd3e175f8a485e2ad5a7bbec5aa5f207a35b4ca59d9ab1a5ee20a0389944"},
+    {"repository":"Admissible-Existence/ECAT-ICAT","expected_sha":"dcebc84af3dc597a46303dcfcbd71ea8078d88ab","receipt_sha256":"978aefa173fde9172fe7c51f758e9b72cef0a5a39fceed1d8d60b057cf02bbb8"},
+    {"repository":"Admissible-Existence/STCM","expected_sha":"dca7e323b541d743cad5f3c797f608a24ca6d060","receipt_sha256":"08f3502e22717762e780b84ee43856ca7f4935be7036b60e4f7945eb20daaf1c"},
+    {"repository":"Admissible-Existence/learning-transition-governance","expected_sha":"5ea5d46d81fdeb9c8042d6b7b6e61e85bd503e4f","receipt_sha256":"d1e9dee03557a6d5f4ba32aaf80e3ec1fc14bc41512566a70634df49c700a0b7"},
+    {"repository":"AdmittedCode/admissibility-receipt","expected_sha":"db6a69c1c97dbbf740ae3262dc7aee133d18e239","receipt_sha256":"19d8c44f14d39074316a686f26612c6b2aa81d18a2f3c4517d090514d0e9f682"},
+    {"repository":"AdmittedCode/coherency-scanner","expected_sha":"eb3a65f519eb78c44ce45a8f6b77c86e73d77d48","receipt_sha256":"4cddb5a8e9f37a0a185f1f2efd8409c6809e2b3be1e7708a91ad94aa20f3ee1c"},
+    {"repository":"AdmittedCode/fleet-status","expected_sha":"dfc04e24e29e62e1055916586c0827e2fba41bca","receipt_sha256":"e6fc9b22a3e7a7c16aefbc483756c5962bd3bb660f57b5f6be9d78ec2a365a2c"},
+    {"repository":"AdmittedCode/provider-harness","expected_sha":"e33c667d2a88f740c4b4f94d80d6c398e014c695","receipt_sha256":"3dfa9d85a2f74be41a4286a869a58eb652fd064ae96cbaab0f44731e6116ee13"},
+    {"repository":"Data-Continuation/RTG-Tests","expected_sha":"a5cf2c5231aa90d9ca93ee18ec5da7f32d52c058","receipt_sha256":"242a967939b3b3035ef46cdf9f9be421d42425d53b9d984ed8b3dc953a43fd3d"},
+    {"repository":"Data-Continuation/formalism-tests","expected_sha":"8a8e7c8ac812b4763949ddaa12f5491955b56049","receipt_sha256":"ae17db5c0ced194221a33cc19d27729ee859e96eebdb3fbe7352dd082b995ba8"}
+  ],
+  "validation": {
+    "materialization_boundary_tests": "5/5 PASS",
+    "all_workflow_steps": "PASS",
+    "receipt_verification": "PASS"
+  },
+  "authority_effect": false,
+  "release_effect": false,
+  "runtime_authority_effect": false,
+  "clean_audit_effect": false,
+  "receipt_retention_note": "The compact receipt hashes and exact SHAs are durable here. Complete sanitized execution receipt retention is being added to subsequent batches through an immutable-pinned artifact action; this batch can be deterministically re-executed against its retained exact SHAs if the complete receipt is required.",
+  "note": "This is direct execution evidence for ten exact public repository states at the historical cutoff. Historical actor authorization and visibility still require dated audit/security-log evidence."
+}
