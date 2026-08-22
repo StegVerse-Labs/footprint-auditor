@@ -6,9 +6,9 @@
   "branch": "main",
   "canonical_handoff": "FOOTPRINT_AUDITOR_MIRROR_HANDOFF.md",
   "canonical_issues": [1, 2, 3],
-  "state": "BLOCKED_DEPENDENCY_MACHINE_OWNED",
+  "state": "ACTIVE_PARTIAL_EXECUTION_PRIVATE_SOURCE_BLOCKED",
   "claimant": "footprint-auditor provenance engine + TVC private-source-read / credential-admission capability",
-  "claim_reconciled_at": "2026-08-22T06:53:00-05:00",
+  "claim_reconciled_at": "2026-08-22T07:05:00-05:00",
   "scope": {
     "boundary_start": "ecosystem-origin",
     "boundary_end": "2026-08-19T19:49:00Z",
@@ -26,7 +26,7 @@
     "manifest_validation_run": 32571449626,
     "manifest_validation_job": 97027372810,
     "manifest_validation_tests": "54/54 PASS",
-    "inventory_note": "The superseding v2 manifest contains 219 unique repository names with 76 public and 143 private entries. It reconciles the 203-row installation-listing baseline with the 16 Labs repositories omitted by the truncated installation listing. Current visibility remains distinct from historical visibility evidence."
+    "inventory_note": "The superseding v2 manifest contains 219 unique repository names with 76 public and 143 private entries. Current visibility remains distinct from historical visibility evidence."
   },
   "installed_scanners": [
     "src/provenance/historical.py",
@@ -38,7 +38,8 @@
     "src/provenance/inventory.py",
     "src/provenance/report.py",
     "src/provenance/repository_executor.py",
-    "src/provenance/audit_runner.py"
+    "src/provenance/audit_runner.py",
+    "scripts/materialize_public_batch.py"
   ],
   "execution_engine_proof": {
     "state": "VALIDATED_EXACT_MATERIALIZED_REPOSITORY",
@@ -51,12 +52,41 @@
     "execution_receipt_verification": "PASS",
     "execution_receipt_sha256": "00a277f4e1ef4c1de9b8245be8dd03484ef30bbfe610b0ebaad0e38b26e91b7b",
     "execution_complete": true,
-    "audit_clean": false,
-    "note": "Execution success is intentionally distinct from audit cleanliness; open findings remain fail-closed audit state."
+    "audit_clean": false
+  },
+  "public_execution": {
+    "state": "ACTIVE",
+    "unique_public_repositories_executed": 15,
+    "public_repositories_total": 76,
+    "public_repositories_remaining": 61,
+    "private_repositories_total": 143,
+    "batch_001": {
+      "repositories": 5,
+      "run": 32571701868,
+      "job": 97027947462,
+      "evidence": "evidence/execution/public-audit-batch-001-2026-08-22.json",
+      "execution_receipt_sha256": "56b7601b818d11367f5840406e011d122d77407c6a973261288cd89e0a5e89ca",
+      "complete_receipt_artifact_retained": false,
+      "state": "EXECUTED_COMPACT_PROOF_RETAINED"
+    },
+    "batch_002": {
+      "repositories": 10,
+      "canonical_run": 32571942363,
+      "canonical_job": 97028507067,
+      "evidence": "evidence/execution/public-audit-batch-002-2026-08-22.json",
+      "execution_receipt_sha256": "76c224989be5b598b252c61ab2bf21980aa9556e9d941fbabdf858b51f186748",
+      "artifact_id": 9475532566,
+      "artifact_sha256": "7906e0a880280c7f60b810c8dca7b2ea9a6f09e8c86c8312dfdf6e0b5b870fe1",
+      "complete_receipt_artifact_retained": true,
+      "download_and_hash_reverified": true,
+      "state": "EXECUTED_FULL_RECEIPT_RETAINED"
+    },
+    "retention_rule": "All subsequent public batches must retain the complete sanitized execution receipt and exact manifest with immutable-action artifact binding plus compact repository evidence. Batch 001 remains eligible for deterministic re-execution to upgrade its compact-only evidence."
   },
   "required_execution": [
+    "continue credentialless exact-cutoff execution for the remaining 61 public repositories",
+    "upgrade public batch 001 to complete retained receipt evidence or supersede it through a deterministic re-execution",
     "materialize each private source through exact-SHA TVC private-source-read without credential export to the audit engine",
-    "obtain public sources without credential-bearing authority",
     "run audit_runner/repository_executor against each exact materialized SHA and preserve deterministic secret-safe receipts",
     "scan all reachable Git history, workflow history, dependency manifests/locks, remote executable references, and current control paths",
     "normalize commit actors only from dated evidence; never infer historical authorization from current membership",
@@ -76,6 +106,7 @@
   },
   "dependencies": [
     {"id":"COMPLETE-219-REPOSITORY-MANIFEST","repository":"StegVerse-Labs/footprint-auditor","state":"COMPLETE_VALIDATED","manifest":"evidence/inventory/connected-repositories-2026-08-19-v2.csv","blob_sha":"434f03951354d8959e863c3f9aa0b6e5748a2d7b","validation_run":32571449626,"validation_job":97027372810},
+    {"id":"PUBLIC-EXACT-CUTOFF-EXECUTION","repository":"StegVerse-Labs/footprint-auditor","state":"ACTIVE_15_OF_76","remaining":61},
     {"id":"TVC-PRIVATE-SOURCE-READ-001","repository":"StegVerse-Labs/TVC","issue":33,"state":"SOURCE_IMPLEMENTED_AUTHORITY_ACTIVATION_PENDING","audit_consumer_comment_id":5378140090},
     {"id":"GITHUB-ORG-AUDIT-LOG","repository":"external GitHub organization/security log evidence","issue":"StegVerse-Labs/footprint-auditor#1","state":"UNAVAILABLE_THROUGH_CONNECTED_GITHUB_TOOL"},
     {"id":"TVC-SCW-VAULT-ROTATION-088","repository":"StegVerse-Labs/TVC","issue":88,"state":"BLOCKED_DEPENDENCY_MACHINE_OWNED"},
