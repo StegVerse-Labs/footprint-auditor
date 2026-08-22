@@ -1,0 +1,46 @@
+{
+  "schema": "stegverse.public-cutoff-coverage.v1",
+  "audit_boundary_end": "2026-08-19T23:59:59Z",
+  "inventory": {
+    "path": "evidence/inventory/connected-repositories-2026-08-19-v2.csv",
+    "blob_sha": "434f03951354d8959e863c3f9aa0b6e5748a2d7b",
+    "public_repository_count": 76,
+    "private_repository_count": 143,
+    "total_repository_count": 219
+  },
+  "coverage": {
+    "unique_public_repositories_executed": 76,
+    "unique_public_repositories_remaining": 0,
+    "complete_retained_reverified_public_states": 76,
+    "compact_only_public_states": 0,
+    "private_repositories_executed_through_tvc_private_source_read": 0,
+    "public_execution_complete": true,
+    "full_ecosystem_execution_complete": false,
+    "clean_audit_permitted": false
+  },
+  "evidence_batches": [
+    {"batch":"001","path":"evidence/execution/public-audit-batch-001-2026-08-22.json","blob_sha":"8b13a678c6c6fc48f2fe9469c818279cab23dd50","unique_states":5,"retention":"SUPERSEDED_BY_008"},
+    {"batch":"002","path":"evidence/execution/public-audit-batch-002-2026-08-22.json","blob_sha":"074f57c3ba7b2eaf072be35c2f551742f5d15fbf","unique_states":10,"retention":"COMPLETE_REVERIFIED"},
+    {"batch":"003","path":"evidence/execution/public-audit-batch-003-2026-08-22.json","blob_sha":"50a1ec3522ed487108a2701073e37457504ddd74","unique_states":15,"retention":"COMPLETE_REVERIFIED"},
+    {"batch":"004","path":"evidence/execution/public-audit-batch-004-2026-08-22.json","blob_sha":"ec1096f9a0f0367dc2eb0595bb470693e4025540","unique_states":15,"retention":"COMPLETE_REVERIFIED"},
+    {"batch":"005","path":"evidence/execution/public-audit-batch-005-2026-08-22.json","blob_sha":"ba21c7969d53e48ed60b94949271613a8f565d3a","unique_states":15,"retention":"COMPLETE_REVERIFIED"},
+    {"batch":"006","path":"evidence/execution/public-audit-batch-006-2026-08-22.json","blob_sha":"c04680ea99acaa35c5509b4dbb3c1c7de7963475","unique_states":15,"retention":"COMPLETE_REVERIFIED"},
+    {"batch":"007","path":"evidence/execution/public-audit-batch-007-2026-08-22.json","blob_sha":"8ed4500d7a1aa0eb13a2731510359fd3da6cb085","unique_states":1,"retention":"COMPLETE_REVERIFIED"},
+    {"batch":"008","path":"evidence/execution/public-audit-batch-008-2026-08-22.json","blob_sha":"860249756703b0a5c9f71a06d6798ed6c2b50164","unique_states":0,"reverified_states":5,"retention":"COMPLETE_REVERIFIED","supersedes":"001"}
+  ],
+  "authority": {
+    "credential_received_by_audit_engine": false,
+    "public_materialization": "anonymous HTTPS",
+    "github_actions_effect": "validation/evidence transport only",
+    "production_runtime_release_control_authority": false
+  },
+  "open_boundaries": [
+    "143 private repositories require activated tvc.private-source-read.v1 exact-SHA materialization",
+    "historical actor/token/application authority requires dated organization/security audit evidence",
+    "historical public/private visibility intervals remain unresolved",
+    "external package/runtime/DNS/signing/deployment provenance remains to be reconciled",
+    "open security findings and machine-owned remediations remain unresolved"
+  ],
+  "verdict": "PUBLIC_EXACT_CUTOFF_EXECUTION_COMPLETE_FULL_ECOSYSTEM_AUDIT_OPEN",
+  "coverage_receipt_sha256": "2f086eff80c2fe33173eec9814e76944d7abac19434fa5fe5f4051f5b908fe02"
+}
