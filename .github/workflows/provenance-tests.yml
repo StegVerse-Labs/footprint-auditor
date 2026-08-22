@@ -46,6 +46,12 @@ jobs:
           tests/test_ecosystem_dependencies.py
           tests/test_repository_executor.py
           tests/test_audit_runner.py
+      - name: Restore exact source worktree after tests
+        shell: bash
+        run: |
+          git reset --hard "$GITHUB_SHA"
+          git clean -fdx
+          test -z "$(git status --porcelain=v1)"
       - name: Build immutable self-scan manifest
         shell: bash
         run: |
