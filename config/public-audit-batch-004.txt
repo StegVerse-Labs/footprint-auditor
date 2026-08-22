@@ -1,0 +1,15 @@
+formalism-tests/core-lite
+master-records/monitoring
+StegVerse-Labs/.github
+StegVerse-Labs/3I-Atlas
+StegVerse-Labs/Administrations
+StegVerse-Labs/Boundary-Test
+StegVerse-Labs/CosDen
+StegVerse-Labs/CrystalWorks
+StegVerse-Labs/DiamondOps-Core
+StegVerse-Labs/Epsteinality
+StegVerse-Labs/Executive_Rhetoric_Ledger
+StegVerse-Labs/FREE-DOM
+StegVerse-Labs/FREE-DOM_Books
+StegVerse-Labs/Fin-Co-Lab
+StegVerse-Labs/Giuffre-ality
