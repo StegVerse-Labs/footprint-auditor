@@ -6,7 +6,7 @@ on:
       - 'scripts/materialize_public_batch.py'
       - 'tests/test_public_materialization.py'
       - 'tests/test_exact_inventory_manifest.py'
-      - 'config/public-audit-batch-001.txt'
+      - 'config/public-audit-batch-*.txt'
       - 'evidence/inventory/connected-repositories-2026-08-19-v2.csv'
       - 'src/provenance/**'
       - '.github/workflows/public-audit-batch.yml'
@@ -15,7 +15,7 @@ on:
       - 'scripts/materialize_public_batch.py'
       - 'tests/test_public_materialization.py'
       - 'tests/test_exact_inventory_manifest.py'
-      - 'config/public-audit-batch-001.txt'
+      - 'config/public-audit-batch-*.txt'
       - 'evidence/inventory/connected-repositories-2026-08-19-v2.csv'
       - 'src/provenance/**'
       - '.github/workflows/public-audit-batch.yml'
@@ -24,6 +24,12 @@ on:
 
 permissions:
   contents: read
+
+env:
+  PUBLIC_AUDIT_SELECTION: config/public-audit-batch-002.txt
+  PUBLIC_AUDIT_EXPECTED_COUNT: '10'
+  PUBLIC_AUDIT_RECEIPT: /tmp/public-audit-batch-002-receipt.json
+  PUBLIC_AUDIT_CUTOFF: 2026-08-19T23:59:59Z
 
 jobs:
   public-cutoff-audit:
@@ -55,50 +61,50 @@ jobs:
       - name: Materialize exact public cutoff batch anonymously
         shell: bash
         run: |
-          rm -rf /tmp/public-materialized /tmp/public-manifest.json
+          rm -rf /tmp/public-materialized /tmp/public-manifest.json "$PUBLIC_AUDIT_RECEIPT"
           python scripts/materialize_public_batch.py \
             --inventory evidence/inventory/connected-repositories-2026-08-19-v2.csv \
-            --selection config/public-audit-batch-001.txt \
+            --selection "$PUBLIC_AUDIT_SELECTION" \
             --root /tmp/public-materialized \
-            --cutoff 2026-08-19T23:59:59Z \
+            --cutoff "$PUBLIC_AUDIT_CUTOFF" \
             --output /tmp/public-manifest.json
 
       - name: Emit secret-free exact cutoff manifest
         shell: bash
         run: |
           python - <<'PY'
-          import json
+          import json, os
           from pathlib import Path
           manifest = json.loads(Path('/tmp/public-manifest.json').read_text())
           assert manifest['schema'] == 'stegverse.materialized-repository-manifest.v1'
-          assert len(manifest['repositories']) == 5
+          assert len(manifest['repositories']) == int(os.environ['PUBLIC_AUDIT_EXPECTED_COUNT'])
           for row in sorted(manifest['repositories'], key=lambda x: x['repository']):
               print(f"MATERIALIZED {row['repository']} {row['expected_sha']}")
           PY
 
-      - name: Execute five-repository provenance audit
+      - name: Execute public provenance audit batch
         shell: bash
         run: |
           inventory_digest="$(sha256sum evidence/inventory/connected-repositories-2026-08-19-v2.csv | awk '{print $1}')"
           python -m src.provenance.audit_runner \
             --manifest /tmp/public-manifest.json \
             --findings-dir evidence/findings \
-            --output /tmp/public-audit-batch-001-receipt.json \
-            --boundary-end 2026-08-19T23:59:59Z \
-            --installation-count 5 \
+            --output "$PUBLIC_AUDIT_RECEIPT" \
+            --boundary-end "$PUBLIC_AUDIT_CUTOFF" \
+            --installation-count 3 \
             --inventory-digest "$inventory_digest" \
-            --observed-at 2026-08-22T11:55:00Z
+            --observed-at 2026-08-22T12:02:00Z
 
       - name: Verify and emit compact batch receipt
         shell: bash
         run: |
           python - <<'PY'
-          import json
+          import json, os
           from pathlib import Path
           from src.provenance.audit_runner import verify_execution_receipt
-          receipt = json.loads(Path('/tmp/public-audit-batch-001-receipt.json').read_text())
+          receipt = json.loads(Path(os.environ['PUBLIC_AUDIT_RECEIPT']).read_text())
           assert receipt['execution_complete'] is True
-          assert receipt['executed_repository_count'] == 5
+          assert receipt['executed_repository_count'] == int(os.environ['PUBLIC_AUDIT_EXPECTED_COUNT'])
           assert receipt['audit_open'] is True
           assert receipt['credential_received_by_runner'] is False
           assert receipt['network_access_required_by_runner'] is False
