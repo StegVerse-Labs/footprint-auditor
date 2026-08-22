@@ -1,0 +1,70 @@
+{
+  "schema": "stegverse.public-cutoff-audit-batch.v1",
+  "batch_id": "PUBLIC-AUDIT-BATCH-001",
+  "audit_boundary_end": "2026-08-19T23:59:59Z",
+  "observed_run": 32571701868,
+  "observed_job": 97027947462,
+  "workflow": ".github/workflows/public-audit-batch.yml",
+  "selection": "config/public-audit-batch-001.txt",
+  "inventory": "evidence/inventory/connected-repositories-2026-08-19-v2.csv",
+  "inventory_blob_sha": "434f03951354d8959e863c3f9aa0b6e5748a2d7b",
+  "materialization": {
+    "credential_received": false,
+    "repository_count": 5,
+    "transport": "anonymous HTTPS Git clone",
+    "exact_cutoff_resolution": true
+  },
+  "execution": {
+    "status": "SUCCESS",
+    "execution_complete": true,
+    "audit_clean": false,
+    "credential_received_by_runner": false,
+    "network_access_required_by_runner": false,
+    "execution_receipt_sha256": "56b7601b818d11367f5840406e011d122d77407c6a973261288cd89e0a5e89ca",
+    "unresolved_repository_scan_counts": {
+      "ecosystem_dependencies": 17,
+      "executor_exceptions": 0,
+      "historical_identity_authority": 3583,
+      "python_dependencies": 33,
+      "workflow_authority": 325,
+      "workflow_dependencies": 156
+    }
+  },
+  "repositories": [
+    {
+      "repository": "AdmittedCode/code-admit-gate",
+      "expected_sha": "576d40e0f7a178c0f52146a68cf5a491b28921d5",
+      "receipt_sha256": "add21ae1f2fac9a9523760e8d715118d219a37f163d7fa16ee0751b9acb86263"
+    },
+    {
+      "repository": "Data-Continuation/core-lite",
+      "expected_sha": "c2c24186cd8a2ae4b7327c7f88bc868a25f6b619",
+      "receipt_sha256": "c549d21066ce1677f1c6f9bd56ec528e273bc36fe08f7ba0d4356642db442f0b"
+    },
+    {
+      "repository": "GCAT-BCAT-Engine/workflows",
+      "expected_sha": "cc9b467d732a5e1a03c1266b38f023c2a50590a3",
+      "receipt_sha256": "ce0bfe8aa7fe9d600c98c5ab22b579c34ec735f04942ba58c9f916a1b778ecbd"
+    },
+    {
+      "repository": "StegVerse-002/core-lite",
+      "expected_sha": "9c56c8e309542f7f1c23d0b0fbbfc7876e28bfec",
+      "receipt_sha256": "242554f521c3637d887f0b999fb37185fe3bed8e458a08561c1082a0efdab390"
+    },
+    {
+      "repository": "StegVerse-org/StegVerse-SDK",
+      "expected_sha": "e5cee8bc404c90be00eb5592fa394111818eb3ec",
+      "receipt_sha256": "21e9d7c8a2447631698347bd418870b16200dcbba90c6b585f291ec4d8fa0c24"
+    }
+  ],
+  "validation": {
+    "materialization_boundary_tests": "5/5 PASS",
+    "all_workflow_steps": "PASS",
+    "receipt_verification": "PASS"
+  },
+  "authority_effect": false,
+  "release_effect": false,
+  "runtime_authority_effect": false,
+  "clean_audit_effect": false,
+  "note": "This is direct execution evidence for five exact public repository states at the historical cutoff. Historical actor authorization and visibility still require dated audit/security-log evidence."
+}
