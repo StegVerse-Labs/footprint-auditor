@@ -26,10 +26,10 @@ permissions:
   contents: read
 
 env:
-  PUBLIC_AUDIT_BATCH_ID: '004'
-  PUBLIC_AUDIT_SELECTION: config/public-audit-batch-004.txt
+  PUBLIC_AUDIT_BATCH_ID: '005'
+  PUBLIC_AUDIT_SELECTION: config/public-audit-batch-005.txt
   PUBLIC_AUDIT_EXPECTED_COUNT: '15'
-  PUBLIC_AUDIT_RECEIPT: /tmp/public-audit-batch-004-receipt.json
+  PUBLIC_AUDIT_RECEIPT: /tmp/public-audit-batch-005-receipt.json
   PUBLIC_AUDIT_CUTOFF: 2026-08-19T23:59:59Z
 
 jobs:
@@ -86,9 +86,9 @@ jobs:
             --findings-dir evidence/findings \
             --output "$PUBLIC_AUDIT_RECEIPT" \
             --boundary-end "$PUBLIC_AUDIT_CUTOFF" \
-            --installation-count 3 \
+            --installation-count 1 \
             --inventory-digest "$inventory_digest" \
-            --observed-at 2026-08-22T12:12:00Z
+            --observed-at 2026-08-22T23:08:00Z
       - name: Verify and emit compact batch receipt
         shell: bash
         run: |
