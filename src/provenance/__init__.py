@@ -37,6 +37,13 @@ from .repository_executor import (
     scan_materialized_repository,
     verify_repository_receipt,
 )
+from .audit_runner import (
+    MANIFEST_SCHEMA,
+    RUNNER_SCHEMA,
+    run_audit,
+    validate_manifest,
+    verify_execution_receipt,
+)
 
 __all__ = [
     "AuditBoundary",
@@ -64,4 +71,9 @@ __all__ = [
     "summarize_ecosystem_dependencies",
     "scan_materialized_repository",
     "verify_repository_receipt",
+    "MANIFEST_SCHEMA",
+    "RUNNER_SCHEMA",
+    "run_audit",
+    "validate_manifest",
+    "verify_execution_receipt",
 ]
