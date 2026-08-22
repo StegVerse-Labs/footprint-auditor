@@ -24,8 +24,10 @@ jobs:
   provenance:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
       - name: Run provenance tests
@@ -41,3 +43,43 @@ jobs:
           tests/test_ecosystem_dependencies.py
           tests/test_repository_executor.py
           tests/test_audit_runner.py
+      - name: Build immutable self-scan manifest
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os
+          payload = {
+              "schema": "stegverse.materialized-repository-manifest.v1",
+              "repositories": [{
+                  "repository": os.environ["GITHUB_REPOSITORY"],
+                  "path": os.environ["GITHUB_WORKSPACE"],
+                  "expected_sha": os.environ["GITHUB_SHA"],
+              }],
+          }
+          with open("/tmp/footprint-auditor-manifest.json", "w", encoding="utf-8") as handle:
+              json.dump(payload, handle, sort_keys=True)
+          PY
+      - name: Execute end-to-end self audit
+        run: >-
+          python -m src.provenance.audit_runner
+          --manifest /tmp/footprint-auditor-manifest.json
+          --findings-dir evidence/findings
+          --output /tmp/footprint-auditor-execution-receipt.json
+          --boundary-end 2026-08-19T23:59:59Z
+          --installation-count 11
+          --inventory-digest 91af76ca27027d70bb9cb40d439d68590ac05f1dd06aa8526c74c9dd472afbaa
+          --observed-at 2026-08-21T23:59:00Z
+      - name: Verify execution receipt
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from src.provenance.audit_runner import verify_execution_receipt
+          with open("/tmp/footprint-auditor-execution-receipt.json", "r", encoding="utf-8") as handle:
+              receipt = json.load(handle)
+          assert receipt["execution_complete"] is True
+          assert receipt["executed_repository_count"] == 1
+          assert receipt["audit_open"] is True
+          assert verify_execution_receipt(receipt)
+          print(receipt["execution_receipt_sha256"])
+          PY
