@@ -1,0 +1,30 @@
+{
+  "schema": "stegverse.public-cutoff-audit-batch.v1",
+  "batch_id": "PUBLIC-AUDIT-BATCH-007",
+  "audit_boundary_end": "2026-08-19T23:59:59Z",
+  "observed_run": 32604564857,
+  "observed_job": 97107660369,
+  "workflow": ".github/workflows/public-audit-batch.yml",
+  "selection": "config/public-audit-batch-007.txt",
+  "inventory": "evidence/inventory/connected-repositories-2026-08-19-v2.csv",
+  "inventory_blob_sha": "434f03951354d8959e863c3f9aa0b6e5748a2d7b",
+  "materialization": {"credential_received":false,"repository_count":1,"transport":"anonymous HTTPS Git clone","exact_cutoff_resolution":true},
+  "execution": {
+    "status":"SUCCESS","execution_complete":true,"audit_clean":false,"credential_received_by_runner":false,"network_access_required_by_runner":false,
+    "execution_receipt_sha256":"d1d12706f720e29e6261f46db841608a8e14f7d1a3f5c6039e1e44373bf089e0",
+    "unresolved_repository_scan_counts":{"ecosystem_dependencies":0,"executor_exceptions":0,"historical_identity_authority":12,"python_dependencies":0,"workflow_authority":0,"workflow_dependencies":0}
+  },
+  "artifact": {
+    "id":9483781849,"size_bytes":3916,"sha256":"a076163948d5462a30b86f66bf9f35dfe11303dd9c3457f18bcb5ce651d36476",
+    "download_and_hash_reverified":true,
+    "downloaded_execution_receipt_file_sha256":"3f0923bfc2ffed1fcb6209c642a9a23ddebd4a4b635367a13516a83d77995ff4",
+    "downloaded_exact_manifest_sha256":"8e6e0f8231855c48bf1db790cc1f87dd53ab5eade46801e0e3137ef842267ad4",
+    "receipt_internal_hash_recomputation":"PASS","repository_receipt_hash_recomputation":"1/1 PASS"
+  },
+  "repositories": [
+    {"repository":"StegVerse-Labs/Consumer-Redress-Ledger","expected_sha":"7f75275bbae3eb26573fe1f8e1c29d0eded1c299","receipt_sha256":"e7ca003610f316b96ae6df7cdf9c02b020b9a614cb23b4025b3ad445457e5bea"}
+  ],
+  "validation":{"materialization_boundary_tests":"5/5 PASS","all_workflow_steps":"PASS","receipt_verification":"PASS","downloaded_artifact_verification":"PASS"},
+  "authority_effect":false,"release_effect":false,"runtime_authority_effect":false,"clean_audit_effect":false,
+  "note":"Final previously unscanned public repository exact-cutoff execution. This establishes 76/76 unique public repository execution when reconciled with batches 001-006. Batch 001 still requires deterministic re-execution to upgrade five compact-only receipts to complete retained evidence. Historical actor authorization and visibility remain unresolved until dated organization/security evidence is reconciled."
+}
