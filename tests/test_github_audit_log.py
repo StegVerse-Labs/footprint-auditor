@@ -89,6 +89,36 @@ def test_actor_events_remain_provenance_gap_until_dated_authority_is_reconciled(
     assert event.details["previous_visibility"] == "public"
 
 
+def test_unknown_visibility_is_not_promoted_into_historical_exposure_evidence():
+    records = [
+        {
+            "action": "repo.change_visibility",
+            "repo": "ExampleOrg/example",
+            "created_at": "2026-03-01T00:00:00Z",
+            "visibility": "unknown-provider-value",
+        }
+    ]
+    assert extract_visibility_transitions(records) == []
+    summary = coverage_summary(records, expected_repositories=["ExampleOrg/example"])
+    assert summary["repositories_missing_visibility_evidence"] == ["ExampleOrg/example"]
+    assert summary["historical_visibility_complete"] is False
+
+
+def test_actorless_record_is_retained_as_explicit_provenance_gap():
+    events = normalize_actor_events([
+        {
+            "action": "repo.change_visibility",
+            "repo": "ExampleOrg/example",
+            "created_at": "2026-03-01T00:00:00Z",
+            "visibility": "private",
+        }
+    ])
+    assert len(events) == 1
+    assert events[0].actor is None
+    assert events[0].authorized is None
+    assert events[0].status is AuditStatus.PROVENANCE_GAP
+
+
 def test_coverage_summary_fails_open_claim_when_expected_repo_has_no_visibility_evidence():
     records = [
         {
