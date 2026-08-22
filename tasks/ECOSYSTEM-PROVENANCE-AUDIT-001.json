@@ -8,7 +8,7 @@
   "canonical_issues": [1, 2, 3],
   "state": "ACTIVE_PARTIAL_EXECUTION_PRIVATE_SOURCE_BLOCKED",
   "claimant": "footprint-auditor provenance engine + TVC private-source-read / credential-admission capability",
-  "claim_reconciled_at": "2026-08-22T07:10:00-05:00",
+  "claim_reconciled_at": "2026-08-22T18:06:00-05:00",
   "scope": {
     "boundary_start": "ecosystem-origin",
     "boundary_end": "2026-08-19T19:49:00Z",
@@ -56,11 +56,11 @@
   },
   "public_execution": {
     "state": "ACTIVE",
-    "unique_public_repositories_executed": 30,
+    "unique_public_repositories_executed": 45,
     "public_repositories_total": 76,
-    "public_repositories_remaining": 46,
+    "public_repositories_remaining": 31,
     "private_repositories_total": 143,
-    "complete_retained_public_receipts": 25,
+    "complete_retained_public_receipts": 40,
     "compact_only_public_receipts": 5,
     "batch_001": {
       "repositories": 5,
@@ -98,10 +98,26 @@
       "receipt_internal_hash_reverified": true,
       "state": "EXECUTED_FULL_RECEIPT_RETAINED"
     },
+    "batch_004": {
+      "repositories": 15,
+      "canonical_run": 32572399702,
+      "canonical_job": 97029683139,
+      "evidence": "evidence/execution/public-audit-batch-004-2026-08-22.json",
+      "execution_receipt_sha256": "23afa9e574ced4981ea22f8f8da50c09091af9af607d9a098140e0bd95a82435",
+      "execution_receipt_file_sha256": "f3dc88a182c7afef8817e64b402318dbd3fcb4aff8146b20d80c2751061ca674",
+      "exact_manifest_file_sha256": "838e3eb138577de80c97f97636ee3688e96dec48e2900d627c733f7ccea105a7",
+      "artifact_id": 9475656845,
+      "artifact_sha256": "b52f0ba327b303dc45d3ea98ed31623605cfa15c01778904b62f2e37e2e9b9d4",
+      "complete_receipt_artifact_retained": true,
+      "download_and_hash_reverified": true,
+      "receipt_internal_hash_reverified": true,
+      "repository_receipt_hashes_reverified": "15/15",
+      "state": "EXECUTED_FULL_RECEIPT_RETAINED"
+    },
     "retention_rule": "All subsequent public batches must retain the complete sanitized execution receipt and exact manifest with immutable-action artifact binding plus compact repository evidence. Batch 001 remains eligible for deterministic re-execution to upgrade its compact-only evidence."
   },
   "required_execution": [
-    "continue credentialless exact-cutoff execution for the remaining 46 public repositories",
+    "continue credentialless exact-cutoff execution for the remaining 31 public repositories",
     "upgrade public batch 001 to complete retained receipt evidence or supersede it through a deterministic re-execution",
     "materialize each private source through exact-SHA TVC private-source-read without credential export to the audit engine",
     "run audit_runner/repository_executor against each exact materialized SHA and preserve deterministic secret-safe receipts",
@@ -123,7 +139,7 @@
   },
   "dependencies": [
     {"id":"COMPLETE-219-REPOSITORY-MANIFEST","repository":"StegVerse-Labs/footprint-auditor","state":"COMPLETE_VALIDATED","manifest":"evidence/inventory/connected-repositories-2026-08-19-v2.csv","blob_sha":"434f03951354d8959e863c3f9aa0b6e5748a2d7b","validation_run":32571449626,"validation_job":97027372810},
-    {"id":"PUBLIC-EXACT-CUTOFF-EXECUTION","repository":"StegVerse-Labs/footprint-auditor","state":"ACTIVE_30_OF_76","remaining":46,"complete_retained":25,"compact_only":5},
+    {"id":"PUBLIC-EXACT-CUTOFF-EXECUTION","repository":"StegVerse-Labs/footprint-auditor","state":"ACTIVE_45_OF_76","remaining":31,"complete_retained":40,"compact_only":5},
     {"id":"TVC-PRIVATE-SOURCE-READ-001","repository":"StegVerse-Labs/TVC","issue":33,"state":"SOURCE_IMPLEMENTED_AUTHORITY_ACTIVATION_PENDING","audit_consumer_comment_id":5378140090},
     {"id":"GITHUB-ORG-AUDIT-LOG","repository":"external GitHub organization/security log evidence","issue":"StegVerse-Labs/footprint-auditor#1","state":"UNAVAILABLE_THROUGH_CONNECTED_GITHUB_TOOL"},
     {"id":"TVC-SCW-VAULT-ROTATION-088","repository":"StegVerse-Labs/TVC","issue":88,"state":"BLOCKED_DEPENDENCY_MACHINE_OWNED"},
