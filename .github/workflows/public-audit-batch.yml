@@ -26,6 +26,7 @@ permissions:
   contents: read
 
 env:
+  PUBLIC_AUDIT_BATCH_ID: '002'
   PUBLIC_AUDIT_SELECTION: config/public-audit-batch-002.txt
   PUBLIC_AUDIT_EXPECTED_COUNT: '10'
   PUBLIC_AUDIT_RECEIPT: /tmp/public-audit-batch-002-receipt.json
@@ -93,7 +94,7 @@ jobs:
             --boundary-end "$PUBLIC_AUDIT_CUTOFF" \
             --installation-count 3 \
             --inventory-digest "$inventory_digest" \
-            --observed-at 2026-08-22T12:02:00Z
+            --observed-at 2026-08-22T12:04:00Z
 
       - name: Verify and emit compact batch receipt
         shell: bash
@@ -116,3 +117,14 @@ jobs:
               assert row['network_access_required'] is False
               print('REPOSITORY_RECEIPT', row['repository'], row['expected_sha'], row['receipt_sha256'])
           PY
+
+      - name: Retain complete sanitized receipt and exact manifest
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: public-audit-batch-${{ env.PUBLIC_AUDIT_BATCH_ID }}-receipts
+          path: |
+            /tmp/public-manifest.json
+            /tmp/public-audit-batch-002-receipt.json
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 9
