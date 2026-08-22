@@ -1,0 +1,2 @@
+Validation-only pull-request trigger for the canonical provenance workflow after adding the exact 219-repository manifest gate.
+No authority, runtime, release, or audit-clean effect.
