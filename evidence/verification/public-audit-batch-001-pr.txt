@@ -1,0 +1,2 @@
+Validation-only trigger for credentialless public cutoff audit batch 001.
+No authority, release, runtime, production, or clean-audit effect.
