@@ -167,13 +167,34 @@ def _cargo_lock(path: str, content: str) -> List[DependencyFinding]:
 
 def _go_mod(path: str, content: str) -> List[DependencyFinding]:
     out: List[DependencyFinding] = []
+    in_require_block = False
     for lineno, raw in enumerate(content.splitlines(), 1):
         line = raw.split("//", 1)[0].strip()
-        if not line or line.startswith(("module ", "go ", "toolchain ", "require (", ")", "replace ")):
+        if not line:
             continue
+        if line == "require (":
+            in_require_block = True
+            continue
+        if in_require_block and line == ")":
+            in_require_block = False
+            continue
+        if line.startswith(("module ", "go ", "toolchain ", "replace ", "exclude ", "retract ")):
+            continue
+        if line.startswith("require "):
+            line = line[len("require "):].strip()
+        elif not in_require_block:
+            continue
+
         parts = line.split()
         if len(parts) >= 2 and parts[1].startswith("v"):
-            out.append(_f("go", path, f"{parts[0]}@{parts[1]}", DependencyStatus.LOCKED_NOT_ARTIFACT_BOUND, "module version requires go.sum content hash", lineno))
+            out.append(_f(
+                "go",
+                path,
+                f"{parts[0]}@{parts[1]}",
+                DependencyStatus.LOCKED_NOT_ARTIFACT_BOUND,
+                "module version requires go.sum content hash",
+                lineno,
+            ))
     return out
 
 
