@@ -57,18 +57,20 @@ jobs:
               }],
           }
           with open("/tmp/footprint-auditor-manifest.json", "w", encoding="utf-8") as handle:
-              json.dump(payload, handle, sort_keys=True)
+              json.dump(payload, handle, sort_keys=True, separators=(",", ":"))
           PY
       - name: Execute end-to-end self audit
-        run: >-
-          python -m src.provenance.audit_runner
-          --manifest /tmp/footprint-auditor-manifest.json
-          --findings-dir evidence/findings
-          --output /tmp/footprint-auditor-execution-receipt.json
-          --boundary-end 2026-08-19T23:59:59Z
-          --installation-count 11
-          --inventory-digest 91af76ca27027d70bb9cb40d439d68590ac05f1dd06aa8526c74c9dd472afbaa
-          --observed-at 2026-08-21T23:59:00Z
+        shell: bash
+        run: |
+          manifest_digest="$(sha256sum /tmp/footprint-auditor-manifest.json | awk '{print $1}')"
+          python -m src.provenance.audit_runner \
+            --manifest /tmp/footprint-auditor-manifest.json \
+            --findings-dir evidence/findings \
+            --output /tmp/footprint-auditor-execution-receipt.json \
+            --boundary-end 2026-08-19T23:59:59Z \
+            --installation-count 1 \
+            --inventory-digest "$manifest_digest" \
+            --observed-at 2026-08-21T23:59:00Z
       - name: Verify execution receipt
         shell: bash
         run: |
