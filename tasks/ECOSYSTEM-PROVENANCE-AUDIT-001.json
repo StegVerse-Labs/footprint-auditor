@@ -8,7 +8,7 @@
   "canonical_issues": [1, 2, 3],
   "state": "ACTIVE_PARTIAL_EXECUTION_PRIVATE_SOURCE_BLOCKED",
   "claimant": "footprint-auditor provenance engine + TVC private-source-read / credential-admission capability",
-  "claim_reconciled_at": "2026-08-22T07:05:00-05:00",
+  "claim_reconciled_at": "2026-08-22T07:10:00-05:00",
   "scope": {
     "boundary_start": "ecosystem-origin",
     "boundary_end": "2026-08-19T19:49:00Z",
@@ -56,10 +56,12 @@
   },
   "public_execution": {
     "state": "ACTIVE",
-    "unique_public_repositories_executed": 15,
+    "unique_public_repositories_executed": 30,
     "public_repositories_total": 76,
-    "public_repositories_remaining": 61,
+    "public_repositories_remaining": 46,
     "private_repositories_total": 143,
+    "complete_retained_public_receipts": 25,
+    "compact_only_public_receipts": 5,
     "batch_001": {
       "repositories": 5,
       "run": 32571701868,
@@ -81,10 +83,25 @@
       "download_and_hash_reverified": true,
       "state": "EXECUTED_FULL_RECEIPT_RETAINED"
     },
+    "batch_003": {
+      "repositories": 15,
+      "canonical_run": 32572145027,
+      "canonical_job": 97029030499,
+      "evidence": "evidence/execution/public-audit-batch-003-2026-08-22.json",
+      "execution_receipt_sha256": "b360090e83cb960d25482b1989a0006b63b99e6c0220aaf6792382ec6298ff9a",
+      "execution_receipt_file_sha256": "b9b338a3810fafcc41d88d93258e52b9e2f642df5be961e48f7b74c3156a3136",
+      "exact_manifest_file_sha256": "8225e196a2fbdd68865c2151fdcd5e63b5482cc8ea089c9a96a06ebc8d1308fa",
+      "artifact_id": 9475588782,
+      "artifact_sha256": "297175dae07720b239d0cb4f06bc58f1111f8b1cbed71916b32a1a6f6954669b",
+      "complete_receipt_artifact_retained": true,
+      "download_and_hash_reverified": true,
+      "receipt_internal_hash_reverified": true,
+      "state": "EXECUTED_FULL_RECEIPT_RETAINED"
+    },
     "retention_rule": "All subsequent public batches must retain the complete sanitized execution receipt and exact manifest with immutable-action artifact binding plus compact repository evidence. Batch 001 remains eligible for deterministic re-execution to upgrade its compact-only evidence."
   },
   "required_execution": [
-    "continue credentialless exact-cutoff execution for the remaining 61 public repositories",
+    "continue credentialless exact-cutoff execution for the remaining 46 public repositories",
     "upgrade public batch 001 to complete retained receipt evidence or supersede it through a deterministic re-execution",
     "materialize each private source through exact-SHA TVC private-source-read without credential export to the audit engine",
     "run audit_runner/repository_executor against each exact materialized SHA and preserve deterministic secret-safe receipts",
@@ -106,7 +123,7 @@
   },
   "dependencies": [
     {"id":"COMPLETE-219-REPOSITORY-MANIFEST","repository":"StegVerse-Labs/footprint-auditor","state":"COMPLETE_VALIDATED","manifest":"evidence/inventory/connected-repositories-2026-08-19-v2.csv","blob_sha":"434f03951354d8959e863c3f9aa0b6e5748a2d7b","validation_run":32571449626,"validation_job":97027372810},
-    {"id":"PUBLIC-EXACT-CUTOFF-EXECUTION","repository":"StegVerse-Labs/footprint-auditor","state":"ACTIVE_15_OF_76","remaining":61},
+    {"id":"PUBLIC-EXACT-CUTOFF-EXECUTION","repository":"StegVerse-Labs/footprint-auditor","state":"ACTIVE_30_OF_76","remaining":46,"complete_retained":25,"compact_only":5},
     {"id":"TVC-PRIVATE-SOURCE-READ-001","repository":"StegVerse-Labs/TVC","issue":33,"state":"SOURCE_IMPLEMENTED_AUTHORITY_ACTIVATION_PENDING","audit_consumer_comment_id":5378140090},
     {"id":"GITHUB-ORG-AUDIT-LOG","repository":"external GitHub organization/security log evidence","issue":"StegVerse-Labs/footprint-auditor#1","state":"UNAVAILABLE_THROUGH_CONNECTED_GITHUB_TOOL"},
     {"id":"TVC-SCW-VAULT-ROTATION-088","repository":"StegVerse-Labs/TVC","issue":88,"state":"BLOCKED_DEPENDENCY_MACHINE_OWNED"},
