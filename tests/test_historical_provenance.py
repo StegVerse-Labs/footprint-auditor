@@ -80,7 +80,7 @@ def test_expected_third_party_is_distinct_from_internal_authority():
     assert event.status == AuditStatus.THIRD_PARTY_EXPECTED
 
 
-def test_unexpected_actor_does_not_silently_pass():
+def test_unexpected_third_party_does_not_silently_pass():
     ledger = AuditLedger(authorized_actors={"TVC Agent"})
     event = ledger.add_event(
         AuditEvent(
@@ -91,7 +91,25 @@ def test_unexpected_actor_does_not_silently_pass():
             actor="unknown-bot",
         )
     )
+    assert event.status == AuditStatus.THIRD_PARTY_UNEXPLAINED
+    assert event in ledger.unresolved()
+
+
+def test_confirmed_unauthorized_requires_explicit_authority_evidence():
+    ledger = AuditLedger(authorized_actors={"TVC Agent"})
+    event = ledger.add_event(
+        AuditEvent(
+            event_id="unauthorized",
+            repo="StegVerse-Labs/demo",
+            timestamp=dt(5),
+            event_type="commit",
+            actor="unknown-bot",
+            authorized=False,
+            third_party=True,
+        )
+    )
     assert event.status == AuditStatus.CONFIRMED_UNAUTHORIZED
+    assert event in ledger.unresolved()
 
 
 def test_malicious_evidence_has_highest_precedence():
