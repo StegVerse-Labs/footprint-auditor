@@ -1,0 +1,33 @@
+{
+  "schema": "stegverse.provenance-validation.v1",
+  "capability": "github_org_audit_log_ingestion",
+  "validated_at": "2026-08-22T23:48:04Z",
+  "pull_request": 20,
+  "pull_request_head_sha": "8ca191f63ef1ae44fdee58532dbdd827581676ac",
+  "pull_request_merge_test_sha": "df3b184ab84e7ae42267fb674876e1dc6c6a560b",
+  "merged_commit": "b64b95c816ae0466c63e213e60540edecd39e594",
+  "workflow_run": 32606170289,
+  "workflow_job": 97111417599,
+  "workflow": ".github/workflows/provenance-tests.yml",
+  "test_result": "64/64 PASS",
+  "new_test_module": "tests/test_github_audit_log.py",
+  "implementation": "src/provenance/github_audit_log.py",
+  "validated_properties": [
+    "ISO, epoch-second, and epoch-millisecond timestamps normalize to UTC",
+    "explicit public/private/internal visibility transitions normalize deterministically",
+    "visibility evidence is bound to canonical record SHA-256",
+    "exposure intervals are reconstructed only from explicit dated transitions",
+    "actor-bearing audit records do not infer historical authorization",
+    "actorless records remain explicit provenance gaps",
+    "unknown visibility values are not promoted into exposure evidence",
+    "missing expected repository visibility evidence keeps historical visibility incomplete",
+    "end-to-end self audit remains execution_complete=true and audit_clean=false"
+  ],
+  "end_to_end_self_audit_receipt_sha256": "0e0a218d01bab449430483b9979c7ee80ac99f8b57afa301439c5b5bcc5df3fb",
+  "organization_audit_log_data_ingested": false,
+  "historical_visibility_complete": false,
+  "historical_actor_authority_complete": false,
+  "clean_audit_effect": false,
+  "authority_effect": false,
+  "note": "The ingestion and fail-closed reconstruction path is validated, but the connected GitHub surface still does not expose the organization audit-log evidence itself. No clean-audit or historical-authorization conclusion is implied."
+}
