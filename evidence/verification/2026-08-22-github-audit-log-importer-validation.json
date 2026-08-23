@@ -1,0 +1,43 @@
+{
+  "schema": "stegverse.provenance-validation.v1",
+  "capability": "github_org_audit_log_importer",
+  "validated_at": "2026-08-23T00:41:46Z",
+  "pull_request": 21,
+  "pull_request_head_sha": "d1bdd7fc5537da1371d61abb8e42a84fd19db513",
+  "pull_request_merge_test_sha": "57c7a4f29c22432bded354ce5920ce5cc36b9095",
+  "merged_commit": "107023834c0df5d6ed35a61b45eb54253b18b172",
+  "workflow_run": 32608506740,
+  "workflow_job": 97117462150,
+  "workflow": ".github/workflows/provenance-tests.yml",
+  "test_result": "69/69 PASS",
+  "implementation": "scripts/import_github_audit_log.py",
+  "tests": "tests/test_github_audit_log_import.py",
+  "initial_validation_failure": {
+    "run": 32608172300,
+    "job": 97116601107,
+    "result": "68 PASS / 1 FAIL",
+    "defect": "visibility transition receipts serialized raw actor identifiers despite actor-event hashing",
+    "repair_commit": "d1bdd7fc5537da1371d61abb8e42a84fd19db513",
+    "repair": "visibility transitions now retain actor SHA-256 plus actor_identifier_persisted=false instead of raw actor identifiers"
+  },
+  "validated_properties": [
+    "JSON array, wrapped records, and JSONL audit-log inputs are accepted",
+    "historical boundary filtering excludes dated post-cutoff records",
+    "undated records are retained as unresolved evidence rather than silently discarded",
+    "expected repository visibility coverage is derived from the exact inventory",
+    "visibility transitions and exposure intervals are deterministic",
+    "raw actor identifiers are not persisted in retained visibility or actor-event receipts",
+    "actor identifiers are represented by SHA-256 digests",
+    "source audit-log bytes are bound by SHA-256",
+    "generated import receipt is deterministically self-verifying",
+    "missing expected visibility evidence keeps historical visibility incomplete",
+    "imported evidence grants no clean-audit or execution authority",
+    "end-to-end self audit remains execution_complete=true and audit_clean=false"
+  ],
+  "end_to_end_self_audit_receipt_sha256": "841d4b04f643ec590358f1e0035b7c5c257a76d87952c894f508ceefa3d45688",
+  "organization_audit_log_data_ingested": false,
+  "historical_visibility_complete": false,
+  "historical_actor_authority_complete": false,
+  "clean_audit_effect": false,
+  "authority_effect": false
+}
