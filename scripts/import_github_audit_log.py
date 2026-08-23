@@ -90,10 +90,22 @@ def _filter_boundary(records: Iterable[Mapping[str, Any]], boundary_end: str | N
             if parse_timestamp(raw_time) <= end:
                 kept.append(record)
         except (TypeError, ValueError):
-            # Malformed timestamp evidence is retained for coverage accounting;
-            # lower-level normalizers will refuse to invent a dated transition.
             kept.append(record)
     return kept
+
+
+def _safe_transition(item: Any) -> dict[str, Any]:
+    return {
+        "repository": item.repository,
+        "timestamp": item.timestamp.isoformat(),
+        "visibility": item.visibility,
+        "previous_visibility": item.previous_visibility,
+        "action": item.action,
+        "actor_sha256": _actor_digest(item.actor),
+        "actor_identifier_persisted": False,
+        "evidence_ref": item.evidence_ref,
+        "record_sha256": item.record_sha256,
+    }
 
 
 def build_receipt(
@@ -122,7 +134,7 @@ def build_receipt(
         "records_received": len(records),
         "records_within_boundary_or_undated": len(bounded),
         "coverage": coverage,
-        "visibility_transitions": [item.canonical_dict() for item in transitions],
+        "visibility_transitions": [_safe_transition(item) for item in transitions],
         "exposure_intervals": [
             {
                 "repository": item.repo,
