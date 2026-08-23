@@ -1,0 +1,66 @@
+{
+  "schema": "stegverse.private-cutoff-audit-selection.v1",
+  "batch_id": "PRIVATE-AUDIT-BATCH-001",
+  "audit_boundary_end": "2026-08-19T23:59:59Z",
+  "selection_state": "PREPARED_NOT_MATERIALIZED_NOT_EXECUTED",
+  "materialization_capability": "tvc.private-source-read.v1",
+  "required_reference_mode": "IMMUTABLE_COMMIT",
+  "tv_policy_commit": "c6eede495c18b8b19156cf68576702b93e77f593",
+  "tvc_source_implementation_pr": 95,
+  "credential_authority": "TV/TVC",
+  "credential_received_by_audit_engine": false,
+  "repositories": [
+    {
+      "repository": "Admissible-Existence/AE",
+      "default_branch": "main",
+      "exact_sha": "53c8eedddc4e54d8fa0660039d65ab9ac63057a1",
+      "exact_ref": "commit:53c8eedddc4e54d8fa0660039d65ab9ac63057a1",
+      "observed_commit_time": "2026-08-19T22:12:12Z"
+    },
+    {
+      "repository": "Admissible-Existence/BC",
+      "default_branch": "main",
+      "exact_sha": "f457b9c38fd9f17da83101b02bdf248fc18256c1",
+      "exact_ref": "commit:f457b9c38fd9f17da83101b02bdf248fc18256c1",
+      "observed_commit_time": "2026-08-07T20:09:37Z"
+    },
+    {
+      "repository": "Admissible-Existence/CHF",
+      "default_branch": "main",
+      "exact_sha": "2d87454922b5c172023ad66ecf6824867484e8f5",
+      "exact_ref": "commit:2d87454922b5c172023ad66ecf6824867484e8f5",
+      "observed_commit_time": "2026-08-07T20:09:06Z"
+    },
+    {
+      "repository": "Admissible-Existence/DaCo",
+      "default_branch": "main",
+      "exact_sha": "3b99db0a2bfb445f27dc1ef3e722e78e209c0744",
+      "exact_ref": "commit:3b99db0a2bfb445f27dc1ef3e722e78e209c0744",
+      "observed_commit_time": "2026-08-07T07:05:31Z"
+    },
+    {
+      "repository": "Admissible-Existence/ET",
+      "default_branch": "main",
+      "exact_sha": "9630a8d2a624022d097f8b46b0be82311ffa04d5",
+      "exact_ref": "commit:9630a8d2a624022d097f8b46b0be82311ffa04d5",
+      "observed_commit_time": "2026-08-19T22:22:55Z"
+    }
+  ],
+  "selection_evidence": {
+    "repository_visibility": "private",
+    "default_branch_resolved_from_live_repository_metadata": true,
+    "commit_candidates_resolved_from_repository-scoped descending commit history": true,
+    "all_selected_commit_times_at_or_before_boundary": true,
+    "exact_source_fetchability_under_tvc_authority_verified": false,
+    "materialized_head_equality_verified": false
+  },
+  "execution_gate": {
+    "tvc_pr_95_validated": false,
+    "tvc_private_source_authority_activated": false,
+    "private_source_materialization_receipt_observed": false,
+    "audit_execution_permitted_to_be_counted": false
+  },
+  "authority_effect": false,
+  "clean_audit_effect": false,
+  "note": "This file prepares immutable historical targets only. It is not source materialization, audit execution, validation, authority activation, or evidence that the selected SHA is fetchable until TVC independently proves exact-commit fetchability and materialized HEAD equality under the admitted TV/TVC capability."
+}
