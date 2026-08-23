@@ -5,6 +5,7 @@ on:
     paths:
       - 'src/provenance/**'
       - 'scripts/materialize_public_batch.py'
+      - 'scripts/import_github_audit_log.py'
       - 'tests/test_*.py'
       - 'config/provenance_audit.yaml'
       - 'evidence/**'
@@ -13,6 +14,7 @@ on:
     paths:
       - 'src/provenance/**'
       - 'scripts/materialize_public_batch.py'
+      - 'scripts/import_github_audit_log.py'
       - 'tests/test_*.py'
       - 'config/provenance_audit.yaml'
       - 'evidence/**'
@@ -49,6 +51,7 @@ jobs:
           tests/test_public_materialization.py
           tests/test_ecosystem_dependencies.py
           tests/test_github_audit_log.py
+          tests/test_github_audit_log_import.py
           tests/test_repository_executor.py
           tests/test_audit_runner.py
       - name: Restore exact source worktree after tests
