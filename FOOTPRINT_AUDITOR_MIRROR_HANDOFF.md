@@ -3,7 +3,7 @@
 Status: ACTIVE — PUBLIC 76/76 COMPLETE / PRIVATE 0/143 / PRIVATE SOURCE EXECUTION SOURCE-COMPLETE, SOLE-HOST ACTIVATION PENDING
 
 Date established: 2026-08-19  
-Last updated: 2026-08-23 17:12 America/Chicago
+Last updated: 2026-08-23 23:54 America/Chicago
 
 ## Governing objective
 Perform a historical ecosystem security/provenance audit from ecosystem origin through `2026-08-19T23:59:59Z`. Attribute consequential transitions to dated actor, automation, dependency, build, release, deployment, runtime, or explicit third-party evidence. Missing evidence is never silently benign.
@@ -13,7 +13,7 @@ Perform a historical ecosystem security/provenance audit from ecosystem origin t
 - Credential/secret/token authority: **TV/TVC ONLY**.
 - NON-TV/TVC secret/token authority: prohibited.
 - GitHub Actions: validation/transport/evidence only; no production/runtime/control-plane authority.
-- The audit engine never receives the private-source credential.
+- The audit engine never receives private-source credentials.
 - `source_complete != activated`, `workflow_pass != runtime`, and unresolved transitions remain open/fail closed.
 
 Canonical task: `tasks/ECOSYSTEM-PROVENANCE-AUDIT-001.json`.
@@ -43,74 +43,48 @@ PR #21 merged at `107023834c0df5d6ed35a61b45eb54253b18b172`; run `32608506740`, 
 ## Private exact-cutoff execution — 0/143 / CURRENT PRIMARY RUNTIME GAP
 Sole admitted capability: `tvc.private-source-read.v1`, owned by `StegVerse-Labs/TVC#33`.
 
-### TV policy
-Historical immutable-read policy merged at `StegVerse-Labs/TV@c6eede495c18b8b19156cf68576702b93e77f593` with `TRACKED_REF` and `IMMUTABLE_COMMIT` modes.
+Validated and merged chain:
+- TV immutable historical-read policy: `c6eede495c18b8b19156cf68576702b93e77f593`
+- TVC immutable exact-source PR #95: `47b742c7ce141925020812cdddbf23ccd99cdc56`; **15/15 PASS**
+- TVC cutoff resolver PR #96: `f7ae8cbcdc04fff028ecb2923d7728ab45594224`; **21/21 PASS**
+- TVC resident activation PR #97: `15dae9e726a1383b71ca36f0f3404a63d9c3c579`; **25/25 PASS**
+- TVC deterministic service installer PR #99: `fc8aee86f96e52d5852dc6ded8c0ad689591fabe`; **28/28 PASS**
+- canonical first request: `StegVerse-Labs/TVC/requests/private-source-read/footprint-auditor-private-001-ae.json`, commit `9d8baaee3ac776a9c5583903dd9a7a8109dd05f4`
 
-### TVC exact immutable source
-PR #95 merged `47b742c7ce141925020812cdddbf23ccd99cdc56`; run `32608428996`, job `97117259662`: **15/15 PASS** plus no-generic-token fallback PASS.
+The first request binds `Admissible-Existence/AE`, `main`, cutoff `2026-08-19T23:59:59Z`, `IMMUTABLE_COMMIT`, and task `ECOSYSTEM-PROVENANCE-AUDIT-001`. TVC resolves and freezes the exact historical SHA only after genuine TVC read authority exists.
 
-### TVC historical cutoff resolver
-PR #96 merged `f7ae8cbcdc04fff028ecb2923d7728ab45594224`; run `32609026197`, job `97118810251`: **21/21 PASS** plus no-generic-token fallback PASS. TVC can resolve the last branch commit at/before cutoff after actual TVC credential injection, so manual SHA precomputation for all 143 private repos is unnecessary.
+No GitHub-visible evidence currently proves the resident service is installed on the sole host, the scoped private-source credential exists under `/run/stegverse`, or a materialization completed. Therefore private execution remains **0/143**.
 
-### TVC resident activation bridge
-PR #97 merged `15dae9e726a1383b71ca36f0f3404a63d9c3c579`; run `32669511949`, job `97268014050`: **25/25 PASS**.
+## Confirmed security event — SCW historical vault-key exposure
+Finding: `evidence/findings/2026-08-19-tv-scw-vault-key-exposure.json`. Never reproduce the historical key value.
 
-Validated:
-- systemd `LoadCredential` transport;
-- credential process-only and absent from retained receipts;
-- non-secret activation requests only;
-- materialization restricted to `/var/lib/stegverse/private-source-read/materialized`;
-- hardened read-only service boundary;
-- generic GitHub/provider/user credential fallback absent.
+Current-tree containment in TV remains complete but is not remediation. The TVC #88 remediation **source gap is now closed**:
 
-### TVC deterministic service installer
-PR #99 merged `fc8aee86f96e52d5852dc6ded8c0ad689591fabe`; run `32669693792`, job `97268480481`: **28/28 PASS** plus no-generic-token fallback PASS.
+### Resident rotation source
+PR #102 merged at `3aaccc74d16ed049d88b2020395e2d67f307d84d`.  
+Validation run `32691444218`, job `97325728662`: **6/6 PASS** plus `SCW_VAULT_ROTATION_SOURCE_CONTRACT_OK`.
 
-Installer `scripts/install_private_source_read_service.py` renders the exact systemd unit using only absolute paths and a credential source under `/run/stegverse`, never reads/persists the credential value, and does not start the service implicitly.
+The source uses two `systemd LoadCredential` values inside the TVC resident boundary: compromised-era decrypt credential and replacement encrypt credential. It rejects old-key reuse as the replacement key, re-encrypts only inside the credential boundary, decrypt-verifies replacement ciphertext, requires changed ciphertext, and writes only replacement ciphertext plus a secret-free SHA-256-bound receipt.
 
-### Canonical first private-audit activation request
-TVC now contains `requests/private-source-read/footprint-auditor-private-001-ae.json`, commit `9d8baaee3ac776a9c5583903dd9a7a8109dd05f4`.
+### One-shot activation/receipt verifier
+PR #104 merged at `52faf04721b2173e46ba96bc46b481da320cf065`.  
+Validation run `32691617738`, job `97326198675`: **11/11 PASS** plus the source-contract scan.
 
-It is non-secret and binds:
-- caller `StegVerse-Labs/footprint-auditor`;
-- source `Admissible-Existence/AE`;
-- task `ECOSYSTEM-PROVENANCE-AUDIT-001`;
-- branch `main`;
-- cutoff `2026-08-19T23:59:59Z`;
-- mode `IMMUTABLE_COMMIT`;
-- materialization id `private-audit-001-ae`;
-- TTL 600 seconds.
+The activation utility stages only ciphertext, checks credential-file presence without reading values, starts the resident service, and independently verifies the previous/replacement hashes and non-exposure predicates in the emitted receipt.
 
-The exact historical SHA is resolved by TVC under admitted read authority at execution time, then frozen into the immutable grant/materialization path.
+TVC durable proof: `receipts/security/scw-vault-rotation-source-validation-2026-08-23.json`.
 
-### Current observed runtime boundary
-No GitHub-visible evidence currently proves:
-- `stegtvc-private-source-read.service` is installed on the sole host;
-- the scoped `TVC_PRIVATE_SOURCE_READ_TOKEN` exists in `/run/stegverse`;
-- a resident private-source invocation completed;
-- any exact private checkout has been materialized.
-
-Therefore **private execution remains 0/143** and capability activation remains unproven.
-
-The source-complete bounded host sequence is now:
+SCW state remains:
 ```text
-TVC install_private_source_read_service.py --daemon-reload
-  -> authorize_and_activate_private_source_read.py --request requests/private-source-read/footprint-auditor-private-001-ae.json
-  -> systemd LoadCredential
-  -> historical cutoff resolution
-  -> immutable exact grant/materialization
-  -> verify authorized_exact_sha == observed_exact_sha
-  -> hand only materialized checkout to footprint-auditor
-  -> verify deterministic audit receipt
+rotation source: VALIDATED / MERGED
+one-shot activation source: VALIDATED / MERGED
+replacement-key rotation observed: NO
+payload re-encryption observed: NO
+consumer replacement-ciphertext install observed: NO
+historical visibility resolved: NO
 ```
 
-No second heartbeat, scheduler, credential broker, generic GitHub token, or alternate runtime authority is introduced.
-
-## Prepared private batch 001
-`config/private-audit-batch-001.json` remains preparation only. It contains five seed targets; none count toward execution until TVC materialization and footprint audit receipts both verify.
-
-## Confirmed security event
-Historical SCW Fernet key exposure remains confirmed in `evidence/findings/2026-08-19-tv-scw-vault-key-exposure.json`. Never reproduce the key value. Current-tree containment exists; replacement-key rotation/re-encryption and historical visibility proof remain required under TVC #88.
+Do not downgrade this to completed remediation until actual TV/TVC resident execution and the verified secret-free rotation receipt are observed.
 
 ## Current finding ledger
 `evidence/reports/ecosystem-provenance-audit-2026-08-19-v5.json` records 13 open findings:
@@ -121,17 +95,17 @@ Historical SCW Fernet key exposure remains confirmed in `evidence/findings/2026-
 - confirmed unauthorized actors: 0
 - confirmed security compromises: 1
 
-v5 predates completed public execution and is not a final ecosystem receipt.
+v5 predates completed public execution and the newly validated remediation source; it is not a final ecosystem receipt.
 
 ## Remaining hard gates
 1. Observe/install the validated private-source resident service on the sole host.
-2. Observe scoped TVC credential availability without exposing the value.
+2. Observe scoped TVC private-source credential availability without exposing the value.
 3. Execute the canonical first private request; verify secret-free TVC materialization receipt and exact HEAD.
-4. Run `footprint-auditor` over that materialized checkout and retain verified audit receipt.
-5. Repeat until private execution is **143/143**.
+4. Run `footprint-auditor` over that materialized checkout and retain a verified audit receipt; repeat to **143/143**.
+5. Execute the validated TVC SCW one-shot rotation path under actual TV/TVC credentials; install replacement ciphertext and retain verified secret-free rotation evidence.
 6. Obtain/import dated GitHub organization/security evidence for actor/token/App/OAuth/programmatic authority and historical visibility.
 7. Reconcile external registry/DNS/signing/deployment/runtime/device provenance.
-8. Complete required TV/TVC remediations including SCW replacement rotation/re-encryption.
+8. Complete remaining machine-owned security remediations.
 9. Generate a superseding aggregate ecosystem receipt with explicit unresolved-exception accounting.
 
 ## Current conclusion
@@ -140,24 +114,22 @@ v5 predates completed public execution and is not a final ecosystem receipt.
 - GitHub audit-log importer: **VALIDATED; SOURCE DATA PENDING**
 - Public exact-cutoff execution: **76/76 COMPLETE**
 - Private exact-cutoff execution: **0/143**
-- TV immutable-read policy: **VALIDATED / MERGED**
-- TVC immutable exact-source path: **VALIDATED / MERGED**
-- TVC historical cutoff resolver: **VALIDATED / MERGED**
-- TVC resident activation bridge: **VALIDATED / MERGED**
-- TVC resident service installer: **VALIDATED / MERGED**
-- Canonical first activation request: **INSTALLED / NON-SECRET**
-- Sole-host installation/credential/materialization: **NOT OBSERVED**
+- Private-source implementation through resident installer: **SOURCE-COMPLETE / VALIDATED**
+- Private sole-host credential/materialization: **NOT OBSERVED**
+- SCW rotation/remediation implementation: **SOURCE-COMPLETE THROUGH ONE-SHOT VERIFIED ACTIVATION PATH**
+- SCW actual replacement rotation/re-encryption: **NOT OBSERVED**
 - Historical actor authority reconstruction: **INCOMPLETE**
 - Historical exposure reconstruction: **INCOMPLETE**
 - Confirmed malicious third-party event: **NONE ESTABLISHED**
 - Confirmed unauthorized actor: **NONE ESTABLISHED**
-- Confirmed security compromise: **YES — historical SCW key exposure; full remediation unproven**
+- Confirmed security compromise: **YES — historical SCW key exposure; runtime remediation still unproven**
 - Clean-audit conclusion permitted: **NO**
 
 ## Next nonduplicate execution priority
-1. Consume any new sole-host private-source installation/credential/materialization evidence immediately.
-2. If present, execute/verify the first private audit and begin scaling the private denominator.
-3. If absent, keep private coverage at 0/143 and advance other non-colliding historical/external provenance and security-remediation work.
+1. Consume any new sole-host private-source or SCW-rotation execution evidence immediately.
+2. If private-source authority appears, execute/verify the first private audit and begin scaling the private denominator.
+3. If SCW rotation credentials appear, execute the one-shot validated rotation path and reconcile the finding.
+4. If neither runtime boundary is available, continue non-colliding historical/external provenance and remaining security-remediation work.
 
 ## Completion rule
 This goal remains open. Do not archive, release, deploy, activate, or publish a clean-audit claim while private execution, historical authority/visibility evidence, external provenance, required remediation, or unresolved findings remain pending.
