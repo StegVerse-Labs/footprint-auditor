@@ -8,7 +8,7 @@
   "canonical_issues": [1, 2, 3],
   "state": "ACTIVE_PUBLIC_COMPLETE_PRIVATE_EXECUTION_SOURCE_COMPLETE_SOLE_HOST_ACTIVATION_PENDING",
   "claimant": "footprint-auditor provenance engine + TVC private-source-read capability",
-  "claim_reconciled_at": "2026-08-23T17:12:00-05:00",
+  "claim_reconciled_at": "2026-08-23T23:54:00-05:00",
   "scope": {
     "boundary_start": "ecosystem-origin",
     "boundary_end": "2026-08-19T23:59:59Z",
@@ -66,6 +66,26 @@
     "authority_activation_observed": false,
     "materialization_receipt_observed": false
   },
+  "scw_compromise_remediation": {
+    "finding": "evidence/findings/2026-08-19-tv-scw-vault-key-exposure.json",
+    "tvc_task": "StegVerse-Labs/TVC/tasks/TVC-SCW-VAULT-ROTATION-088.json",
+    "state": "SOURCE_VALIDATED_ACTUAL_ROTATION_PENDING",
+    "resident_rotation_merge": "3aaccc74d16ed049d88b2020395e2d67f307d84d",
+    "resident_rotation_validation_run": 32691444218,
+    "resident_rotation_validation_job": 97325728662,
+    "resident_rotation_tests": "6/6 PASS",
+    "one_shot_activation_merge": "52faf04721b2173e46ba96bc46b481da320cf065",
+    "one_shot_activation_validation_run": 32691617738,
+    "one_shot_activation_validation_job": 97326198675,
+    "one_shot_activation_tests": "11/11 PASS",
+    "source_contract_check": "SCW_VAULT_ROTATION_SOURCE_CONTRACT_OK",
+    "old_key_reuse_as_replacement_rejected": true,
+    "credential_value_exposed": false,
+    "actual_rotation_observed": false,
+    "payload_reencryption_observed": false,
+    "consumer_replacement_install_observed": false,
+    "historical_visibility_resolved": false
+  },
   "required_execution": [
     "install or observe the validated stegtvc-private-source-read.service on the sole host",
     "observe the scoped TVC private-source credential under /run/stegverse without exposing its value",
@@ -75,7 +95,7 @@
     "ingest dated GitHub organization/security audit evidence when obtainable",
     "reconstruct historical actor/token/App/OAuth/programmatic authority and visibility intervals",
     "reconcile external package registries, runtime/deployment, DNS, signing, devices, and other non-GitHub evidence",
-    "complete required TV/TVC security remediations including SCW replacement-key rotation/re-encryption",
+    "observe actual TV/TVC SCW replacement-key rotation/re-encryption and consumer ciphertext install using the now-validated resident path",
     "generate a superseding aggregate ecosystem audit receipt"
   ],
   "authority": {
