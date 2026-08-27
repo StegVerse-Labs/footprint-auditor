@@ -1,0 +1,102 @@
+{
+  "schema": "stegverse.security-current-tree-verification.v1",
+  "verification_id": "SCW-HOSTED-CONTROL-PLANE-CONTAINMENT-2026-08-27",
+  "recorded_at": "2026-08-27T12:20:00Z",
+  "repository": "StegVerse-Labs/SCW",
+  "canonical_handoff": "SCW_MIRROR_HANDOFF.md",
+  "credential_authority": "TV/TVC",
+  "github_actions_production_runtime_control_plane_authority": "NONE",
+  "source_pr": 86,
+  "admitted_head_sha": "3fa51c435a61dd5ed937a6da20f8ff998d25e5b6",
+  "merge_sha": "f4c369e6fe975522748b45852776d23d57a1a944",
+  "contained_hosted_surfaces": [
+    ".github/workflows/release.yml",
+    ".github/workflows/newline-healer.yml",
+    ".github/workflows/workflows-state-snapshot.yml",
+    ".github/workflows/workflows-ai-review.yml",
+    ".github/workflows/workflows-auto-quarantine.yml",
+    ".github/workflows/workflows-first-aid.yml",
+    ".github/workflows/workflows-first-aid-sweep.yml",
+    ".github/workflows/ai-review.yml",
+    ".github/workflows/guardrails.yml"
+  ],
+  "validation_only_surface": ".github/workflows/ci.yml",
+  "validation_only_transition": {
+    "prior_hosted_jobs": [
+      "build-test",
+      "deploy",
+      "status-refresh"
+    ],
+    "prior_runtime_commands": [
+      "scripts/deploy/deploy_orchestrator.sh",
+      "scripts/status/publish_status.sh"
+    ],
+    "current_jobs": [
+      "validate"
+    ],
+    "current_permissions": "contents: read",
+    "checkout_persist_credentials": false,
+    "deployment_authority": false,
+    "status_publication_authority": false,
+    "repository_mutation_authority": false
+  },
+  "already_contained_surfaces": [
+    ".github/workflows/scw_orchestrator.yml",
+    ".github/workflows/forward-to-bridge.yml",
+    ".github/workflows/uptime.yml",
+    ".github/workflows/scw_bridge.yml"
+  ],
+  "machine_validation": {
+    "checker": "scripts/check_legacy_control_plane_containment.py",
+    "test": "tests/test_legacy_control_plane_containment.py",
+    "workflow": ".github/workflows/legacy-control-plane-containment.yml",
+    "runs": [
+      {
+        "name": "Test Readiness",
+        "run_id": 33071237141,
+        "result": "SUCCESS"
+      },
+      {
+        "name": "Legacy Control-Plane Containment Validation",
+        "run_id": 33071237243,
+        "result": "SUCCESS"
+      },
+      {
+        "name": "DCO (Signed-off-by)",
+        "run_id": 33071237156,
+        "result": "SUCCESS"
+      },
+      {
+        "name": "CI — VALIDATION ONLY",
+        "run_id": 33071237170,
+        "result": "SUCCESS"
+      }
+    ]
+  },
+  "post_merge_current_tree_scan": {
+    "workflow_count": 18,
+    "forbidden_active_markers_found": false,
+    "note": "The only searched marker remaining was the literal text publish_status.sh inside the already-retired uptime compatibility marker; it is reported as replacement provenance and is not executed."
+  },
+  "credential_values_read": false,
+  "credential_values_recorded": false,
+  "authority_effect": "NONE",
+  "containment_complete_for_current_active_scw_hosted_control_plane": true,
+  "replacement_runtime_activated": false,
+  "historical_execution_or_actor_provenance_resolved": false,
+  "successor_requirements": [
+    "If any retired SCW cross-repository mutation, release, deployment, status-publication, bridge-dispatch, PR-comment, issue-write, quarantine, healer, or first-aid capability remains product-required, implement it only as a bounded TV/TVC-admitted StegVerse resident capability.",
+    "Bind any successor to exact caller, target repository/service, operation, immutable request evidence, expiration/replay constraints, and secret-free receipt.",
+    "Do not export provider/GitHub credential material to SCW or GitHub-hosted workflows.",
+    "Do not infer historical safety, non-execution, authorship, or private visibility from current-tree containment.",
+    "Continue historical run/artifact/audit-log reconstruction independently."
+  ],
+  "non_claims": [
+    "current containment proves historical generic-token workflows never executed",
+    "historical credentials were never exposed",
+    "historical actors or applications are fully attributed",
+    "replacement TV/TVC runtime capability is activated",
+    "SCW vault-key rotation is complete",
+    "ecosystem clean-audit completion"
+  ]
+}
