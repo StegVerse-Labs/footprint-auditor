@@ -86,6 +86,32 @@ historical visibility resolved: NO
 
 Do not downgrade this to completed remediation until actual TV/TVC resident execution and the verified secret-free rotation receipt are observed.
 
+
+
+## 2026-08-27 SCW current-tree hosted control-plane containment — VERIFIED
+
+A fresh current-tree containment pass in `StegVerse-Labs/SCW` has now been merged at `f4c369e6fe975522748b45852776d23d57a1a944` from admitted PR head `3fa51c435a61dd5ed937a6da20f8ff998d25e5b6`.
+
+The pass retired the remaining GitHub-hosted release/repository-mutation/PR-comment/issue-write/quarantine/healer/first-aid surfaces and converted the general CI chain from hosted build→deploy→status publication into validation-only execution. Machine validation passed:
+
+```text
+Test Readiness:                         33071237141 SUCCESS
+Legacy Control-Plane Containment:      33071237243 SUCCESS
+DCO:                                    33071237156 SUCCESS
+CI — VALIDATION ONLY:                  33071237170 SUCCESS
+```
+
+Post-merge workflow scan enumerated 18 active workflow files and found no active `contents: write`, `issues: write`, `pull-requests: write`, `id-token: write`, secret interpolation, `git push`, GitHub-script issue mutation, sticky PR-comment mutation, semantic-release, or hosted deploy-orchestrator execution. The sole literal `publish_status.sh` search hit is text inside the already-retired uptime compatibility marker and is not executed.
+
+Durable receipt:
+
+`evidence/verification/2026-08-27-scw-hosted-control-plane-containment.json`
+
+This closes the **current active SCW GitHub-hosted control-plane containment** subgoal only. It does not resolve historical execution/authorship/visibility, does not complete the separate SCW vault-key rotation, and does not prove any TV/TVC resident successor capability is activated.
+
+Successor rule is now explicit: any product-required replacement for retired SCW cross-repository mutation, release, deployment, status publication, bridge dispatch, PR comment, issue write, quarantine, healer, or first-aid behavior must be implemented only as an exact-scope TV/TVC-admitted StegVerse resident capability with replay/expiry constraints and secret-free receipts; no provider/GitHub credential may be exported to SCW or a hosted workflow.
+
+
 ## Current finding ledger
 `evidence/reports/ecosystem-provenance-audit-2026-08-19-v5.json` records 13 open findings:
 - AUTHORIZED_UNEXPLAINED: 10
