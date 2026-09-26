@@ -1,0 +1,3 @@
+validation-only trigger for PUBLIC-AUDIT-BATCH-008
+supersedes compact-only retention for PUBLIC-AUDIT-BATCH-001 without adding unique repository coverage
+no production, runtime, release, publication, mutation, or credential authority
