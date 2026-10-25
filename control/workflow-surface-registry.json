@@ -1,0 +1,115 @@
+{
+ "schema": "stegverse.workflow-surface-registry/v1",
+ "goal_id": "G17-WORKFLOW-SURFACE-MINIMIZATION",
+ "repository": "StegVerse-Labs/footprint-auditor",
+ "policy_issue": "StegVerse-Labs/.github#167, #168; StegVerse-org/.github#166",
+ "preferred_repository_workflow_count_max": 2,
+ "exception_repository_workflow_count_max": 3,
+ "credential_authority": "the SKAP Vault inside KV is the only PII and credential store for every user, including the StegVerse ecosystem's own; no secret or token is referenced, introduced or moved by this fold",
+ "invariants": [
+  "Every workflow file is registered in surfaces[]; an unregistered or changed one fails closed (tests/test_workflow_surface_registry.py).",
+  "A new check is a group in tools/tasks/task_catalog.json, never a new workflow file.",
+  "The stable dispatcher carries no workflow_dispatch, schedule, repository_dispatch, issues or workflow_run trigger; a kept surface is pinned by sha256 and unchanged by the fold."
+ ],
+ "unregistered_workflow_outcome": {
+  "disposition": "FAIL_CLOSED",
+  "failure_code": "UNREGISTERED_WORKFLOW_SURFACE",
+  "failed_predicate": "EVERY_WORKFLOW_FILE_IS_REGISTERED",
+  "required_evidence_or_repair": "register the file in control/workflow-surface-registry.json surfaces[] or fold it into tools/tasks/task_catalog.json",
+  "retry_entrypoint": "tests/test_workflow_surface_registry.py",
+  "owning_existing_goal": "G17-WORKFLOW-SURFACE-MINIMIZATION (StegVerse-Labs/.github#167/#168); StegVerse-org/.github#166",
+  "next_attempt": "the next pull request touching .github/workflows/"
+ },
+ "surfaces": [
+  {
+   "path": ".github/workflows/validation-dispatcher.yml",
+   "classification": "KEEP_STABLE_DISPATCHER",
+   "triggers": [
+    "pull_request",
+    "push"
+   ],
+   "permissions": {
+    "contents": "read"
+   }
+  }
+ ],
+ "folded": [
+  {
+   "workflow": ".github/workflows/classifier-tests.yml",
+   "name": "footprint-auditor classifier tests",
+   "triggers_before": [
+    "workflow_dispatch",
+    "push"
+   ],
+   "classification": "CONSOLIDATE_INTO_STABLE_DISPATCHER",
+   "status": "DONE",
+   "catalog_groups": [
+    "classifier-tests.classifier-tests"
+   ],
+   "verbatim_record": "tools/tasks/folded/classifier-tests.yml",
+   "verbatim_sha256": "a0583ac8cc358b84a69445b32d2c955335f0d72aa4b6d1e9a1416987d949bcd6"
+  },
+  {
+   "workflow": ".github/workflows/provenance-tests.yml",
+   "name": "provenance-tests",
+   "triggers_before": [
+    "push",
+    "pull_request",
+    "workflow_dispatch"
+   ],
+   "classification": "CONSOLIDATE_INTO_STABLE_DISPATCHER",
+   "status": "DONE",
+   "catalog_groups": [
+    "provenance-tests.provenance"
+   ],
+   "verbatim_record": "tools/tasks/folded/provenance-tests.yml",
+   "verbatim_sha256": "fc43a0d02079401fe2042838e5bce3d12d80d5318aa22161a924c42459a2f6ed"
+  },
+  {
+   "workflow": ".github/workflows/public-audit-batch.yml",
+   "name": "public-audit-batch",
+   "triggers_before": [
+    "push",
+    "pull_request",
+    "workflow_dispatch"
+   ],
+   "classification": "CONSOLIDATE_INTO_STABLE_DISPATCHER",
+   "status": "DONE",
+   "catalog_groups": [
+    "public-audit-batch.public-cutoff-audit"
+   ],
+   "verbatim_record": "tools/tasks/folded/public-audit-batch.yml",
+   "verbatim_sha256": "47237c4da515e363f4c52aa853a65d0d0f623905123e337bb72b84a5bc45d993"
+  },
+  {
+   "workflow": ".github/workflows/report-artifact.yml",
+   "name": "footprint-auditor report artifact",
+   "triggers_before": [
+    "workflow_dispatch",
+    "push"
+   ],
+   "classification": "CONSOLIDATE_INTO_STABLE_DISPATCHER",
+   "status": "DONE",
+   "catalog_groups": [
+    "report-artifact.report-artifact"
+   ],
+   "verbatim_record": "tools/tasks/folded/report-artifact.yml",
+   "verbatim_sha256": "1ea9c0efb48f5a256cca98bf044a49b7474d499bd79e4ff07cd182ce69ba6381"
+  },
+  {
+   "workflow": ".github/workflows/reporter-tests.yml",
+   "name": "footprint-auditor reporter tests",
+   "triggers_before": [
+    "workflow_dispatch",
+    "push"
+   ],
+   "classification": "CONSOLIDATE_INTO_STABLE_DISPATCHER",
+   "status": "DONE",
+   "catalog_groups": [
+    "reporter-tests.reporter-tests"
+   ],
+   "verbatim_record": "tools/tasks/folded/reporter-tests.yml",
+   "verbatim_sha256": "2d454213c1454e08166fa89e260844404ffa99033ad21e815f5b67a41f013902"
+  }
+ ]
+}

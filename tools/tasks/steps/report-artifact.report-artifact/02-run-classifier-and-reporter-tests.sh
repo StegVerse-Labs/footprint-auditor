@@ -1,0 +1,1 @@
+python -m pytest -q tests/test_finding_classifier.py tests/test_finding_reporter.py

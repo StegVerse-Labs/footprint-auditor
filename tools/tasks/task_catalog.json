@@ -1,0 +1,335 @@
+{
+ "schema": "stegverse.task-catalog/v1",
+ "repository": "StegVerse-Labs/footprint-auditor",
+ "goal_id": "G17-WORKFLOW-SURFACE-MINIMIZATION",
+ "authority": "Rigel 2026-10-24 retroactive G17 enforcement (StegVerse-org/.github#166); pattern StegVerse-Labs/StegDB#60 (eab2e773)",
+ "dispatcher": ".github/workflows/validation-dispatcher.yml",
+ "runner": "tools/tasks/run_catalog.py",
+ "runner_source": "StegVerse-Labs/StegDB tools/tasks/run_catalog.py @ eab2e773271f3e63466a710f1b4555f677882848 (sha256 f741f30557888fd8e4852a52adfc65736a08898d49ade7519f6bcc2672921e9b), copied unmodified",
+ "rule": "Every check a folded workflow job ran is one group here; its step bodies are the original run blocks byte for byte, pinned by sha256, except the repairs listed. A new check is a new group (or a step in one), never a new workflow file.",
+ "path_filters": "Dropped: every group runs on every pull_request and push to main (a superset of the original path-filtered runs). workflow_dispatch/schedule triggers are not carried (no manual dispatch, no cron).",
+ "repairs": [
+  "Each folded check used to run on push to any branch (with path filters) and workflow_dispatch; it now runs on every pull request and push to main.",
+  "report-artifact's own path filter named github/workflows/report-artifact.yml (no leading period); it is a validation run block and is carried byte for byte."
+ ],
+ "folded_from_commit": "6fbb16edeecfa327d3245aee53f8f120887547f3",
+ "groups": [
+  {
+   "id": "classifier-tests.classifier-tests",
+   "source": {
+    "workflow": ".github/workflows/classifier-tests.yml",
+    "workflow_name": "footprint-auditor classifier tests",
+    "job": "classifier-tests",
+    "job_name": null,
+    "commit": "6fbb16e",
+    "triggers_before": [
+     "workflow_dispatch",
+     "push"
+    ],
+    "permissions_before": {
+     "contents": "read"
+    }
+   },
+   "events": [
+    "pull_request",
+    "push"
+   ],
+   "env": {},
+   "steps": [
+    {
+     "name": "Install dependencies",
+     "run_file": "tools/tasks/steps/classifier-tests.classifier-tests/01-install-dependencies.sh",
+     "run_sha256": "125728d0351b7fe7d8d315078bb42ec39955ba6223b7c31e185fdb53307381d1"
+    },
+    {
+     "name": "Run classifier tests",
+     "run_file": "tools/tasks/steps/classifier-tests.classifier-tests/02-run-classifier-tests.sh",
+     "run_sha256": "a8a01966ac145d994b47756b5fda37580d597bd427b7b1bd9e86806b45a159b4"
+    }
+   ],
+   "artifacts": [],
+   "runner": {
+    "fetch_depth": "1",
+    "persist_credentials": "false",
+    "timeout_minutes": 30,
+    "python_version": "3.12"
+   }
+  },
+  {
+   "id": "provenance-tests.provenance",
+   "source": {
+    "workflow": ".github/workflows/provenance-tests.yml",
+    "workflow_name": "provenance-tests",
+    "job": "provenance",
+    "job_name": null,
+    "commit": "6fbb16e",
+    "triggers_before": [
+     "push",
+     "pull_request",
+     "workflow_dispatch"
+    ],
+    "permissions_before": {
+     "contents": "read"
+    }
+   },
+   "events": [
+    "pull_request",
+    "push"
+   ],
+   "env": {},
+   "steps": [
+    {
+     "name": "Install validation dependency",
+     "run_file": "tools/tasks/steps/provenance-tests.provenance/01-install-validation-dependency.sh",
+     "run_sha256": "0f6bb03ebcc83b7ad6ffe374c258f7c2a8e06cea5a7a263b6bae850f4571e18c"
+    },
+    {
+     "name": "Run provenance tests",
+     "run_file": "tools/tasks/steps/provenance-tests.provenance/02-run-provenance-tests.sh",
+     "run_sha256": "62c9ef64112d9301ede28929ae1f5456c0b6ae32676dfbfcb6b51c4e0129a4eb"
+    },
+    {
+     "name": "Restore exact source worktree after tests",
+     "run_file": "tools/tasks/steps/provenance-tests.provenance/03-restore-exact-source-worktree-after-tests.sh",
+     "run_sha256": "10d0ded2645ae30eb7dbcdb4b850bf31f59ebc8c4be68de8885e64712a3984a0",
+     "shell": "bash"
+    },
+    {
+     "name": "Build immutable self-scan manifest",
+     "run_file": "tools/tasks/steps/provenance-tests.provenance/04-build-immutable-self-scan-manifest.sh",
+     "run_sha256": "2e4f2cc524c48382c623bc586993da209ca9e0c4a89537193ed31fc26b47b53d",
+     "shell": "bash"
+    },
+    {
+     "name": "Execute end-to-end self audit",
+     "run_file": "tools/tasks/steps/provenance-tests.provenance/05-execute-end-to-end-self-audit.sh",
+     "run_sha256": "14427cce18dff60f3c312313d036132584d53425d3b0a595b17c7898a18ef0c4",
+     "shell": "bash"
+    },
+    {
+     "name": "Verify execution receipt",
+     "run_file": "tools/tasks/steps/provenance-tests.provenance/06-verify-execution-receipt.sh",
+     "run_sha256": "7d65d7d07a30c0a835d8f604cb84de30534813126298fc008a5d7043f2cb067e",
+     "shell": "bash"
+    }
+   ],
+   "artifacts": [],
+   "runner": {
+    "fetch_depth": "0",
+    "persist_credentials": "false",
+    "timeout_minutes": 30,
+    "python_version": "3.12"
+   }
+  },
+  {
+   "id": "public-audit-batch.public-cutoff-audit",
+   "source": {
+    "workflow": ".github/workflows/public-audit-batch.yml",
+    "workflow_name": "public-audit-batch",
+    "job": "public-cutoff-audit",
+    "job_name": null,
+    "commit": "6fbb16e",
+    "triggers_before": [
+     "push",
+     "pull_request",
+     "workflow_dispatch"
+    ],
+    "permissions_before": {
+     "contents": "read"
+    }
+   },
+   "events": [
+    "pull_request",
+    "push"
+   ],
+   "env": {
+    "PUBLIC_AUDIT_BATCH_ID": "008",
+    "PUBLIC_AUDIT_SELECTION": "config/public-audit-batch-008.txt",
+    "PUBLIC_AUDIT_EXPECTED_COUNT": "5",
+    "PUBLIC_AUDIT_RECEIPT": "/tmp/public-audit-batch-008-receipt.json",
+    "PUBLIC_AUDIT_CUTOFF": "2026-08-19 23:59:59+00:00",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "GIT_TERMINAL_PROMPT": "0"
+   },
+   "steps": [
+    {
+     "name": "Install bounded validation dependency",
+     "run_file": "tools/tasks/steps/public-audit-batch.public-cutoff-audit/01-install-bounded-validation-dependency.sh",
+     "run_sha256": "0f6bb03ebcc83b7ad6ffe374c258f7c2a8e06cea5a7a263b6bae850f4571e18c"
+    },
+    {
+     "name": "Validate inventory and credentialless materialization boundary",
+     "run_file": "tools/tasks/steps/public-audit-batch.public-cutoff-audit/02-validate-inventory-and-credentialless-materialization-bounda.sh",
+     "run_sha256": "dbcd1e0247f6d61ae70de7aa16595a50d47e495aef18632e794892834501991e"
+    },
+    {
+     "name": "Materialize exact public cutoff batch anonymously",
+     "run_file": "tools/tasks/steps/public-audit-batch.public-cutoff-audit/03-materialize-exact-public-cutoff-batch-anonymously.sh",
+     "run_sha256": "2e1eee068ff15442cb513279c382ad2e5924f9b75aa2c93aff82e85ea7709bbd",
+     "shell": "bash"
+    },
+    {
+     "name": "Emit secret-free exact cutoff manifest",
+     "run_file": "tools/tasks/steps/public-audit-batch.public-cutoff-audit/04-emit-secret-free-exact-cutoff-manifest.sh",
+     "run_sha256": "11b0ea2929e2cd861e94cefd566c407f48323eb519870dc7c67c20c5fa1e584e",
+     "shell": "bash"
+    },
+    {
+     "name": "Execute public provenance audit batch",
+     "run_file": "tools/tasks/steps/public-audit-batch.public-cutoff-audit/05-execute-public-provenance-audit-batch.sh",
+     "run_sha256": "c5e4a6922a182bd809e6ad19a9b334149b69fffba6be38629dc65cd3515fa0bd",
+     "shell": "bash"
+    },
+    {
+     "name": "Verify and emit compact batch receipt",
+     "run_file": "tools/tasks/steps/public-audit-batch.public-cutoff-audit/06-verify-and-emit-compact-batch-receipt.sh",
+     "run_sha256": "ffa07bfb1efc66ff1b4dc3e0c46e8468948ff5f197233f4d606449aebcab3cee",
+     "shell": "bash"
+    }
+   ],
+   "artifacts": [
+    {
+     "name": "public-audit-batch-${{ env.PUBLIC_AUDIT_BATCH_ID }}-receipts",
+     "path": "/tmp/public-manifest.json\n${{ env.PUBLIC_AUDIT_RECEIPT }}\n",
+     "if_no_files_found": "error",
+     "if": "success()"
+    }
+   ],
+   "runner": {
+    "fetch_depth": "0",
+    "persist_credentials": "false",
+    "timeout_minutes": 30,
+    "python_version": "3.12",
+    "artifact_name": "public-audit-batch--receipts",
+    "artifact_if_no_files_found": "error"
+   }
+  },
+  {
+   "id": "report-artifact.report-artifact",
+   "source": {
+    "workflow": ".github/workflows/report-artifact.yml",
+    "workflow_name": "footprint-auditor report artifact",
+    "job": "report-artifact",
+    "job_name": null,
+    "commit": "6fbb16e",
+    "triggers_before": [
+     "workflow_dispatch",
+     "push"
+    ],
+    "permissions_before": null
+   },
+   "events": [
+    "pull_request",
+    "push"
+   ],
+   "env": {},
+   "steps": [
+    {
+     "name": "Install dependencies",
+     "run_file": "tools/tasks/steps/report-artifact.report-artifact/01-install-dependencies.sh",
+     "run_sha256": "2840af84d819b1ac873926c2747d575da686090d7da90d4fce6ee22183386079"
+    },
+    {
+     "name": "Run classifier and reporter tests",
+     "run_file": "tools/tasks/steps/report-artifact.report-artifact/02-run-classifier-and-reporter-tests.sh",
+     "run_sha256": "31c01bf15999b07bd06be5b0ad8cb9d4b347f14d3878de5a872a66c745b04c3f"
+    },
+    {
+     "name": "Create demo findings input",
+     "run_file": "tools/tasks/steps/report-artifact.report-artifact/03-create-demo-findings-input.sh",
+     "run_sha256": "6be205dea719d432be090f7293e235a8ef5c5a6cfd31f044ed1904ef0608177c"
+    },
+    {
+     "name": "Classify demo findings",
+     "run_file": "tools/tasks/steps/report-artifact.report-artifact/04-classify-demo-findings.sh",
+     "run_sha256": "4203f854dcff074a9fac2ee3ca312a01b8b96fcc7ae5a25d2f93d0c1774afb3b"
+    },
+    {
+     "name": "Render footprint audit report",
+     "run_file": "tools/tasks/steps/report-artifact.report-artifact/05-render-footprint-audit-report.sh",
+     "run_sha256": "87da54c5debb81b0fc048255cbce67f01ad1055528c5dbfa48a2505873e1078c"
+    }
+   ],
+   "artifacts": [
+    {
+     "name": "footprint-auditor-report-artifacts",
+     "path": "tmp/demo_findings.json\nreports/classifier_summary.json\nreports/footprint_audit_report.md\nreports/footprint_audit_report.json\nreceipts/footprint_audit_receipts.jsonl\n",
+     "if_no_files_found": "error",
+     "if": "success()"
+    }
+   ],
+   "runner": {
+    "fetch_depth": "1",
+    "persist_credentials": "true",
+    "timeout_minutes": 30,
+    "python_version": "3.12",
+    "artifact_name": "footprint-auditor-report-artifacts",
+    "artifact_if_no_files_found": "error"
+   }
+  },
+  {
+   "id": "reporter-tests.reporter-tests",
+   "source": {
+    "workflow": ".github/workflows/reporter-tests.yml",
+    "workflow_name": "footprint-auditor reporter tests",
+    "job": "reporter-tests",
+    "job_name": null,
+    "commit": "6fbb16e",
+    "triggers_before": [
+     "workflow_dispatch",
+     "push"
+    ],
+    "permissions_before": {
+     "contents": "read"
+    }
+   },
+   "events": [
+    "pull_request",
+    "push"
+   ],
+   "env": {},
+   "steps": [
+    {
+     "name": "Install dependencies",
+     "run_file": "tools/tasks/steps/reporter-tests.reporter-tests/01-install-dependencies.sh",
+     "run_sha256": "0f6bb03ebcc83b7ad6ffe374c258f7c2a8e06cea5a7a263b6bae850f4571e18c"
+    },
+    {
+     "name": "Run reporter tests",
+     "run_file": "tools/tasks/steps/reporter-tests.reporter-tests/02-run-reporter-tests.sh",
+     "run_sha256": "d82bbaa860e5dac4c1994c05671b65c72fccc0f773fd78e1a51d56ecc6907680"
+    }
+   ],
+   "artifacts": [],
+   "runner": {
+    "fetch_depth": "1",
+    "persist_credentials": "false",
+    "timeout_minutes": 30,
+    "python_version": "3.12"
+   }
+  },
+  {
+   "id": "workflow-surface-registry.validate",
+   "catalog_addition": "G17 registry gate (no folded source workflow)",
+   "events": [
+    "pull_request",
+    "push"
+   ],
+   "env": {},
+   "steps": [
+    {
+     "name": "Workflow files equal the registered surfaces; catalog verifies ALLOW",
+     "run_file": "tools/tasks/steps/workflow-surface-registry.validate/01-registry.sh",
+     "run_sha256": "811824e88664923006be2eeb35632d710f5504145967f61632ad9e8fbdcb35ca"
+    }
+   ],
+   "artifacts": [],
+   "runner": {
+    "fetch_depth": "1",
+    "persist_credentials": "false",
+    "timeout_minutes": 10,
+    "python_version": "3.11"
+   }
+  }
+ ]
+}

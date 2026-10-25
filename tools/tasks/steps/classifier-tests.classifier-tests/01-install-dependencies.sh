@@ -1,0 +1,1 @@
+python -m pip install pyyaml==6.0.2 pytest==8.4.1
