@@ -5,9 +5,9 @@
  "authority": "Rigel 2026-10-24 retroactive G17 enforcement (StegVerse-org/.github#166); pattern StegVerse-Labs/StegDB#60 (eab2e773)",
  "dispatcher": ".github/workflows/validation-dispatcher.yml",
  "runner": "tools/tasks/run_catalog.py",
- "runner_source": "StegVerse-Labs/StegDB tools/tasks/run_catalog.py @ eab2e773271f3e63466a710f1b4555f677882848 (sha256 f741f30557888fd8e4852a52adfc65736a08898d49ade7519f6bcc2672921e9b), copied unmodified",
+ "runner_source": "StegVerse-Labs/StegDB tools/tasks/run_catalog.py @ eab2e773271f3e63466a710f1b4555f677882848 (sha256 f741f30557888fd8e4852a52adfc65736a08898d49ade7519f6bcc2672921e9b), copied unmodified; then patched with the original-path-filter selection (matrix marks cells selected; StegVerse-Labs/Site#1647 pattern), so it no longer equals that sha256",
  "rule": "Every check a folded workflow job ran is one group here; its step bodies are the original run blocks byte for byte, pinned by sha256, except the repairs listed. A new check is a new group (or a step in one), never a new workflow file.",
- "path_filters": "Dropped: every group runs on every pull_request and push to main (a superset of the original path-filtered runs). workflow_dispatch/schedule triggers are not carried (no manual dispatch, no cron).",
+ "path_filters": "Restored: each folded group carries its original workflow's push / pull_request paths or paths-ignore filter as path_filters (a folded workflow's own path names its tools/tasks/folded copy and its tools/tasks/steps directory). A group the event's changed files do not select records NOT_SELECTED and exits 0 (a run, never a skipped job; pattern StegVerse-org/StegVerse-SDK#561, StegVerse-Labs/Site#1647). Not carried: branches filters, workflow_dispatch/schedule triggers (no manual dispatch, no cron), job-level if, and GitHub's 300-changed-file rule (an undeterminable diff selects every group).",
  "repairs": [
   "Each folded check used to run on push to any branch (with path filters) and workflow_dispatch; it now runs on every pull request and push to main.",
   "report-artifact's own path filter named github/workflows/report-artifact.yml (no leading period); it is a validation run block and is carried byte for byte."
@@ -53,6 +53,16 @@
     "persist_credentials": "false",
     "timeout_minutes": 30,
     "python_version": "3.12"
+   },
+   "path_filters": {
+    "push": {
+     "paths": [
+      "src/classifier/**",
+      "tests/test_finding_classifier.py",
+      "tools/tasks/folded/classifier-tests.yml",
+      "tools/tasks/steps/classifier-tests.classifier-tests/**"
+     ]
+    }
    }
   },
   {
@@ -119,6 +129,32 @@
     "persist_credentials": "false",
     "timeout_minutes": 30,
     "python_version": "3.12"
+   },
+   "path_filters": {
+    "pull_request": {
+     "paths": [
+      "src/provenance/**",
+      "scripts/materialize_public_batch.py",
+      "scripts/import_github_audit_log.py",
+      "tests/test_*.py",
+      "config/provenance_audit.yaml",
+      "evidence/**",
+      "tools/tasks/folded/provenance-tests.yml",
+      "tools/tasks/steps/provenance-tests.provenance/**"
+     ]
+    },
+    "push": {
+     "paths": [
+      "src/provenance/**",
+      "scripts/materialize_public_batch.py",
+      "scripts/import_github_audit_log.py",
+      "tests/test_*.py",
+      "config/provenance_audit.yaml",
+      "evidence/**",
+      "tools/tasks/folded/provenance-tests.yml",
+      "tools/tasks/steps/provenance-tests.provenance/**"
+     ]
+    }
    }
   },
   {
@@ -202,6 +238,33 @@
     "python_version": "3.12",
     "artifact_name": "public-audit-batch--receipts",
     "artifact_if_no_files_found": "error"
+   },
+   "path_filters": {
+    "pull_request": {
+     "paths": [
+      "scripts/materialize_public_batch.py",
+      "tests/test_public_materialization.py",
+      "tests/test_exact_inventory_manifest.py",
+      "config/public-audit-batch-*.txt",
+      "evidence/inventory/connected-repositories-2026-08-19-v2.csv",
+      "src/provenance/**",
+      "tools/tasks/folded/public-audit-batch.yml",
+      "tools/tasks/steps/public-audit-batch.public-cutoff-audit/**",
+      "evidence/verification/public-audit-batch-*.txt"
+     ]
+    },
+    "push": {
+     "paths": [
+      "scripts/materialize_public_batch.py",
+      "tests/test_public_materialization.py",
+      "tests/test_exact_inventory_manifest.py",
+      "config/public-audit-batch-*.txt",
+      "evidence/inventory/connected-repositories-2026-08-19-v2.csv",
+      "src/provenance/**",
+      "tools/tasks/folded/public-audit-batch.yml",
+      "tools/tasks/steps/public-audit-batch.public-cutoff-audit/**"
+     ]
+    }
    }
   },
   {
@@ -265,6 +328,16 @@
     "python_version": "3.12",
     "artifact_name": "footprint-auditor-report-artifacts",
     "artifact_if_no_files_found": "error"
+   },
+   "path_filters": {
+    "push": {
+     "paths": [
+      "src/classifier/**",
+      "src/reporter/**",
+      "config/severity_rules.yaml",
+      "github/workflows/report-artifact.yml"
+     ]
+    }
    }
   },
   {
@@ -306,6 +379,16 @@
     "persist_credentials": "false",
     "timeout_minutes": 30,
     "python_version": "3.12"
+   },
+   "path_filters": {
+    "push": {
+     "paths": [
+      "src/reporter/**",
+      "tests/test_finding_reporter.py",
+      "tools/tasks/folded/reporter-tests.yml",
+      "tools/tasks/steps/reporter-tests.reporter-tests/**"
+     ]
+    }
    }
   },
   {
@@ -321,6 +404,11 @@
      "name": "Workflow files equal the registered surfaces; catalog verifies ALLOW",
      "run_file": "tools/tasks/steps/workflow-surface-registry.validate/01-registry.sh",
      "run_sha256": "811824e88664923006be2eeb35632d710f5504145967f61632ad9e8fbdcb35ca"
+    },
+    {
+     "name": "Folded groups keep their original path filters (NOT_SELECTED, never skipped)",
+     "run_file": "tools/tasks/steps/workflow-surface-registry.validate/02-original-path-filters.sh",
+     "run_sha256": "9db82fbdf49b831995929ec2919b6ead95a650d1b9929cfb760742654aa3dbc7"
     }
    ],
    "artifacts": [],
